@@ -1,0 +1,35 @@
+[Y]
+17-Juli-2014:
+templating, database, CI base view
+
+19-Juli-2014 :
+login siswa
+
+22-Juli-2014 : 
+tambah tombol delete distatus,tampilan notifikasi pesan, edit style.css
+
+23-Juli-2014 : 
+load semua model ke base ,login guru, tambah script topmenu aktif, perubahan topmenu jika sudah login, 
+
+4-Agus-2014
+buat ajax.js
+new tampilan post n pesan
+aturan guru dan siswa
+
+-------------------------------------------
+
+5-Agus-2014
+[CLEAR-WORK]ubah nama user di base header - view->defaultbase_header
+[WORK]Membuat fungsi kirim pesan - C : all->send_message() | M->m_all->send_message() | edit form kirim pesan | add m_al to base
+[WORK]lihat semua pesan - edit view/menu/pesan | m_all->pesan_saya()
+[WORK]lihat pesan by pengirim - edit myajax.js->showmessage(x,y) | m_all->isi_pesan_saya($params)
+[WORK]membalas pesan - myajax.js | m_all->kirim_pesan_via_modal | all->kirim_pesan_via_modal
+[WORK]menampilkan semua pesan : C siswa-messages | m_siswa->semuapesan | view->siswa->messages
+membatasi 10 thread pesan
+update profile - ubah foto
+[CLEAR-WORK]update profile - ubah password : View, Contl-Process,model updatepassword
+
+
+[L]
+17-Juli-2014:
+templating, database, CI base view
