@@ -27,9 +27,12 @@ aturan guru dan siswa
 [WORK]menampilkan semua pesan : C siswa-messages | m_siswa->semuapesan | view->siswa->messages
 membatasi 10 thread pesan
 update profile - ubah foto
-[CLEAR-WORK]update profile - ubah password : View, Contl-Process,model updatepassword
+[WORK]update profile - ubah password : View, Contl-Process,model updatepassword
 
+---------------------------------------------
 
-[L]
-17-Juli-2014:
-templating, database, CI base view
+15-Agus-2014
+[WORK]Json untuk lihat status di timeline siswa - m_all | m_siswa | m _guru |C->json | V->student/timeline 
+[WORK]show timeline untuk siswa - v->timeline | js -myajax.js |total:2
+[WORK]update status - c-all(update status) | m_all(update status) | myajax.js(updateStatus) | all updates
+[WORK]more status | +5

@@ -35,4 +35,21 @@ class m_guru extends CI_Model{
         }        
         return $v;
     }
+
+    //get name by id
+    public function name_by_id($id){
+        $this->db->select('nama_lengkap');
+        $this->db->where('id', $id);
+        $query = $this->db->get('guru');
+        $nama = $query->row_array();
+        return $nama['nama_lengkap'];
+    }
+
+    //all data by id
+    public function data_by_id($id){
+        $this->db->where('id', $id);
+        $query = $this->db->get('guru');
+        return $query->row_array();
+    }
+
 }

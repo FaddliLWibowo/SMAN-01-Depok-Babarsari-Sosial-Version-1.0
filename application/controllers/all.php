@@ -9,6 +9,10 @@ class all extends base{
 		echo '<center><h1>ERROR 403 : FORBIDEN ACCESS</h1></center>';
 	}
 
+	/*
+	* ALL ABOUT USER
+	*/
+
 	public function logout(){
 		$data['title']="Processing";
 		//fungsi yang digunakan untuk menghapus session
@@ -99,6 +103,25 @@ class all extends base{
 		$params = array($pengirim, $penerima,$isi );
 		$this->m_all->kirim_pesan_via_modal($params); //INSERT TO DATABASE
 	}
+
+	/*
+	* STATUS
+	*/
+	public function update_status(){
+		$isi = $this->input->post('isi');
+		$idsiswa = $this->input->post('idsiswa');
+		$idguru = $this->input->post('idguru');
+		$idgrup = $this->input->post('idgrup');
+		//CONVERT 0 TO NULL
+		if($idsiswa==0){$idsiswa=NULL;}
+		if($idguru==0){$idguru=NULL;}
+		if($idgrup==0){$idgrup=NULL;}
+		//PARAMETERS TO MODAL
+		$params = array('isi_status'=>$isi,'id_siswa'=>$idsiswa,'id_guru'=>$idguru,'id_grup'=>$idgrup);
+		$this->m_all->update_status($params);
+		//RETURN TRUE FROM MODAL
+	}
+
 
 	//Membatasi penggunaan user dan manajemen hacker
 }

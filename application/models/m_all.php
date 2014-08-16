@@ -1,6 +1,49 @@
 <?php
 
 class m_all extends CI_Model{
+	/*
+	* ALL ABOUT STATUS
+	*/
+
+	//UPDATE STATUS
+	public function update_status($params){
+		if($this->db->insert('status',$params)){return true;}else{return false;}
+	}
+
+	//SHOW ALL STATUS, AUTO LOAD WHERE OPEN TIMELINE LIMIT 3 STATUS
+	public function start_status(){
+		$this->db->where('publik',1);
+		$this->db->limit(8);
+		$this->db->order_by('id_status','desc');
+		$query = $this->db->get('status');
+		if($query->num_rows()>0){
+			return $query->result_array();
+		}else{return array();}
+	}
+
+	//SHOW UPDATED STATUS
+	public function show_updated_status($lastid){
+		$this->db->where('publik',1);
+		$this->db->where('id_status >',$lastid);//ID BIGGER THEN $lastid , post yang ditampilkan sekarang
+		$this->db->order_by('id_status','desc');
+		$query = $this->db->get('status');
+		if($query->num_rows()>0){
+			return $query->result_array();
+		}else{return array();}
+	}
+
+	//SHOW MORE STATUS
+	public function show_more_status($lastid){
+		$this->db->where('publik',1);
+		$this->db->where('id_status <',$lastid);//ID BIGGER THEN $lastid
+		$this->db->limit(3);
+		$this->db->order_by('id_status','desc');
+		$query = $this->db->get('status');
+		if($query->num_rows()>0){
+			return $query->result_array();
+		}else{return array();}
+	}
+
 	//KIRIM PESAN
 	public function send_message($params){
 		$sql = "INSERT INTO pesan(pengirim, penerima, isi, waktu) VALUES(?,?,?, CURTIME())";
