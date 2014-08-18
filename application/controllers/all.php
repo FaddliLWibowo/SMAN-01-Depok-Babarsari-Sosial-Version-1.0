@@ -112,12 +112,19 @@ class all extends base{
 		$idsiswa = $this->input->post('idsiswa');
 		$idguru = $this->input->post('idguru');
 		$idgrup = $this->input->post('idgrup');
+		$desidsiswa = $this->input->post('desidsiswa');
+		$desidguru = $this->input->post('desidguru');
+		$desidgrup = $this->input->post('desidgrup');
 		//CONVERT 0 TO NULL
 		if($idsiswa==0){$idsiswa=NULL;}
 		if($idguru==0){$idguru=NULL;}
 		if($idgrup==0){$idgrup=NULL;}
+		if($desidsiswa==0){$desidsiswa=NULL;}
+		if($desidguru==0){$desidguru=NULL;}
+		if($desidgrup==0){$desidgrup=NULL;}
 		//PARAMETERS TO MODAL
-		$params = array('isi_status'=>$isi,'id_siswa'=>$idsiswa,'id_guru'=>$idguru,'id_grup'=>$idgrup);
+		$params = array('isi_status'=>$isi,'id_siswa'=>$idsiswa,'id_guru'=>$idguru,'id_grup'=>$idgrup,
+			'on_id_siswa'=>$desidsiswa,'on_id_guru'=>$desidguru,'on_id_grup'=>$desidgrup);
 		$this->m_all->update_status($params);
 		//RETURN TRUE FROM MODAL
 	}

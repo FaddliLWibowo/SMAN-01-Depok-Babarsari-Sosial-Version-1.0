@@ -36,3 +36,13 @@ update profile - ubah foto
 [WORK]show timeline untuk siswa - v->timeline | js -myajax.js |total:2
 [WORK]update status - c-all(update status) | m_all(update status) | myajax.js(updateStatus) | all updates
 [WORK]more status | +5
+[]show comments
+[]profile page
+
+----------------------------------------------
+
+18-Agus-2014
+[WORK] add link res>des on timeline
+[WORK]status on profile page | m_siswa , m_guru, json, myajax.js
+[WORK]post status to user via profile page | js on v->siswa/profile | c->json | m->m_siswa
+[]send message via profile page |

@@ -1,10 +1,10 @@
 <script type="text/javascript">
   //WHEN DOCUMENT READY
-  $(document).ready(function(){
-    lattestStatus();//LOAD LATTEST UPDATES
-    setInterval(function(){showUpdatedStatus();},20000);//LOAD LATTEST UPDATES EVERY 20 seconds
-    
+  $(document).ready(function(){ 
+    lattestStatus('<?php echo $this->session->userdata('avatar');?>');//LOAD LATTEST UPDATES
+    setInterval(function(){showUpdatedStatus();},20000);//LOAD LATTEST UPDATES EVERY 20 seconds    
   });
+  
 </script>
 
 <section id="padding-top"></section>
@@ -24,9 +24,9 @@
       <div id="my-tab-content" class="tab-content">
         <div class="tab-pane active" id="status"> 
           <div class="col-md-12">  
-            <textarea rows="5" class="form-control" id="newpost" placeholder="type here..."></textarea>
+            <textarea rows="5" class="form-control" id="newpost" placeholder="Update Status"></textarea>
             <br/>
-            <button onclick="updateStatus(<?php echo $this->session->userdata('id')?>,0,0)" id="btn-newpost">post</button>
+            <button onclick="updateStatus(<?php echo $this->session->userdata('id')?>,0,0,<?php echo $this->session->userdata('id')?>,0,0)" id="btn-newpost">post</button>
           </div>
         </div>
         <div class="tab-pane" id="kirimpesan">
@@ -47,7 +47,7 @@
       </div>
     </div>
 
-    <center class="col-md-12" style="padding:5px;display:none" id="top-loader"><img width="30px" src="<?php echo base_url('assets/css/loader.gif')?>"/></center>
+    <center id="top-loader" class="col-md-12" style="padding:5px;" ><img width="30px" src="<?php echo base_url('assets/css/loader.gif')?>"/></center>
     <div id="all-timeline"></div>
     <center class="col-md-12" style="padding:5px;display:none" id="bottom-loader"><img width="30px" src="<?php echo base_url('assets/css/loader.gif')?>"/></center>
     <button onclick="showMoreStatus()" id="btn-more" style="width:100%;display:none" class="btn btn-default">Berikutnya</button>

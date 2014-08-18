@@ -19,6 +19,19 @@ class m_guru extends CI_Model{
         } 
 	}
 
+    /*
+    * ALL ABOUT STATUS
+    */
+    //STATUS RES/DES by id guru
+    public function profile_timeline($id){
+        $this->db->where('id_guru',$id);//IF RESOURCE = $id
+        $this->db->or_where('id_guru',$id);//IF DESTINATION = $id
+        $this->db->order_by('id_status','desc');
+        $this->db->limit(10);
+        $query = $this->db->get('status');
+        return $query->result_array();
+    }   
+
     //SEARCH GURU
     public function searchguru($id){
         $sql = "SELECT * FROM guru WHERE nip = ?";

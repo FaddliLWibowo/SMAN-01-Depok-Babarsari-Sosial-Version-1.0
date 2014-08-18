@@ -44,6 +44,27 @@ class m_all extends CI_Model{
 		}else{return array();}
 	}
 
+	/*
+	* ALL ABOUT COMMENTS
+	*/
+
+	public function show_comment_by_id($id){
+		$this->db->where('id_status',$id);
+		$this->db->limit(3);
+		$query = $this->db->get('status_komentar');
+		if($query->num_rows > 0){
+			$query = $query->result_array();
+			return $query;
+		} else {
+			return array();
+		}
+
+	} 
+
+	/*
+	* ALL ABOUT MESSAGES
+	*/
+
 	//KIRIM PESAN
 	public function send_message($params){
 		$sql = "INSERT INTO pesan(pengirim, penerima, isi, waktu) VALUES(?,?,?, CURTIME())";

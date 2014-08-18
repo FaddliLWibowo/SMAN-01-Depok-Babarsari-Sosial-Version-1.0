@@ -34,6 +34,7 @@ class siswa extends base{
 		$nama = $this->m_siswa->name_by_NIS($nis);
 		$data['script'] = "$(document).ready(function(){document.getElementById('home').className='active';});";
 		$data['title'] = $nama.' | ';
+		$data['siswa'] = $this->m_siswa->data_by_nis($nis);
 		$this->defaultdisplay('siswa/profile', $data);
 	}
 

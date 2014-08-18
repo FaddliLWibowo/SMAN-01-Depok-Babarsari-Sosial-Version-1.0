@@ -21,4 +21,21 @@ class base extends CI_Controller {
 		$data['template_anak'] = $view_anak;
 		$this->load->view('base/defaultbase', $data);
 	}
+
+	//JSON
+	public function json_data(){
+		if(!is_null($id_siswa)){
+			$data = $this->m_siswa->data_by_id($id_siswa);//GET STUDENT NAME BY ID
+			$link = 'siswa/profile/'.$data['nis'];
+			$name = $data['nama_lengkap'];
+			$avatar = $data['avatar'];
+		}else if(!is_null($id_guru)){
+			$data = $this->m_guru->data_by_id($id_guru);//GET TEACHER NAME BY ID
+			$link = 'guru/profile/'.$data['nip'];
+			$name = $data['nama_lengkap'];
+			$avatar = $data['avatar'];
+		}else if(!is_null($id_grup)){
+			$name = 'on construct';//GET GROUP NAME BY ID;
+		}
+	}
 }
