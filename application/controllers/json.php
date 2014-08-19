@@ -36,7 +36,19 @@ class json extends CI_Controller{
 			}
 		} else if(!empty($this->input->get('idguru'))){ //POST ON PROFILE GURU
 			$idguru = $this->input->get('idguru');
-			$status = $this->m_guru->profile_timeline($idguru);
+			if(!empty($this->input->get('last'))){
+				$lastid=$this->input->get('last');
+				$smallid=0;
+				$status = $this->m_guru->custom_profile_timeline($idguru,$lastid,$smallid);
+			}
+			else if(!empty($this->input->get('small'))){				
+				$smallid=$this->input->get('small');
+				$lastid=0; 
+				$status = $this->m_guru->custom_profile_timeline($idguru,$lastid,$smallid);
+			}
+			else {//STATUS ON SISWA PROFILE PAGE		
+				$status = $this->m_guru->profile_timeline($idguru);
+			}			
 		} else if(!empty($this->input->get('lastid'))){ //CHECK LATTEST STATUS FOR TIMELINE
 			$lastid = $this->input->get('lastid');
 			$status = $this->m_all->show_updated_status($lastid);

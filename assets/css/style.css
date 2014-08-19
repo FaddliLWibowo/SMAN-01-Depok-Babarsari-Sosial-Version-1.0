@@ -11,29 +11,11 @@
 .header-grup{background-color: rgb(110, 110, 255);color:#fff;}
 #new {padding:40px;}
 #bigbutton {padding:40px;}
-#timeline-place{
-	background-color: rgb(228, 228, 228);
-	padding: 10px;
-}
-#map {
-	padding:40px;
-	background-color: gray
-}
-
-#footer {
-	padding:40px;
-	background-color: #fff;
-}
-
-.dropdown{
-	text-align :left;
-}
-
-.top-menu > ul {
-	list-style: none;
-	padding:10px;
-}
-
+#timeline-place{background-color:rgb(228, 228, 228);padding: 10px;}
+#map {padding:40px;background-color: gray}
+#footer {padding:40px;background-color: #fff;}
+.dropdown{text-align:left;}
+.top-menu > ul {list-style: none;padding:10px;}
 .top-menu > ul > li{
 	float:right;
 	margin :0 10px;
@@ -41,40 +23,13 @@
 	width:70px;
 	text-align: center;
 }
-
-.top-menu > ul > li.active{
-	border-bottom: 10px solid rgb(255, 102, 0);
-}
-
-.top-menu > ul > li:hover{
-	border-bottom: 10px solid gray;
-}
-
-.top-menu ul li a{
-	color:#000;
-}
-
-.top-menu ul li a:hover{
-	text-decoration: none;
-	color:#000;
-}
-
-.fixed-sidebar{
-	position:fixed;
-	width:28%;
-}
-
-span.web-logo{
-	width : 150px;
-	height :60px;
-	background-image: url('logo.png');
-}
-
-.white-transparent-button{
-	padding : 10px;
-	border : 1px solid white;
-	color : #fff;
-}
+.top-menu > ul > li.active{border-bottom: 10px solid rgb(255, 102, 0);}
+.top-menu > ul > li:hover{border-bottom: 10px solid gray;}
+.top-menu ul li a{color:#000;}
+.top-menu ul li a:hover{text-decoration: none;color:#000;}
+.fixed-sidebar{position:fixed;width:28%;}
+span.web-logo{width : 150px;height :60px;background-image: url('logo.png');}
+.white-transparent-button{padding : 10px;border : 1px solid white;color : #fff;}
 
 .white-transparent-button:hover{
 	text-decoration: none;
@@ -261,8 +216,8 @@ a.more:hover{
 }
 
 .guru img{
-	height :50px;
-	width:50px;
+	height :40px;
+	width:40px;
 	float:left;
 	margin-right: 2px
 }

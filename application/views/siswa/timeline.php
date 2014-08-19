@@ -1,3 +1,4 @@
+<style type="text/css">.myavatar{background-image: url('<?php echo base_url("assets/img/avatar/".$this->session->userdata("avatar"))?>');background-size: cover}</style>
 <script type="text/javascript">
   //WHEN DOCUMENT READY
   $(document).ready(function(){ 
@@ -17,7 +18,7 @@
    <div style="background-color: rgb(228, 228, 228);" class="col-md-6">
     <div class="timeline">
       <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-        <li class="active col-md-6"><a class="btn" data-toggle="tab"><span class="glyphicon glyphicon-bullhorn"></span> Post Update</a></li>
+        <li class="active col-md-6"><a href="#status" class="btn" data-toggle="tab"><span class="glyphicon glyphicon-bullhorn"></span> Post Update</a></li>
         <li class="col-md-6" ><a class="btn" href="#kirimpesan" data-toggle="tab"><span class="glyphicon glyphicon-comment"></span> Kirim Pesan</a></li>
       </ul>
       <br/>

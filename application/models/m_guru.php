@@ -25,13 +25,25 @@ class m_guru extends CI_Model{
     //STATUS RES/DES by id guru
     public function profile_timeline($id){
         $this->db->where('id_guru',$id);//IF RESOURCE = $id
-        $this->db->or_where('id_guru',$id);//IF DESTINATION = $id
+        $this->db->or_where('on_id_guru',$id);//IF DESTINATION = $id
         $this->db->order_by('id_status','desc');
-        $this->db->limit(10);
+        $this->db->limit(5);
         $query = $this->db->get('status');
         return $query->result_array();
-    }   
-
+    }
+    //CEK UPDATE STATUS RES/DES by id guru
+    public function custom_profile_timeline($id,$lastid,$smallid){
+        if($lastid > 0){//SETUP LASTID = CHECK LATTEST UPDATES
+            $sql = "SELECT * FROM status WHERE id_status > ".$lastid." AND (id_guru = ".$id." OR on_id_guru = ".$id.") ORDER BY id_status DESC";
+        } else if ($smallid > 0 ){//MORE UPDATES
+            $sql = "SELECT * FROM status WHERE id_status < ".$smallid." AND (id_guru = ".$id." OR on_id_guru = ".$id.") ORDER BY id_status DESC LIMIT 0,3";
+        }                     
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+    /*
+    * ALL ABOUT DATA
+    */
     //SEARCH GURU
     public function searchguru($id){
         $sql = "SELECT * FROM guru WHERE nip = ?";
@@ -61,6 +73,26 @@ class m_guru extends CI_Model{
     //all data by id
     public function data_by_id($id){
         $this->db->where('id', $id);
+        $query = $this->db->get('guru');
+        return $query->row_array();
+    }
+    //all teacher
+    public function all_teacher(){
+        $this->db->order_by('nama_lengkap','ASC');
+        $query = $this->db->get('guru');
+        return $query->result_array();
+    }
+     //get name by NIP
+    public function name_by_NIP($nip){
+        $this->db->select('nama_lengkap');
+        $this->db->where('nip', $nip);
+        $query = $this->db->get('guru');
+        $nama = $query->row_array();
+        return $nama['nama_lengkap'];
+    }
+    //all data by NIP
+    public function data_by_nip($nip){
+        $this->db->where('nip', $nip);
         $query = $this->db->get('guru');
         return $query->row_array();
     }

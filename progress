@@ -45,4 +45,10 @@ update profile - ubah foto
 [WORK] add link res>des on timeline
 [WORK]status on profile page | m_siswa , m_guru, json, myajax.js
 [WORK]post status to user via profile page | js on v->siswa/profile | c->json | m->m_siswa
-[]send message via profile page |
+[WORK]send message via profile page | v->profile|
+[]membaca pesan sidebar + fullpesan sesuai urutan
+[WORK]lihat semua guru | c->guru| v->guru |m->m_guru->all_teacher
+[WORK]lihat profile guru | c->guru/timeline | v->guru/timeline | 
+[WORK] siswa send status to siswa / siswa send status to guru
+[]lihat timeline di profile guru
+[]lihat materi terbaru + semua materi

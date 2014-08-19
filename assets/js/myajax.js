@@ -40,7 +40,7 @@ $.ajax({
 			'<p>'+
 			'<button class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span style=\'font-size:10px\'> 234 </span>'+
 			
-			'<button class="btn btn-default btn-xs"> Lihat Komentar</button>'+
+			'<button onclick=\'getCommentById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
 			'</p>'+
 			'</div>'+
 			'</div>'+			
@@ -49,7 +49,7 @@ $.ajax({
 						
 			+'</div>'+//END OF #COMMENTS
 			'<div class=\'comment row\'>'+
-			'<div class=\'col-md-2\'><img src=\'http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/assets/img/avatar/'+me+'\' /></div>'+
+			'<div class=\'col-md-2\'><img class="myavatar" /></div>'+
 			'<div class=\'col-md-10\'>'+
 			'<textarea class=\'form-control\' id=\'comment\' placeholder=\'your comment...\'></textarea>'+
 			'</div>'+
@@ -102,7 +102,7 @@ $.ajax({
 			
 			'</div>'+//END #COMMENTS 
 			'<div class=\'comment row\'>'+
-			'<div class=\'col-md-2\'><img src=\'http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/assets/img/avatar/avatar.jpg\' /></div>'+
+			'<div class=\'col-md-2\'><img class="myavatar" /></div>'+
 			'<div class=\'col-md-10\'>'+
 			'<textarea class=\'form-control\' id=\'comment\' placeholder=\'your comment...\'></textarea>'+
 			'</div>'+
@@ -152,7 +152,7 @@ $.ajax({
 			'<div class="comments" name=\''+n['id']+'\'>'+			
 			'</div>'+//end of #comments
 			'<div class=\'comment row\'>'+
-			'<div class=\'col-md-2\'><img src=\'http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/assets/img/avatar/avatar.jpg\' /></div>'+
+			'<div class=\'col-md-2\'><img class="myavatar" /></div>'+
 			'<div class=\'col-md-10\'>'+
 			'<textarea class=\'form-control\' id=\'comment\' placeholder=\'your comment...\'></textarea>'+
 			'</div>'+
@@ -199,12 +199,14 @@ function updateStatus(x,y,z,a,b,c){ //X= ID_SISWA,y = ID_GURU,Z = ID_GRUP | a = 
 /*
 * AJAX FOR COMMENTS
 */
-function getCommentById(x){ //COMMENT BY ID STATUS
-	$.ajax({				
+//BUTTON SHOW COMMENTS CLICKED
+function getCommentById(x){ //COMMENT BY ID STATUS	
+	$.ajax({ //x=id_status		
 		type:'GET',
-		url:'http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/index.php/json/show_comment_by_id?id='+n['id'],
+		url:'http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/index.php/json/show_comment_by_id?id='+x,
 		timeout: 50000,//50000MS
 		success:function(data){ //SUCCESS INSERT TO DB
+			//alert(x);
 			$.each(data['result'], function(i,n){//LOPPING COMMENTS
 				comment = '<div class=\'comment row\'>'+
 				'<div class=\'col-md-2\'>'+            
@@ -216,8 +218,12 @@ function getCommentById(x){ //COMMENT BY ID STATUS
 				'</div>'+
 				'</div>';
 				comment = comment+'';
-				$('.comments').html(comment);
+				document.write(comment);
 			});
+
+		},
+		error:function(){
+			alert('Tidak ada komentar');
 		}
 	});
 }
@@ -233,7 +239,7 @@ function showmessage(x,y){
 	$('#loader').show();
 	$.ajax({
 		type:"GET",
-		url:"http://localhost/2014-Project/SMAN01DEPOK-SOCIAL/index.php/all/isi_pesan_saya",
+		url:"http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/index.php/all/isi_pesan_saya",
 		data:{pengirim:x,penerima:y},
 		success:function(result){
 			$('#loader').hide();//HIDE LOADING

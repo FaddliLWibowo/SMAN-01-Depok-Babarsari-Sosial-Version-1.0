@@ -9,7 +9,7 @@ $(document).ready(function(){
 function profileStatus(){
   $('#top-loader').show();//SHOW LOADING
   $.ajax({
-    url:'<?php echo site_url("json/start_status?idsiswa=".$siswa["id"])?>',
+    url:'<?php echo site_url("json/start_status?idguru=".$guru["id"])?>',
     dataType:'json',
     timeout: 50000,//50000MS
     success:function(data){
@@ -49,7 +49,7 @@ function profileStatus(){
       $('#btn-more').show();//show btn to more status
     },
     error: function(){
-      alert('Terjadi masalah');
+      alert('Tidak Ada Status');
       $('#top-loader').hide();
     }
   });
@@ -59,7 +59,7 @@ function showUpdatedStatusOnProfile(){
 $('#top-loader').show();//SHOW LOADING
 lastid = $('#all-timeline .timeline div').first().attr('name');//GET ELEMENT NAME
 $.ajax({
-  url:'<?php echo site_url("json/start_status?idsiswa=".$siswa["id"]."&last=")?>'+lastid,
+  url:'<?php echo site_url("json/start_status?idguru=".$guru["id"]."&last=")?>'+lastid,
   dataType:'json',
   timeout: 50000,//50000MS
   success:function(data){
@@ -102,13 +102,14 @@ error: function(){
 });
   $('#top-loader').hide();//SHOW LOADING
 }
+
 //MORESTATUS
 function showMoreStatusOnProfile(){
   $('#bottom-loader').show();//SHOW LOADING
   var id = $('#all-timeline .timeline .name').last().attr('name');//GET ELEMENT NAME
   //alert(id);
   $.ajax({
-    url:'<?php echo site_url("json/start_status?idsiswa=".$siswa["id"]."&small=")?>'+id,
+    url:'<?php echo site_url("json/start_status?idguru=".$guru["id"]."&small=")?>'+id,
     dataType:'json',
     timeout: 50000,//50000MS
     success:function(data){
@@ -152,7 +153,7 @@ function showMoreStatusOnProfile(){
   $('#bottom-loader').hide();//SHOW LOADING
 }
 /////////////////UPDATE STATUS
-function updateSiswaStatus(x,y,z,a,b,c){ //X= ID_SISWA,y = ID_GURU,Z = ID_GRUP | a = DES_ID_SISWA,b = DES_ID_GURU,c=DES_ID_GRUP  
+function updateGuruStatus(x,y,z,a,b,c){ //X= ID_SISWA,y = ID_GURU,Z = ID_GRUP | a = DES_ID_SISWA,b = DES_ID_GURU,c=DES_ID_GRUP  
   $('#top-loader').show();//SHOW LOADING
   var isi = $('#newpost').val();//GET STATUS FROM TEXAREA
   if(isi == ''){//NOT FILL UP STATUS = ALERT + REFRESH PAGE
@@ -166,7 +167,7 @@ function updateSiswaStatus(x,y,z,a,b,c){ //X= ID_SISWA,y = ID_GURU,Z = ID_GRUP |
     timeout: 50000,//50000MS
     data:{idsiswa:x,idguru:y,idgrup:z,isi:isi,desidsiswa:a,desidguru:b,desidgrup:c},
     success:function(data){ //SUCCESS INSERT TO DB
-      showUpdatedStatusOnProfile()();
+      showUpdatedStatusOnProfile();
     },
     error:function(data){
       alert('ERROR'+data);
@@ -188,38 +189,68 @@ function updateSiswaStatus(x,y,z,a,b,c){ //X= ID_SISWA,y = ID_GURU,Z = ID_GRUP |
   <div style="background-color: rgb(228, 228, 228);" class="col-md-6">
     <div class="header-timeline">
         <center>
-          <img src="<?php echo base_url('assets/img/avatar/'.$siswa['avatar'])?>"/>
-          <h3><?php echo $siswa['nama_lengkap']?></h3>
-          <p><?php echo $siswa['moto']?></p>
+          <img src="<?php echo base_url('assets/img/avatar/'.$guru['avatar'])?>"/>
+          <h3><?php echo $guru['nama_lengkap']?></h3>
+          <p><?php echo $guru['moto']?></p>         
         </center>
     </div>
 
     <div class="timeline">
         <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-            <li class="active col-md-6"><a class="btn" href="#sendpost" data-toggle="tab"><span class="glyphicon glyphicon-bullhorn"></span> Send Post to User</a></li>
-            <li class="col-md-6" ><a class="btn" href="#sendmessage" data-toggle="tab"><span class="glyphicon glyphicon-envelope"></span> Send Message to User</a></li>
+            <li class="active"><a class="btn" href="#sendpost" data-toggle="tab"><span class="glyphicon glyphicon-bullhorn"></span> Post</a></li>
+            <li><a class="btn" href="#sendmessage" data-toggle="tab"><span class="glyphicon glyphicon-envelope"></span> Message</a></li>
+            <li><a class="btn" href="#materiguru" data-toggle="tab"><span class="glyphicon glyphicon-book"></span> Materi</a></li>
+            <li><a class="btn" href="#soalguru" data-toggle="tab"><span class="glyphicon glyphicon-file"></span> Soal</a></li>
+            <li><a class="btn" href="#info" data-toggle="tab"><span class="glyphicon glyphicon-info-sign"></span> info</a></li>
         </ul>
         <br/><br/>
         <div id="my-tab-content" class="tab-content">
             <div class="tab-pane active" id="sendpost">
               <textarea rows="5" class="form-control" id="newpost" placeholder="type here..."></textarea>
-               <?php //CEK YANG LOGIN 
+              <?php //CEK YANG LOGIN 
               if($this->session->userdata('siswa_logged_in')){
               ?>
-              <button onclick="updateSiswaStatus(<?php echo $this->session->userdata('id')?>,0,0,<?php echo $siswa['id']?>,0,0)" id="btn-newpost">Post</button>  
+              <button onclick="updateGuruStatus(<?php echo $this->session->userdata('id')?>,0,0,0,<?php echo $guru['id']?>,0)" id="btn-newpost">Post</button>  
               <?php } else if($this->session->userdata('guru_logged_in')){?>
-              <button onclick="updateSiswaStatus(0,<?php echo $this->session->userdata('id')?>,0,<?php echo $siswa['id']?>,0,0)" id="btn-newpost">Post</button> 
-              <?php } ?> <br/><br/>
+              <button onclick="updateGuruStatus(0,<?php echo $this->session->userdata('id')?>,0,0,<?php echo $guru['id']?>,0)" id="btn-newpost">Post</button> 
+              <?php } ?>              
+              <br/><br/>
             </div>
 
             <div class="tab-pane" id="sendmessage">
               <form action="<?php echo site_url('all/send_message')?>" method="POST">   
-              <input type="hidden" name="penerima" value="<?php echo $siswa['nis'];?>" />
+              <input type="hidden" name="penerima" value="<?php echo $guru['nip'];?>" />
               <textarea name="isi" rows="5" class="form-control" id="newpost" placeholder="type here..."></textarea>
               <button id="btn-newpost">Message</button> 
               </form> 
               <br/><br/>
             </div>
+
+            <div class="tab-pane" id="materiguru">
+            materi
+            </div>
+
+            <div class="tab-pane" id="soalguru">
+            soal
+            </div>
+
+            <div class="tab-pane" id="info">
+              <h4>Info Guru</h4>
+              <p>Jangan menyalahgunakan data yang ada disini, data guru hanya digunakan untuk urusan kegiatan belajar mengajar</p>
+              <div class="row">
+                <div class="col-md-2"><strong>Nama</strong></div><div class="col-md-10"><?php echo $guru['nama_lengkap']?></div>
+                <div class="col-md-2"><strong>NIP</strong></div><div class="col-md-10"><?php echo $guru['nip']?></div>
+                <div class="col-md-2"><strong>Alamat</strong></div><div class="col-md-10"><?php echo $guru['alamat']?></div>
+                <div class="col-md-2"><strong>Email</strong></div><div class="col-md-10"><?php echo $guru['email']?></div>
+                <div class="col-md-2"><strong>Telp</strong></div><div class="col-md-10"><?php echo $guru['telp']?></div>
+              </div>
+              <hr>
+              <h4>Kelas dan Mata Pelajaran Yang Diampu</h4>
+              <div class="row">
+
+              </div>
+            </div>
+
         </div>
 
     </div>
