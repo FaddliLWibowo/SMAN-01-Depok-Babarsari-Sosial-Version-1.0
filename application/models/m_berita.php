@@ -3,8 +3,8 @@
 class m_berita extends CI_Model{
 	//LIHAT SEMUA BERITA
 	function berita($x,$y){
-		$this->db->order_by('id_berita','desc');
-		$query = $this->db->get('berita',$x,$y);
+		$sql = "SELECT * FROM berita ORDER BY id_berita DESC LIMIT ".$y.",".$x;
+		$query =$this->db->query($sql);
 		if($query->num_rows()>0){return $query->result_array();}else{return array();}
 	}
 	//BERITA BY ID

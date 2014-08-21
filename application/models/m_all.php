@@ -99,19 +99,28 @@ class m_all extends CI_Model{
 	/*
 	* MATERI
 	*/
-
 	//ALL MATERI
 	public function all_materi($x,$y){
-		$sql="SELECT guru.nama_lengkap AS 'guru', judul,link FROM materi
-		INNER JOIN guru ON guru.id = materi.id_guru LIMIT ".$y.",".$x;
+		$sql="SELECT guru.nama_lengkap AS 'guru',kelas.nama_kelas AS 'kelas',
+		matapelajaran.matapelajaran AS 'mapel', judul,link,tahun 
+		FROM materi
+		INNER JOIN guru ON guru.id = materi.id_guru
+		INNER JOIN kelas ON kelas.id_kelas = materi.id_kelas
+		INNER JOIN matapelajaran ON matapelajaran.id_matapelajaran= materi.id_matapelajaran
+		LIMIT ".$y.",".$x;
 		$this->db->order_by('id_materi','desc');
 		$query = $this->db->query($sql);
 		if($query->num_rows()>0){return $query->result_array();}else{return array();}
 	}
 	//ALL SOAL
 	public function all_soal($x,$y){
-		$sql="SELECT guru.nama_lengkap AS 'guru', judul,link FROM soal
-		INNER JOIN guru ON guru.id = soal.id_guru LIMIT ".$y.",".$x;
+		$sql="SELECT guru.nama_lengkap AS 'guru',kelas.nama_kelas AS 'kelas',
+		matapelajaran.matapelajaran AS 'mapel', judul,link,tahun 
+		FROM soal
+		INNER JOIN guru ON guru.id = soal.id_guru
+		INNER JOIN kelas ON kelas.id_kelas = soal.id_kelas
+		INNER JOIN matapelajaran ON matapelajaran.id_matapelajaran= soal.id_matapelajaran
+		LIMIT ".$y.",".$x;
 		$this->db->order_by('id_soal','desc');
 		$query = $this->db->query($sql);
 		if($query->num_rows()>0){return $query->result_array();}else{return array();}
