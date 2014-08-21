@@ -95,4 +95,25 @@ class m_all extends CI_Model{
 		$sql ="INSERT INTO pesan(pengirim,penerima,isi, waktu) VALUES(?,?,?, CURTIME())";
 		$this->db->query($sql,$params);
 	}
+
+	/*
+	* MATERI
+	*/
+
+	//ALL MATERI
+	public function all_materi($x,$y){
+		$sql="SELECT guru.nama_lengkap AS 'guru', judul,link FROM materi
+		INNER JOIN guru ON guru.id = materi.id_guru LIMIT ".$y.",".$x;
+		$this->db->order_by('id_materi','desc');
+		$query = $this->db->query($sql);
+		if($query->num_rows()>0){return $query->result_array();}else{return array();}
+	}
+	//ALL SOAL
+	public function all_soal($x,$y){
+		$sql="SELECT guru.nama_lengkap AS 'guru', judul,link FROM soal
+		INNER JOIN guru ON guru.id = soal.id_guru LIMIT ".$y.",".$x;
+		$this->db->order_by('id_soal','desc');
+		$query = $this->db->query($sql);
+		if($query->num_rows()>0){return $query->result_array();}else{return array();}
+	}
 }

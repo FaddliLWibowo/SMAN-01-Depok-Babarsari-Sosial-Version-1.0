@@ -43,20 +43,6 @@
 </div>
 <div class="panel panel-default">
   <div class="panel-heading">
-    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#event">
-      <h4 class="panel-title">
-       <span class="glyphicon glyphicon-list-alt"></span> Event
-     </h4>
-   </a>
- </div>
- <div id="event" class="panel-collapse collapse">
-  <div class="panel-body">
-    isi menu
-  </div>
-</div>
-</div>
-<div class="panel panel-default">
-  <div class="panel-heading">
     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#menu">
       <h4 class="panel-title">
        <span class="glyphicon glyphicon-th"></span> Menu Guru

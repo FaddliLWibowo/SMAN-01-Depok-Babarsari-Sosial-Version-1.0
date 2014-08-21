@@ -9,12 +9,16 @@
 
     <div class="timeline">
       <div class="page-header">
-        <h1>Berita <small>SMAN 01 Depok Babarsari</small></h1>
+        <h1>Berita</h1>
       </div>    
-        <?php foreach($berita as $b):?>
-          <a><h2><?php echo $b['judul']?></h2></a><small>Oleh Admin | Post | Update</small><br/>
-          <p><?php echo $b['konten']?></p><p><a class="btn btn-warning" href="#">selengkapnya</a></p>
+        <?php foreach($berita as $b):
+        $konten = substr($b['konten'], 0,300)
+        ?>
+          <a href="<?php echo site_url('berita/baca/'.$b['id_berita'])?>"><h2><?php echo $b['judul']?></h2></a><small style="color:gray">Oleh Admin | Post | Update</small><br/>
+          <p><?php echo $konten?></p><p><a class="btn btn-warning" href="#">selengkapnya</a></p>
+          <br/>
         <?php endforeach;?>
+        <center><?php echo $page?></center>
     </div>
 
   </div>
