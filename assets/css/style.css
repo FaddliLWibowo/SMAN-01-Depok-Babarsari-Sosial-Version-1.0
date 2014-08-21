@@ -201,32 +201,20 @@ a.more:hover{
 }
 
 /*GURU MANAJEMEN*/
-.semua-guru{
-	padding:20px;
-}
-
-.guru{
-	background-color: rgb(228, 228, 228);
-	padding:5px;
-	margin:10px;
-}
-
-.guru span{
-	height:20px;
-}
-
+.semua-guru{padding:20px;}
+.guru{background-color: rgb(228, 228, 228);padding:5px;margin:10px;}
+.guru span{height:20px;}
 .guru img{
 	height :40px;
 	width:40px;
 	float:left;
 	margin-right: 2px
 }
-
 .panel-body{
 	height:250px;
 	overflow: auto;
 }
-
+.choose{background-color:rgb(228, 228, 228);padding:5px}
 /*ALL*/
 .profile-detail{
 	padding:20px;

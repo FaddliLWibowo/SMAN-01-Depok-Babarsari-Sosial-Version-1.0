@@ -1,15 +1,15 @@
- <div class="panel-group" id="accordion">
+<div class="panel-group" id="accordion">
   <div class="panel panel-default">
     <div class="panel-heading">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#pesan">
         <h4 class="panel-title">
           <span class="glyphicon glyphicon-comment"></span> Pesan <span class="badge">42</span>
-        </h4>
+        </h4>        
       </a>
     </div>
     <div id="pesan" class="panel-collapse collapse">
       <div class="panel-body">
-        isi menu
+        <?php $this->load->view('siswa/menu/pesan')?>
       </div>
     </div>
   </div>
@@ -29,19 +29,19 @@
   </div>
   <div class="panel panel-default">
     <div class="panel-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#jadwal">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#news">
         <h4 class="panel-title">
-          <span class="glyphicon glyphicon-calendar"></span> Jadwal Pelajaran
-        </h4>
-      </a>
-    </div>
-    <div id="jadwal" class="panel-collapse collapse">
-      <div class="panel-body">
-       isi menu
-     </div>
+         <span class="glyphicon glyphicon-list-alt"></span> News
+       </h4>
+     </a>
    </div>
- </div>
- <div class="panel panel-default">
+   <div id="news" class="panel-collapse collapse">
+    <div class="panel-body">
+      isi menu
+    </div>
+  </div>
+</div>
+<div class="panel panel-default">
   <div class="panel-heading">
     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#event">
       <h4 class="panel-title">
@@ -57,30 +57,23 @@
 </div>
 <div class="panel panel-default">
   <div class="panel-heading">
-    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#materi">
-      <h4 class="panel-title">                
-       <span class="glyphicon glyphicon-briefcase"></span> Materi                
-     </h4>
-   </a>
- </div>
- <div id="materi" class="panel-collapse collapse">
-  <div class="panel-body">
-    isi menu
-  </div>
-</div>
-</div>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#soal">
+    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#menu">
       <h4 class="panel-title">
-       <span class="glyphicon glyphicon-briefcase"></span> Soal
+       <span class="glyphicon glyphicon-th"></span> Menu Guru
      </h4>
    </a>
  </div>
- <div id="soal" class="panel-collapse collapse">
+ <div id="menu" class="panel-collapse collapse">
   <div class="panel-body">
-    isi menu
+    <table class="table table-hover">
+      <tr><td><a href="#">Materi Saya</td></tr>
+      <tr><td><a href="#">Soal Saya</td></tr>
+      <tr><td><a href="#">Jadwal Saya</td></tr>
+      <tr><td></td></tr>
+    </table>
   </div>
 </div>
 </div>
+
+
 </div>

@@ -61,17 +61,17 @@ class json extends CI_Controller{
 		//LOOPING	
 		foreach($status as $s):
 			$id=$s['id_status'];
-			$content=$s['isi_status'];
-			$tag=$s['tag'];
-			$id_siswa=$s['id_siswa'];
-			$id_guru=$s['id_guru'];
-			$id_grup=$s['id_grup'];
-			$des_id_siswa=$s['on_id_siswa'];
-			$des_id_guru=$s['on_id_guru'];
-			$des_id_grup=$s['on_id_grup'];	
-			$waktu=$s['waktu'];
+		$content=$s['isi_status'];
+		$tag=$s['tag'];
+		$id_siswa=$s['id_siswa'];
+		$id_guru=$s['id_guru'];
+		$id_grup=$s['id_grup'];
+		$des_id_siswa=$s['on_id_siswa'];
+		$des_id_guru=$s['on_id_guru'];
+		$des_id_grup=$s['on_id_grup'];	
+		$waktu=$s['waktu'];
 			//GET RESOURCE NAME,LINK,AVATAR
-			if(!is_null($id_siswa)){
+		if(!is_null($id_siswa)){
 				$data = $this->m_siswa->data_by_id($id_siswa);//GET STUDENT NAME BY ID
 				$link = site_url('siswa/profile/'.$data['nis']);
 				$name = $data['nama_lengkap'];
@@ -107,19 +107,19 @@ class json extends CI_Controller{
 
 			$result[] = array('id'=>$id,'content'=>$content,'tag'=>$tag,'profile'=>$link,'name'=>$name,'avatar'=>$avatar,
 				'des_profile'=>$des_link,'des_name'=>$des_name,'des_avatar'=>$des_avatar,'time'=>$waktu);
-		endforeach;
+			endforeach;
 		//ENCODE TO JSON
-		$json['result'] = $result;
+			$json['result'] = $result;
 		//ECHO JSON
-		echo json_encode($json);
-	}
+			echo json_encode($json);
+		}
 
 	//SHOW UPDATED STATUS
-	public function show_updated_status(){
-		$lastid = $this->input->get('lastid');
-		$status = $this->m_all->show_updated_status($lastid);
-		foreach($status as $s):
-			$id=$s['id_status'];
+		public function show_updated_status(){
+			$lastid = $this->input->get('lastid');
+			$status = $this->m_all->show_updated_status($lastid);
+			foreach($status as $s):
+				$id=$s['id_status'];
 			$content=$s['isi_status'];
 			$tag=$s['tag'];
 			$id_siswa=$s['id_siswa'];
@@ -142,19 +142,19 @@ class json extends CI_Controller{
 				$avatar = base_url('assets/img/avatar/'.$avatar);
 			}
 			$result[] = array('id'=>$id,'content'=>$content,'tag'=>$tag,'name'=>$name,'avatar'=>$avatar,'time'=>$waktu);
-		endforeach;
+			endforeach;
 		//ENCODE TO JSON
-		$json['result'] = $result;
+			$json['result'] = $result;
 		//ECHO JSON
-		echo json_encode($json);
-	}
+			echo json_encode($json);
+		}
 
 	//SHOW MORE STATUS
-	public function show_more_status(){
-		$lastid = $this->input->get('lastid');
-		$status = $this->m_all->show_more_status($lastid);
-		foreach($status as $s):
-			$id=$s['id_status'];
+		public function show_more_status(){
+			$lastid = $this->input->get('lastid');
+			$status = $this->m_all->show_more_status($lastid);
+			foreach($status as $s):
+				$id=$s['id_status'];
 			$content=$s['isi_status'];
 			$tag=$s['tag'];
 			$id_siswa=$s['id_siswa'];
@@ -177,12 +177,12 @@ class json extends CI_Controller{
 				$avatar = base_url('assets/img/avatar/'.$avatar);
 			}
 			$result[] = array('id'=>$id,'content'=>$content,'tag'=>$tag,'name'=>$name,'avatar'=>$avatar,'time'=>$waktu);
-		endforeach;
+			endforeach;
 		//ENCODE TO JSON
-		$json['result'] = $result;
+			$json['result'] = $result;
 		//ECHO JSON
-		echo json_encode($json);
-	}
+			echo json_encode($json);
+		}
 
 	/*
 	* ALL ABOUT COMMENT
@@ -192,13 +192,13 @@ class json extends CI_Controller{
 		$comments = $this->m_all->show_comment_by_id($id);
 		foreach($comments as $c):
 			$id_komentar =$c['id_komentar'];
-			$id_status = $c['id_status'];
-			$id_siswa = $c['id_siswa'];
-			$id_guru = $c['id_guru'];
-			$isi = $c['komentar'];
-			$waktu = $c['time'];
+		$id_status = $c['id_status'];
+		$id_siswa = $c['id_siswa'];
+		$id_guru = $c['id_guru'];
+		$isi = $c['komentar'];
+		$waktu = $c['time'];
 			//GET USER NAME
-			if(!is_null($id_siswa)){
+		if(!is_null($id_siswa)){
 				$data = $this->m_siswa->data_by_id($id_siswa);//GET STUDENT NAME BY ID
 			}else if(!is_null($id_guru)){
 				$data = $this->m_guru->data_by_id($id_guru);//GET TEACHER NAME BY ID
@@ -213,10 +213,15 @@ class json extends CI_Controller{
 				$avatar = base_url('assets/img/avatar/'.$avatar);
 			}
 			$result[] = array('id_komentar'=>$id_komentar,'id_status'=>$id_status,'name'=>$name,'avatar'=>$avatar,'isi'=>$isi,'waktu'=>$waktu);
-		endforeach;
-		//ENCODE TO JSON
-		$json['result'] = $result;
+			endforeach;
+			if(!empty($result)){
+			//ENCODE TO JSON
+				$json['result'] = $result;
 		//ECHO JSON
-		echo json_encode($json);
+				echo json_encode($json);
+			} else {
+				echo 'tidak ada status';
+			}
+
+		}
 	}
-}

@@ -129,6 +129,5 @@ class all extends base{
 		//RETURN TRUE FROM MODAL
 	}
 
-
 	//Membatasi penggunaan user dan manajemen hacker
 }

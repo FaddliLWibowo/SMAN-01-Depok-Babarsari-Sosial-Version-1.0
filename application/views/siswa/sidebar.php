@@ -1,57 +1,71 @@
-<div class="panel-group" id="accordion">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#pesan">
-      <h4 class="panel-title">
-          <span class="glyphicon glyphicon-comment"></span> Pesan <span class="badge">42</span>
-        </h4>        
-      </a>
-    </div>
-    <div id="pesan" class="panel-collapse collapse">
-      <div class="panel-body">
-        <?php $this->load->view('siswa/menu/pesan')?>
+ <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#pesan">
+          <h4 class="panel-title">
+            <span class="glyphicon glyphicon-comment"></span> Pesan <span class="badge">42</span>
+          </h4>        
+        </a>
+      </div>
+      <div id="pesan" class="panel-collapse collapse">
+        <div class="panel-body">
+          <?php $this->load->view('siswa/menu/pesan')?>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Grup">
-        <h4 class="panel-title">
-          <span class="glyphicon glyphicon-comment"></span> Grup
-        </h4>
-      </a>
-    </div>
-    <div id="Grup" class="panel-collapse collapse">
-      <div class="panel-body">
-        isi menu
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Grup">
+          <h4 class="panel-title">
+            <span class="glyphicon glyphicon-comment"></span> Grup
+          </h4>
+        </a>
+      </div>
+      <div id="Grup" class="panel-collapse collapse">
+        <div class="panel-body">
+          <?php $this->load->view('siswa/menu/grup')?>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#jadwal">
-        <h4 class="panel-title">
-          <span class="glyphicon glyphicon-calendar"></span> Jadwal Pelajaran
-        </h4>
-      </a>
-    </div>
-    <div id="jadwal" class="panel-collapse collapse">
-      <div class="panel-body">
-       isi menu
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#jadwal">
+          <h4 class="panel-title">
+            <span class="glyphicon glyphicon-calendar"></span> Jadwal Pelajaran
+          </h4>
+        </a>
+      </div>
+      <div id="jadwal" class="panel-collapse collapse">
+        <div class="panel-body">
+         isi menu
+       </div>
      </div>
    </div>
- </div>
- <div class="panel panel-default">
+   <div class="panel panel-default">
+    <div class="panel-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#event">
+        <h4 class="panel-title">
+         <span class="glyphicon glyphicon-list-alt"></span> Event
+       </h4>
+     </a>
+   </div>
+   <div id="event" class="panel-collapse collapse">
+    <div class="panel-body">
+      <?php $this->load->view('siswa/menu/event')?>
+    </div>
+  </div>
+</div>
+<div class="panel panel-default">
   <div class="panel-heading">
-    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#event">
+    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#news">
       <h4 class="panel-title">
-       <span class="glyphicon glyphicon-list-alt"></span> Event
+       <span class="glyphicon glyphicon-list-alt"></span> Berita
      </h4>
    </a>
  </div>
- <div id="event" class="panel-collapse collapse">
+ <div id="news" class="panel-collapse collapse">
   <div class="panel-body">
-    isi menu
+    <?php $this->load->view('siswa/menu/berita')?>
   </div>
 </div>
 </div>

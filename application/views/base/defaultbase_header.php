@@ -5,6 +5,7 @@
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
 	<link href="<?php echo base_url('assets/css/bootstrap.css') ?>" media="screen"  rel="stylesheet" />
 	<link href="<?php echo base_url('assets/css/style.css') ?>" media="screen" rel="stylesheet" />	
+	<link rel="icon" href="<?php echo base_url('assets/assets/images/icon.png')?>" />
 	<script src="<?php echo base_url('assets/js/myajax.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/jquery.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
@@ -25,21 +26,18 @@
 			<div class="top-menu col-md-10">
 				<ul>
 					<?php
-					// $myvalue = 'Test me more';
-					// $arr = explode(' ',trim($myvalue));
-					// echo $arr[0]; // will print Test
+					$name = explode(' ', $this->session->userdata('nama_lengkap'));
+					$name = $name[0];
 					$nis = $this->session->userdata('nis');
+					$session = $this->session->userdata;
 					//apakah user sudah logged in
-					if($this->session->userdata('siswa_logged_in')) {
-						$session = $this->session->userdata;
+					if($this->session->userdata('siswa_logged_in')) {						
 						$avatar = $session['avatar'];
 						if(!empty($avatar)) {//jika sudah upload avatar
 							$src = 'assets/img/avatar/'.$avatar;
 						} else { //jika belum upload avatar
 							$src = 'assets/img/avatar/avatar.jpg';
-						}
-						$name = explode(' ', $this->session->userdata('nama_lengkap'));
-						$name = $name[0];
+						}						
 						echo '
 						<li style="width:120px" class="profile-menu">
 							<div class="dropdown">

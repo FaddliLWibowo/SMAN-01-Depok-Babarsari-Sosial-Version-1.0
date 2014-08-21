@@ -11,6 +11,8 @@ class base extends CI_Controller {
 		$this->load->model('m_siswa');	
 		$this->load->model('m_guru');
 		$this->load->model('m_all');
+		$this->load->model('m_berita');
+		$this->load->model('m_event');
 	}
 
 	public function index(){
@@ -37,5 +39,14 @@ class base extends CI_Controller {
 		}else if(!is_null($id_grup)){
 			$name = 'on construct';//GET GROUP NAME BY ID;
 		}
+	}
+
+	//ONLY STUDENT
+	public function student_login(){
+		if(!$this->session->userdata('siswa_logged_in')) {return redirect(site_url());}
+	}
+	//ONLY TEACHER
+	public function teacher_login(){
+		if(!$this->session->userdata('guru_logged_in')) {return redirect(site_url());}
 	}
 }

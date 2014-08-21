@@ -3,10 +3,6 @@ require_once 'application/controllers/base/base.php';
 class siswa extends base{
 	public function __construct(){
 		parent::__construct();
-		//jika siswa belum login maka balik ke halaman home
-		if(!$this->session->userdata('siswa_logged_in')) {
-			redirect(site_url());
-		}
 	}
 
 	public function index(){
@@ -14,6 +10,7 @@ class siswa extends base{
 	}
 
 	public function timeline(){
+		$this->student_login();
 		$data['title'] = 'Timeline | ';
 		$data['script'] = "$(document).ready(function(){document.getElementById('home').className='active';});";
 		$this->defaultdisplay('siswa/timeline', $data);
@@ -21,6 +18,7 @@ class siswa extends base{
 
 	//MENAMPILKAN SEMUA PESAN
 	public function messages(){
+		$this->student_login();
 		$data['title'] = 'Pesan | ';
 		$data['script'] = "$(document).ready(function(){document.getElementById('home').className='active';});";
 		$nis = $this->session->userdata('nis');
@@ -39,6 +37,7 @@ class siswa extends base{
 	}
 
 	public function edit_profile(){
+		$this->student_login();
 		$data['title']= 'Edit Profile | ';
 		$nis = $this->session->userdata('nis');
 		$data['script'] = "$(document).ready(function(){document.getElementById('home').className='active';});";

@@ -96,5 +96,35 @@ class m_guru extends CI_Model{
         $query = $this->db->get('guru');
         return $query->row_array();
     }
+    /*
+    * ALL ABOUT AJAR MENGAJAR
+    */
+    public function guru_ajar($idguru){//GURU + SUBCLASS + MATA PELAJARAN
+        $sql = "SELECT guru.nama_lengkap AS 'nama',kelas.id_kelas AS 'id_kelas',kelas.nama_kelas AS 'kelas',subkelas.nama AS 'subkelas',
+        matapelajaran.id_matapelajaran AS 'id_matapelajaran', matapelajaran.matapelajaran AS 'matapelajaran' 
+        FROM mengajar 
+        LEFT JOIN guru ON guru.id=mengajar.id_guru
+        LEFT JOIN matapelajaran ON matapelajaran.id_matapelajaran=mengajar.id_matapelajaran
+        LEFT JOIN subkelas ON mengajar.id_subkelas=subkelas.id_subkelas
+        LEFT JOIN kelas ON subkelas.kelas = kelas.id_kelas 
+        WHERE mengajar.id_guru=?;
+        ";
+        $query = $this->db->query($sql,$idguru);
+        if($query->num_rows()>0){return $query->result_array();}else{return array();}
+    }
+    //MATERI BY GURU
+    public function mymateri($nexus){
+        $sql = "SELECT * FROM materi WHERE id_guru = ? AND tahun = ? AND id_matapelajaran= ? AND id_kelas=?
+        ORDER BY id_materi DESC";
+        $query = $this->db->query($sql,$nexus);
+        if($query->num_rows()>0){return $query->result_array();}else{return array();}
+    }
+    //SOAL By GURU
+    public function mysoal($nexus){
+        $sql = "SELECT * FROM soal WHERE id_guru = ? AND tahun = ? AND id_matapelajaran= ? AND id_kelas=? 
+        ORDER BY id_soal DESC";
+        $query = $this->db->query($sql,$nexus);
+        if($query->num_rows()>0){return $query->result_array();}else{return array();}
+    }
 
 }

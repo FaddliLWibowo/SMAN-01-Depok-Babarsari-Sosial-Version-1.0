@@ -16,7 +16,6 @@ $.ajax({
 	}
 });
 }
-
 /////////// SHOW LATTEST STATUS
 function lattestStatus(me){
 //alert('work');
@@ -30,7 +29,7 @@ $.ajax({
 		$.each(data['result'], function(i,n){
 			timeline = '<div class=\'timeline\'>'+
 			'<div name=\''+n['id']+'\' class=\'row name\'>'+
-			'<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' /><button class=\'btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+			'<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' /><button onclick="deleteMyStatus()" class=\'btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
 			'<h5><a href=\''+n['profile']+'\'><strong>'+n['name']+'</strong></a> > <a href=\''+n['des_profile']+'\'><strong>'+n['des_name']+'</strong></a></h5><h6>'+n['time']+'</h6>'+
 			'</div>'+     
 			'</div>'+
@@ -83,7 +82,7 @@ $.ajax({
 		$.each(data['result'], function(i,n){
 			timeline = '<div class=\'timeline\'>'+
 			'<div name=\''+n['id']+'\' class=\'row name\'>'+
-			'<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' /><button class=\'btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+			'<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' /><button  class=\'btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
 			'<h5><a href=\''+n['profile']+'\'><strong>'+n['name']+'</strong></a> > <a href=\''+n['des_profile']+'\'><strong>'+n['des_name']+'</strong></a></h5><h6>'+n['time']+'</h6>'+
 			'</div>'+     
 			'</div>'+
@@ -134,7 +133,7 @@ $.ajax({
 		$.each(data['result'], function(i,n){
 			timeline = '<div class=\'timeline\'>'+
 			'<div name=\''+n['id']+'\' class=\'row name\'>'+
-			'<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' /><button class=\'btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+			'<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' /><button onclick="deleteMyStatus()" class=\'btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
 			'<h5><a href=\''+n['profile']+'\'><strong>'+n['name']+'</strong></a> > <a href=\''+n['des_profile']+'\'><strong>'+n['des_name']+'</strong></a></h5><h6>'+n['time']+'</h6>'+
 			'</div>'+     
 			'</div>'+
@@ -196,6 +195,11 @@ function updateStatus(x,y,z,a,b,c){ //X= ID_SISWA,y = ID_GURU,Z = ID_GRUP | a = 
 	}	
 }
 
+//DELETE MY STATUS
+function deleteMyStatus(){
+	var status = confirm('Anda Yakin');
+}
+
 /*
 * AJAX FOR COMMENTS
 */
@@ -218,9 +222,9 @@ function getCommentById(x){ //COMMENT BY ID STATUS
 				'</div>'+
 				'</div>';
 				comment = comment+'';
-				document.write(comment);
+				
 			});
-
+			alert(comment);
 		},
 		error:function(){
 			alert('Tidak ada komentar');

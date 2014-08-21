@@ -47,8 +47,23 @@ update profile - ubah foto
 [WORK]post status to user via profile page | js on v->siswa/profile | c->json | m->m_siswa
 [WORK]send message via profile page | v->profile|
 []membaca pesan sidebar + fullpesan sesuai urutan
+
+-----------------------------------------------
+
+19-Agus-2014
 [WORK]lihat semua guru | c->guru| v->guru |m->m_guru->all_teacher
 [WORK]lihat profile guru | c->guru/timeline | v->guru/timeline | 
 [WORK] siswa send status to siswa / siswa send status to guru
-[]lihat timeline di profile guru
-[]lihat materi terbaru + semua materi
+[WORK]lihat timeline di profile guru
+[WORK]lihat guru mengajar apa dikelas apa | m_guru->guru_ajar($idguru) | v->guru/profile
+[]timeline jika yang login guru 
+
+------------------------------------------------
+
+20-Agus-2014
+[]Materi yang diupload guru | C->guru | m_guru->my_materi($id_guru)
+[]info di profil siswa | v->siswa->profile | m->siswa->info_lengkap($id_siswa)
+
+------------------------------------------------
+21-Agus-2014
+[work] lihat materi dan soal yang diupload gurua

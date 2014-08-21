@@ -12,7 +12,7 @@
 <section id="timeline-place">
   <div class="container">
    <div style="background-color: rgb(228, 228, 228)" class="col-md-offset-1 col-md-4">
-     <div class="fixed-sidebar"><div class="menu"><?php $this->load->view('siswa/sidebar')?></div></div>
+     <div class="fixed-sidebar"><div class="menu"><?php $this->load->view('sidebar')?></div></div>
    </div>
 
    <div style="background-color: rgb(228, 228, 228);" class="col-md-6">
