@@ -66,11 +66,40 @@ class siswa extends base{
 
 	//UPDATE PROFILE
 	public function updateprofile(){
+		$idsiswa = $this->session->userdata('id'); 
 		$alamat = $this->input->post('txtAlamat');
 		$moto = $this->input->post('txtMoto');
-		$img = $_FILES['fileAvatar'];
+		$img = $_FILES['myAvatar'];
 		//GET PICTURE
 		$this->load->library('form_validation');//CALL FORM VALIDATION LIBRARY
+		$this->form_validation->set_rules('txtAlamat','Alamat','required');
+		$this->form_validation->set_rules('txtMoto','Alamat','required');
+		if($this->form_validation->run()){ //FORM VALIDATION IS WORK
+			//UPLOAD AVATAR MANAGEMENT
+			if(isset($_FILES['myAvatar'])){ //IF UPLOAD NEW AVATAR
+				$this->load->library('upload');
+				$avatarname = str_replace(' ', '-', $img['name']);
+				$config['upload_path'] = './assets/img/avatar';
+				$config['allowed_types'] = 'gif|png|jpg|jpeg|GIF|PNG|JPG|JPEG';
+				$config['overwrite'] = true;
+				$config['max_size'] = 1000000; //1MB
+				$this->upload->initialize($config);
+				if(!$this->upload->do_upload('myAvatar')){
+					redirect(site_url('siswa/edit_profile?note=fail'));
+				}	 
+			} else {//NOT UPLOAD NEW AVATAR
+				$avatarname = $this->input->post('reccentAvatar');
+			}
+			//UPDATE DATABASE
+			$params = array($alamat,$moto,$avatarname,$idsiswa);
+			if($this->m_siswa->editprofile($params)) {
+				redirect(site_url('siswa/edit_profile?note=success'));
+			} else {
+				redirect(site_url('siswa/edit_profile?note=fail'));
+			}
+		} else { //FORM VALIDATION NOT WORK
+			redirect(site_url('siswa/edit_profile?note=fail'));
+		}
 
 	}
 
@@ -87,8 +116,8 @@ class siswa extends base{
 			if($this->form_validation->run()){ //SESUAI RULES
 				$this->m_siswa->updatepassword($txtnewpass1);//QUERY UPDATE PASS
 				echo ("<SCRIPT LANGUAGE='JavaScript'>
-				window.alert('Password Berhasil Diubah');
-				window.location.href='".site_url('siswa/edit_profile')."';
+					window.alert('Password Berhasil Diubah');
+					window.location.href='".site_url('siswa/edit_profile')."';
 				</SCRIPT>");
 			} else { //TIDAK SESUAI RULES
 				$data['title'] = 'Error Ubah Password | ';

@@ -72,7 +72,7 @@ class m_all extends CI_Model{
 	}
 	//PESAN SAYA
 	public function pesan_saya($param){
-		$sql = "SELECT pesan.pengirim AS 'pengirim',pesan.penerima AS 'penerima', pesan.isi AS 'isi',pesan.waktu AS 'waktu' FROM (SELECT * FROM pesan WHERE penerima=? ORDER BY waktu ASC) AS pesan WHERE penerima=? GROUP BY pengirim ORDER BY waktu DESC LIMIT 10 OFFSET 0";
+		$sql = "SELECT pesan.id_pesan AS 'id', pesan.pengirim AS 'pengirim',pesan.penerima AS 'penerima', pesan.isi AS 'isi',pesan.waktu AS 'waktu' FROM (SELECT * FROM pesan WHERE penerima=? ORDER BY id_pesan DESC) AS pesan GROUP BY pesan.pengirim LIMIT 0,10";
 		$result = $this->db->query($sql, array($param,$param));
 		if($result->num_rows>0) {
 			return $result->result_array();
@@ -101,7 +101,7 @@ class m_all extends CI_Model{
 	*/
 	//ALL MATERI
 	public function all_materi($x,$y){
-		$sql="SELECT guru.nama_lengkap AS 'guru',kelas.nama_kelas AS 'kelas',
+		$sql="SELECT guru.nip AS 'nip',guru.nama_lengkap AS 'guru',kelas.nama_kelas AS 'kelas',
 		matapelajaran.matapelajaran AS 'mapel', judul,link,tahun 
 		FROM materi
 		INNER JOIN guru ON guru.id = materi.id_guru
@@ -124,5 +124,36 @@ class m_all extends CI_Model{
 		$this->db->order_by('id_soal','desc');
 		$query = $this->db->query($sql);
 		if($query->num_rows()>0){return $query->result_array();}else{return array();}
+	}
+	/*
+	* ALL ABOUT GROUP
+	*/
+	//SHOW ALL GRUP
+	public function show_all_group($params){//LIMIT + OFFSET
+		$sql = "SELECT * FROM grup LIMIT ?,?";
+		$query = $this->db->query($sql,$params);
+		if($query->num_rows>0){
+			return $query->result_array();			
+		}else{
+			return array();
+		}
+	}
+	//COUNT GROUP MEMBER
+	public function count_member($id){
+		$this->db->where('id_grup',$id);
+		return $this->db->count_all_results('grup_anggota');
+	}
+	//CEK APAKAH MEMBER
+	public function check_member_as_guru($params){//ID GRUP ID ANGGOTA
+		$sql = "SELECT * FROM grup_anggota WHERE id_grup = ? AND id_guru = ?";
+		$query = $this->sql->query($sql,$params);
+		if($query->num_rows>0){return true;}else{return false;}
+	}
+	//CEK APAKAH MEMBER
+	public function check_member_as_siswa($params){//ID GRUP ID ANGGOTA
+		$sql = "SELECT * FROM grup_anggota WHERE id_grup = ? AND id_siswa = ?";
+		$query = $this->sql->query($sql,$params);
+		if($query->num_rows>0){return true;}else{return false;}
+
 	}
 }

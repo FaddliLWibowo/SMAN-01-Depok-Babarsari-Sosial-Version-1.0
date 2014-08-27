@@ -109,9 +109,9 @@ class json extends CI_Controller{
 				'des_profile'=>$des_link,'des_name'=>$des_name,'des_avatar'=>$des_avatar,'time'=>$waktu);
 			endforeach;
 		//ENCODE TO JSON
-			$json['result'] = $result;
+		$json['result'] = $result;
 		//ECHO JSON
-			echo json_encode($json);
+		echo json_encode($json);
 		}
 
 	//SHOW UPDATED STATUS

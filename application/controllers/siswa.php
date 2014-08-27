@@ -40,6 +40,7 @@ class siswa extends base{
 		$this->student_login();
 		$data['title']= 'Edit Profile | ';
 		$nis = $this->session->userdata('nis');
+		$data['siswa'] = $this->m_siswa->data_by_id($this->session->userdata('id'));
 		$data['script'] = "$(document).ready(function(){document.getElementById('home').className='active';});";
 		$password = md5($this->session->userdata('password'));
 		$data['profile'] = $this->m_siswa->can_log_in($nis, $password);

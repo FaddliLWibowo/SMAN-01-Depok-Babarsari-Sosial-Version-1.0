@@ -100,7 +100,7 @@ class m_siswa extends CI_Model{
     }
     //SEMUA PESAN BERDASAR NIS
     public function semuapesan($penerima){
-        $sql = "SELECT pesan.pengirim AS 'pengirim',pesan.penerima AS 'penerima', pesan.isi AS 'isi',pesan.waktu AS 'waktu' FROM (SELECT * FROM pesan WHERE penerima=? ORDER BY waktu ASC) AS pesan WHERE penerima=? GROUP BY pengirim ORDER BY waktu DESC";
+        $sql = "SELECT pesan.id_pesan AS 'id', pesan.pengirim AS 'pengirim',pesan.penerima AS 'penerima', pesan.isi AS 'isi',pesan.waktu AS 'waktu' FROM (SELECT * FROM pesan WHERE penerima=? ORDER BY id_pesan DESC) AS pesan GROUP BY pesan.pengirim";
         $result = $this->db->query($sql, array($penerima,$penerima));
         if($result->num_rows()>0){
             return $result->result_array();
@@ -113,5 +113,12 @@ class m_siswa extends CI_Model{
         $data = array('password'=>md5($param));
         $this->db->where('nis', $this->session->userdata('nis'));
         $this->db->update('siswa',$data);//EXEC
+    }
+    //UPDATE PROFILE
+    public function editprofile($params){
+        $sql = "UPDATE siswa SET alamat = ?,moto = ?,avatar = ? WHERE id =?";
+        if($this->db->query($sql,$params)){
+            return true;
+        } else {return false;}
     }
 }

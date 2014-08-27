@@ -17,7 +17,7 @@ $.ajax({
 });
 }
 /////////// SHOW LATTEST STATUS
-function lattestStatus(me){
+function lattestStatus(){
 //alert('work');
 $('#top-loader').show();//SHOW LOADING
 $.ajax({
@@ -174,9 +174,9 @@ function updateStatus(x,y,z,a,b,c){ //X= ID_SISWA,y = ID_GURU,Z = ID_GRUP | a = 
 	$('#top-loader').show();//SHOW LOADING
 	var isi = $('#newpost').val();//GET STATUS FROM TEXAREA
 	if(isi == ''){//NOT FILL UP STATUS = ALERT + REFRESH PAGE
-		$('#top-loader').hide();//SHOW LOADING
-		$('#newpost').val() = '';//EMPTY STATUS TEXTAREA
 		alert('Status Harus Diisi');
+		$('#top-loader').hide();//SHOW LOADING
+		$('#newpost').val() = '';//EMPTY STATUS TEXTAREA		
 	} else {
 		$.ajax({
 		type:'POST',
@@ -260,12 +260,12 @@ function sendmessageviamodal(x,y){ //x=pengirim, y=penerima
 	//KIRIM PESAN KE SERVER
 	$.ajax({
 		type:"POST",
-		url:"http://localhost/2014-Project/SMAN01DEPOK-SOCIAL/index.php/all/kirim_pesan_via_modal",
+		url:"http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/index.php/all/kirim_pesan_via_modal",
 		data:{isi:isi,pengirim:x,penerima:y},
 		success:function(){ //SUCCESS
 			$.ajax({ //REFRESH THREAD
 				type:"GET",
-				url:"http://localhost/2014-Project/SMAN01DEPOK-SOCIAL/index.php/all/isi_pesan_saya",
+				url:"http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/index.php/all/isi_pesan_saya",
 				data:{pengirim:y,penerima:x},
 				success:function(result){
 				$('#loader').hide();//HIDE LOADING

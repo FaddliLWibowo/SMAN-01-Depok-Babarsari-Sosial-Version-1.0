@@ -53,6 +53,7 @@
 								</ul>
 							</div>
 						</li>
+						<li id="grup"><a href="'.site_url('grup').'">Grup</a></li>
 						<li id="guru"><a href="'.site_url('guru').'">Guru</a></li>
 						<li id="home"><a href="'.site_url('siswa/timeline').'">Home</a></li>
 						';
@@ -78,13 +79,13 @@
 								</ul>
 							</div>
 						</li>
+						<li id="grup"><a href="'.site_url('grup').'">Grup</a></li>
 						<li id="guru"><a href="'.site_url('guru').'">Guru</a></li>
 						<li id="home"><a href="'.site_url('guru/timeline').'">Home</a></li>
 						';
 					} else {
 						echo '<li><a data-toggle="modal" href="#login">Login '.validation_errors().'</a></li>
 						<li id="about"><a href="#">About</a></li>
-						<li id="guru"><a href="'.site_url('guru').'">Guru</a></li>
 						<li id="home"><a href="'.site_url().'">Home</a></li>
 						';					
 					}

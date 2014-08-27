@@ -233,6 +233,7 @@ function updateSiswaStatus(x,y,z,a,b,c){ //X= ID_SISWA,y = ID_GURU,Z = ID_GRUP |
                   <div class="col-md-3"><strong>Jenis Kelamin</strong></div><div class="col-md-8"><?php echo $siswa['kelamin']?></div>
                   <div class="col-md-3"><strong>Email</strong></div><div class="col-md-8"><?php echo $siswa['email']?></div>
                   <div class="col-md-3"><strong>Telp</strong></div><div class="col-md-8"><?php echo $siswa['telp']?></div>
+                  <div class="col-md-3"><strong>Alamat</strong></div><div class="col-md-8"><?php echo $siswa['alamat']?></div>
                   <div class="col-md-3"><strong>Angkatan</strong></div><div class="col-md-8"><?php echo $siswa['angkatan']?></div>
                 </div>
               </p>

@@ -10,8 +10,20 @@
       <div class="page-header">
         <h1>Edit Profile <small><?php echo $this->session->userdata('nama_lengkap')?></small></h1>
       </div>
-      <p><form method="POST" action="">
+      <p><form method="POST" action="<?php echo site_url('process/siswa/updateprofile')?>">
         <h3>Data Diri</h3><br/>
+        <?php 
+        if(isset($_GET['note'])){
+          switch ($_GET['note']) {
+            case 'success':
+              echo '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> Success Edit Profile</div>';
+              break;
+            case 'fail':
+              echo '<div class="alert alert-danger alert-dismissable" ><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> Failed Edit Profile, Try Again!</div>';
+              break;
+          }
+        }
+        ?>
         <div class="row">
           <div class="col-md-2"><strong>Status  </strong></div><div class="col-md-10"><?php echo $this->session->userdata('status')?></div><br/>
         </div>
@@ -31,14 +43,14 @@
         <div class="row">
           <div class="col-md-2"><strong>Alamat </strong></div><div class="col-md-10">
           <small>maks 500 karakter</small>
-          <textarea name="txtAlamat" class="form-control" required><?php echo $this->session->userdata('alamat')?></textarea><br/>
+          <textarea name="txtAlamat" class="form-control" required><?php echo $siswa['alamat']?></textarea><br/>
         </div>
       </div>
       <br/>
       <div class="row">
         <div class="col-md-2"><strong>Moto  </strong></div><div class="col-md-10">
         <small>maks 200 karakter</small>
-        <textarea name="txtMoto" class="form-control" required><?php echo $this->session->userdata('moto')?></textarea><br/>
+        <textarea name="txtMoto" class="form-control" required><?php echo $siswa['moto']?></textarea><br/>
       </div>
     </div>
     <div class="row">
@@ -46,16 +58,17 @@
       <div class="col-md-10">
         <?php
         //show avatar
-        if(empty($this->session->userdata('avatar'))){
+        if(empty($siswa['avatar'])){
           $src = base_url('assets/img/avatar/avatar.jpg');
         } else{
-          $myavatar = $this->session->userdata('avatar');
+          $myavatar = $siswa['avatar'];
           $src = base_url('assets/img/avatar/'.$myavatar);
         }
         ?>
         <img src="<?php echo $src?>" width="100px" height="100px"/>
-        <small>JPG, JPEG, PNG (100px x 100px)</small>
-        <input name="fileAvatar" class="btn btn-default form-control" type="file" name="newposter"/>
+        <small>JPG, JPEG, PNG (100px x 100px),Maks 100 MB</small>
+        <input type="file" name="myAvatar" class="form-control"/>
+        <input type="hidden" name="reccentAvatar" value="<?php echo $siswa['avatar']?>"/>
         <br/>
         <button type="submit" class="btn btn-primary">Update</button>
       </div>

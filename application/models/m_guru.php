@@ -60,8 +60,7 @@ class m_guru extends CI_Model{
         }        
         return $v;
     }
-
-    //get name by id
+    //GET NAME BY ID
     public function name_by_id($id){
         $this->db->select('nama_lengkap');
         $this->db->where('id', $id);
@@ -69,20 +68,19 @@ class m_guru extends CI_Model{
         $nama = $query->row_array();
         return $nama['nama_lengkap'];
     }
-
-    //all data by id
+    //ALL DATA BY ID
     public function data_by_id($id){
         $this->db->where('id', $id);
         $query = $this->db->get('guru');
         return $query->row_array();
     }
-    //all teacher
+    //ALL TEACHER
     public function all_teacher(){
         $this->db->order_by('nama_lengkap','ASC');
         $query = $this->db->get('guru');
         return $query->result_array();
     }
-     //get name by NIP
+    //GET NAME BY NIP
     public function name_by_NIP($nip){
         $this->db->select('nama_lengkap');
         $this->db->where('nip', $nip);
@@ -90,7 +88,7 @@ class m_guru extends CI_Model{
         $nama = $query->row_array();
         return $nama['nama_lengkap'];
     }
-    //all data by NIP
+    //ALL DATA BY NIP
     public function data_by_nip($nip){
         $this->db->where('nip', $nip);
         $query = $this->db->get('guru');
@@ -118,6 +116,10 @@ class m_guru extends CI_Model{
         ORDER BY id_materi DESC";
         $query = $this->db->query($sql,$nexus);
         if($query->num_rows()>0){return $query->result_array();}else{return array();}
+    }
+    //SORTING MATERI ON SEMUA MATERI
+    public function sorting_materi($params){
+        
     }
     //SOAL By GURU
     public function mysoal($nexus){
