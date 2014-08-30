@@ -121,4 +121,44 @@ class m_siswa extends CI_Model{
             return true;
         } else {return false;}
     }
+    //SHOW JOINED GROUp
+    public function joined_grup($params){//idsiswa-idsiswa-limit-offset
+        $sql = "SELECT grup.nama_grup AS 'nama', grup.id_grup AS 'idgrup'
+        FROM grup INNER JOIN grup_anggota ON grup_anggota.id_grup = grup.id_grup 
+        WHERE grup.admin_siswa = ? OR grup_anggota.id_siswa = ?  ORDER BY grup_anggota.joindate ASC LIMIT ?,?";
+        $query = $this->db->query($sql,$params);
+        if($query->num_rows>0){
+            return $query->result_array();
+        }else {
+            return array();
+        }
+    }
+    //CEK ADMIN GRUP / BUKAN ADMIN
+    public function admin_cek($params){
+        $sql = "SELECT * FROM grup WHERE admin_siswa = ? AND id_grup =?";
+        $query = $this->db->query($sql,$params);
+        if($query->num_row>0){
+            return true; //YES ADMIN
+        } else {return false;} //NOT ADMIN
+    }
+    //BTN UNJOIN GRUP
+    public function btn_unjoin_grup($params){ //X = grup | Y = siswa
+        $this->db->where('id_grup',$params[0]);
+        $this->db->where('id_siswa',$params[1]);
+        if($this->db->delete('grup_anggota')){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    //BTN JOIN GRUP
+    public function btn_join_grup($params){
+        $this->db->set('id_grup',$x);
+        $this->db->set('id_siswa',$y);
+        if($this->db->insert('grup_anggota')){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

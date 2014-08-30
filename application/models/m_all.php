@@ -144,15 +144,15 @@ class m_all extends CI_Model{
 		return $this->db->count_all_results('grup_anggota');
 	}
 	//CEK APAKAH MEMBER
-	public function check_member_as_guru($params){//ID GRUP ID ANGGOTA
-		$sql = "SELECT * FROM grup_anggota WHERE id_grup = ? AND id_guru = ?";
-		$query = $this->sql->query($sql,$params);
+	public function check_member_as_guru($x,$y){//ID GRUP ID ANGGOTA
+		$sql = "SELECT * FROM grup_anggota WHERE id_grup = ".$x." AND id_siswa = ".$y;
+		$query = $this->db->query($sql);
 		if($query->num_rows>0){return true;}else{return false;}
 	}
 	//CEK APAKAH MEMBER
-	public function check_member_as_siswa($params){//ID GRUP ID ANGGOTA
-		$sql = "SELECT * FROM grup_anggota WHERE id_grup = ? AND id_siswa = ?";
-		$query = $this->sql->query($sql,$params);
+	public function check_member_as_siswa($x,$y){//ID GRUP ID ANGGOTA
+		$sql = "SELECT * FROM grup_anggota WHERE id_grup = ".$x." AND id_siswa = ".$y;
+		$query = $this->db->query($sql);
 		if($query->num_rows>0){return true;}else{return false;}
 
 	}

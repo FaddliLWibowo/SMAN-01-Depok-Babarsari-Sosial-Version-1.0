@@ -1,4 +1,4 @@
-<section id="padding-top"></section>
+m nb<section id="padding-top"></section>
 <section style="padding:10px;background-color: rgb(228, 228, 228)">
  <div  class="container">
    <div style="background-color: #fff" class="semua-guru"  class="col-md-offset-1 col-md-10">
@@ -23,16 +23,16 @@
             if($this->session->userdata('siswa_logged_in')) {
               //CEK MEMBER OR NOT
               if($this->m_all->check_member_as_siswa($id_grup,$user)){
-                echo '<p style="color:gray"><a href="#" class="btn btn-xs btn-default">Joined</a> member '.$count.'</p>';
+                echo '<p style="color:gray"><form action="'.site_url("process/siswa/unjoin_grup").'" method="POST"><input type="hidden" name="idgrup" value="'.$id_grup.'"><button type="submit" name="btn_unjoin" class="btn btn-xs btn-default">Joined</button> <small>member '.$count.'</small></form></p>';
               } else {
-                echo '<p style="color:gray"><a href="#" class="btn btn-xs btn-primary">Join</a> member '.$count.'</p>';
+                echo '<p style="color:gray"><form action="'.site_url("process/siswa/join_grup").'" method="POST"><input type="hidden" name="idgrup" value="'.$id_grup.'"><button type="submit" name="btn_join" class="btn btn-xs btn-primary">Join</button> <small>member '.$count.'</small></form></p>';
               }
             } else if ($this->session->userdata('guru_logged_in')){
               //CEK MEMBER OR NOT
               if($this->m_all->check_member_as_guru($id_grup,$user)){
-                echo '<p style="color:gray"><a href="#" class="btn btn-xs btn-default">Joined</a> member '.$count.'</p>';
+                echo '<p style="color:gray"><form action="'.site_url("process/guru/unjoin_grup").'" method="POST"><input type="hidden" name="idgrup" value="'.$id_grup.'"><button type="submit" name="btn_unjoin" class="btn btn-xs btn-default">Joined</button> <small>member '.$count.'</small></form></p>';
               } else {
-                echo '<p style="color:gray"><a href="#" class="btn btn-xs btn-primary">Join</a> member '.$count.'</p>';
+                echo '<p style="color:gray"><form action="'.site_url("process/guru/join_grup").'" method="POST"><input type="hidden" name="idgrup" value="'.$id_grup.'"><button type="submit" name="btn_join" class="btn btn-xs btn-primary">Join</button> <s>member '.$count.'</form></p>';
               }
             }
             ?>

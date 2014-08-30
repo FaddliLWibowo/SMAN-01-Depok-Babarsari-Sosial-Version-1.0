@@ -131,5 +131,26 @@ class siswa extends base{
 		}
 		
 	}
+	//JOIN GRUP
+	public function join_grup(){
+		$idgrup = $this->input->post('id_grup');
+	}
+	//UNJOIN GRUP
+	public function unjoin_grup(){
+		$id_grup = $this->input->post('idgrup');
+		$id_siswa = $this->session->userdata('id');
+		$params = array($id_grup,$id_siswa);
+		if(isset($_POST['btn_join'])){ //KLIK BTN JOIN
+			
+		} else if(isset($_POST['btn_unjoin'])){ //KLIK BTN UNJOIN
+			if($this->m_siswa->admin_cek($id_grup,$id_siswa)){ //YES ADMIN
+				echo ("<SCRIPT LANGUAGE='JavaScript'>
+					window.alert('Anda admin lo!!!');
+					window.location.href='".site_url('grup')."';
+				</SCRIPT>");
+			} else { //NOT ADMIN
 
+			}
+		}
+	}
 }
