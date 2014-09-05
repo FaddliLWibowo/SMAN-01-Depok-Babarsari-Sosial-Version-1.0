@@ -188,7 +188,15 @@ function updateSiswaStatus(x,y,z,a,b,c){ //X= ID_SISWA,y = ID_GURU,Z = ID_GRUP |
    <div style="background-color: rgb(228, 228, 228);" class="col-md-6">
     <div class="header-timeline">
       <center>
-        <img src="<?php echo base_url('assets/img/avatar/'.$siswa['avatar'])?>"/>
+        <?php
+        $dont = array('',' ','-');        
+        if(!in_array($siswa['avatar'] , $dont)){
+          $avatar = base_url('assets/img/avatar/'.$siswa['avatar']);
+        } else {
+          $avatar = base_url('assets/img/avatar/avatar.jpg');
+        }
+        ?>
+        <img src="<?php echo $avatar; ?>"/>
         <h3><?php echo $siswa['nama_lengkap']?></h3>
         <p>"<?php echo $siswa['moto']?>"</p>
       </center>

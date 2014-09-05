@@ -143,17 +143,28 @@ class m_all extends CI_Model{
 		$this->db->where('id_grup',$id);
 		return $this->db->count_all_results('grup_anggota');
 	}
-	//CEK APAKAH MEMBER
+	//CEK TEACHER IS MEMBER ?
 	public function check_member_as_guru($x,$y){//ID GRUP ID ANGGOTA
-		$sql = "SELECT * FROM grup_anggota WHERE id_grup = ".$x." AND id_siswa = ".$y;
+		$sql = "SELECT * FROM grup_anggota WHERE id_grup = ".$x." AND id_guru = ".$y;
 		$query = $this->db->query($sql);
 		if($query->num_rows>0){return true;}else{return false;}
 	}
-	//CEK APAKAH MEMBER
+	//CEK STUDENT IS MEMBER ?
 	public function check_member_as_siswa($x,$y){//ID GRUP ID ANGGOTA
 		$sql = "SELECT * FROM grup_anggota WHERE id_grup = ".$x." AND id_siswa = ".$y;
 		$query = $this->db->query($sql);
 		if($query->num_rows>0){return true;}else{return false;}
-
+	}
+	//CEK TEACHER IS ADMIN
+	public function check_admin_as_guru($x,$y){
+		$sql = "SELECT * FROM grup WHERE id_grup = ".$x." AND admin_guru = ".$y;
+		$query = $this->db->query($sql);
+		if($query->num_rows>0){return true;}else{return false;}
+	}
+	//CEK STUDENT IS ADMIN
+	public function check_admin_as_siswa($x,$y){
+		$sql = "SELECT * FROM grup WHERE id_grup = ".$x." AND admin_siswa = ".$y;
+		$query = $this->db->query($sql);
+		if($query->num_rows>0){return true;}else{return false;}	
 	}
 }

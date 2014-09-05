@@ -134,10 +134,18 @@ class m_siswa extends CI_Model{
         }
     }
     //CEK ADMIN GRUP / BUKAN ADMIN
-    public function admin_cek($params){
-        $sql = "SELECT * FROM grup WHERE admin_siswa = ? AND id_grup =?";
-        $query = $this->db->query($sql,$params);
-        if($query->num_row>0){
+    public function admin_cek($x,$y){
+        $sql = "SELECT * FROM grup WHERE admin_siswa = ".$x." AND id_grup =".$y;
+        $query = $this->db->query($sql);
+        if($query->num_rows>0){
+            return true; //YES ADMIN
+        } else {return false;} //NOT ADMIN
+    }
+    //CEK MEMBER OR NOT
+    public function joined_cek($x,$y){
+        $sql = "SELECT * FROM grup_anggota WHERE id_siswa = ".$x." AND id_grup =".$y;
+        $query = $this->db->query($sql);
+        if($query->num_rows>0){
             return true; //YES ADMIN
         } else {return false;} //NOT ADMIN
     }
@@ -152,7 +160,7 @@ class m_siswa extends CI_Model{
         }
     }
     //BTN JOIN GRUP
-    public function btn_join_grup($params){
+    public function btn_join_grup($x,$y){
         $this->db->set('id_grup',$x);
         $this->db->set('id_siswa',$y);
         if($this->db->insert('grup_anggota')){

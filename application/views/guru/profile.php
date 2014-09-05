@@ -230,7 +230,15 @@ function soalGuru(){
    <div style="background-color: rgb(228, 228, 228);" class="col-md-6">
     <div class="header-timeline">
       <center>
-        <img src="<?php echo base_url('assets/img/avatar/'.$guru['avatar'])?>"/>
+        <?php
+        $dont = array('',' ','-');        
+        if(!in_array($siswa['avatar'] , $dont)){
+          $avatar = base_url('assets/img/avatar/'.$siswa['avatar']);
+        } else {
+          $avatar = base_url('assets/img/avatar/avatar.jpg');
+        }
+        ?>
+        <img src="<?php echo $avatar; ?>"/>
         <h3><?php echo $guru['nama_lengkap']?></h3>
         <p>"<?php echo $guru['moto']?>"</p>         
       </center>

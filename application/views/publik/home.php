@@ -75,7 +75,7 @@
 </section>
 
 
-
+<!-- 
 <section id="map">
 	<center>GOOGLE MAP</center>
-</section>
+</section> -->

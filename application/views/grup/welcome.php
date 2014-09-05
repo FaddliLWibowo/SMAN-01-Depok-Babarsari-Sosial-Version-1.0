@@ -9,7 +9,7 @@
       <?php foreach($view as $v):
       $idgrup = $v['id_grup'];      
       $user = $this->session->userdata('id');
-      $count = $this->m_all->count_member($v['id_grup']);
+      $count = 1 + $this->m_all->count_member($v['id_grup']);
       $url_nama_grup = str_replace(' ', '-', $v['nama_grup']);
       ?>
       <div class="col-sm-6 col-md-3">
@@ -20,7 +20,7 @@
             <small>Created <?php echo $v['created']?></small>
             <p><?php echo $v['deskripsi_grup']?></p>
             <?php 
-            //CEK YANG LOGIN SISWA ATAU GURU
+           //CEK YANG LOGIN SISWA ATAU GURU
             if($this->session->userdata('siswa_logged_in')) {              
               //CEK MEMBER OR NOT
               if($this->m_all->check_member_as_siswa($idgrup,$user)){

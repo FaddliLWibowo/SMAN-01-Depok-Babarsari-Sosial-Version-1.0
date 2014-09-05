@@ -133,24 +133,46 @@ class siswa extends base{
 	}
 	//JOIN GRUP
 	public function join_grup(){
-		$idgrup = $this->input->post('id_grup');
+		$idgrup = $this->input->post('idgrup');
+		$idsiswa = $this->session->userdata('id');
+		if(isset($_POST['btn_join'])){//KLIK BTN JOIN
+			if($this->m_siswa->btn_join_grup($idgrup,$idsiswa)){ //JOIN SUCCESS
+				echo ("<SCRIPT LANGUAGE='JavaScript'>
+					window.alert('Gabung grup Sukses');
+					window.location.href='".site_url('grup')."';
+					</SCRIPT>");
+			} else { //JOIN FAILED
+				echo ("<SCRIPT LANGUAGE='JavaScript'>
+					window.alert('Gagal gabung ke grup');
+					window.location.href='".site_url('grup')."';
+				</SCRIPT>");
+			}
+		}
 	}
 	//UNJOIN GRUP
 	public function unjoin_grup(){
-		$id_grup = $this->input->post('idgrup');
-		$id_siswa = $this->session->userdata('id');
-		$params = array($id_grup,$id_siswa);
-		if(isset($_POST['btn_join'])){ //KLIK BTN JOIN
-			
-		} else if(isset($_POST['btn_unjoin'])){ //KLIK BTN UNJOIN
-			if($this->m_siswa->admin_cek($id_grup,$id_siswa)){ //YES ADMIN
+		$idgrup = $this->input->post('idgrup');
+		$idsiswa = $this->session->userdata('id');
+		$params = array($idgrup,$idsiswa);
+		if(isset($_POST['btn_unjoin'])){ //KLIK BTN UNJOIN
+			if($this->m_siswa->admin_cek($idgrup,$idsiswa)){ //YES ADMIN
 				echo ("<SCRIPT LANGUAGE='JavaScript'>
 					window.alert('Anda admin lo!!!');
 					window.location.href='".site_url('grup')."';
 				</SCRIPT>");
 			} else { //NOT ADMIN
-
+				if($this->m_siswa->btn_unjoin_grup($params)){ //UNJOIN COMPLETED
+					echo ("<SCRIPT LANGUAGE='JavaScript'>
+						window.alert('Anda sudah keluar dari grup');
+						window.location.href='".site_url('grup')."';
+					</SCRIPT>");
+				} else { //UNJOIN FAILED
+					echo ("<SCRIPT LANGUAGE='JavaScript'>
+						window.alert('Kesalahan sistem, silahkan ulangi lagi');
+						window.location.href='".site_url('grup')."';
+					</SCRIPT>");
+				}				
 			}
-		}
-	}
+		} //END OF BTN_UNJOIN
+	} //END OF FUNCTION
 }

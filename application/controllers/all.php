@@ -29,10 +29,11 @@ class all extends base{
 			$r = '';
 			return $r;
 		}
-		$status = $id[0];
-		if($status == 1) {
+		$status = strlen($id);
+		//jika pajang id <5 = siswa :else = guru
+		if($status <= 4) {
 			$result = $this->m_siswa->searchsiswa($id);
-		} else if($status == 2) {
+		} else if($status > 4) {
 			$result = $this->m_guru->searchguru($id);
 		} else {
 			$result ='';
