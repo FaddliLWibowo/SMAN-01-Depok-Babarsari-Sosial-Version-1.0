@@ -70,8 +70,8 @@ class m_guru extends CI_Model{
     }
     //ALL DATA BY ID
     public function data_by_id($id){
-        $this->db->where('id', $id);
-        $query = $this->db->get('guru');
+        $sql = "SELECT * FROM guru WHERE id = ?";
+        $query = $this->db->query($sql,$id);
         return $query->row_array();
     }
     //ALL TEACHER

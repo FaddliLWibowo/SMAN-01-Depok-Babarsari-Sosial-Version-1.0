@@ -138,6 +138,20 @@ class m_all extends CI_Model{
 			return array();
 		}
 	}
+	//SHOW GRUP DETAIL
+	public function detail_group($id){
+		$this->db->where('id_grup',$id);
+		$query = $this->db->get('grup');
+		if($query->num_rows>0){
+			return $query->row_array();
+		} else {
+			return array();
+		}
+	}
+	//SHOW ALL MEMBER
+	public function show_all_member($id){
+		$sql = '';
+	}
 	//COUNT GROUP MEMBER
 	public function count_member($id){
 		$this->db->where('id_grup',$id);

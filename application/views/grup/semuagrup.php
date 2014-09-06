@@ -11,10 +11,16 @@
       $user = $this->session->userdata('id');
       $count = $this->m_all->count_member($v['id_grup']);
       $url_nama_grup = str_replace(' ', '-', $v['nama_grup']);
+      //AVATAR
+      if(!empty($v['avatar'])){//IF AVATAR UPLOADED
+        $avatar = base_url('assets/img/grup/avatar'.$v['avatar']);
+      } else { //AVATAR NOT UPLOADED
+        $avatar = base_url('assets/img/grup/avatar.png');
+      }
       ?>
       <div class="col-sm-6 col-md-3">
-        <div class="thumbnail">         
-          <img height="200px" src="<?php echo base_url('assets/img/grup/3.png')?>" alt="...">
+        <div class="thumbnail" style="height:400px">         
+          <img height="200px" src="<?php echo $avatar;?>" alt="...">
           <div class="caption">
             <h3><a href="<?php echo site_url('grup/welcome/'.$idgrup.'/'.$url_nama_grup)?>"><?php echo $v['nama_grup']?></a></h3>
             <small>Created <?php echo $v['created']?></small>

@@ -1,11 +1,11 @@
 <section id="padding-top"></section>
 <section id="timeline-place">
   <div class="container">
-   <div style="background-color rgb(228, 228, 228)" class="col-md-offset-1 col-md-4">
+   <div style="background-color:rgb(228, 228, 228)" class="col-md-offset-1 col-md-4">
      <div class="fixed-sidebar"><div class="menu"><?php $this->load->view('sidebar')?></div></div>
    </div>
 
-   <div style="min-height300px;background-color rgb(228, 228, 228);" class="col-md-6">
+   <div style="min-height:300px;background-color:rgb(228, 228, 228);" class="col-md-6">
     <div class="timeline">
       <div class="page-header">
         <h1>Edit Profile <small><?php echo $this->session->userdata('nama_lengkap')?></small></h1>
@@ -13,8 +13,8 @@
       <p><form method="POST" action="<?php echo site_url('process/siswa/updateprofile')?>">
         <h3>Data Diri</h3><br/>
         <?php 
-        if(isset($_GET['note'])){
-          switch ($_GET['note']) {
+        if(isset($this->input->get('note'))){
+          switch ($this->input->get('note')) {
             case 'success':
               echo '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> Success Edit Profile</div>';
               break;

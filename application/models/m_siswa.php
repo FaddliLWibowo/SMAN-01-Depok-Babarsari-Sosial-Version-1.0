@@ -60,8 +60,8 @@ class m_siswa extends CI_Model{
     }
     //all data by id
     public function data_by_id($id){
-        $this->db->where('id', $id);
-        $query = $this->db->get('siswa');
+        $sql = "SELECt * FROM siswa WHERE id = ?";
+        $query = $this->db->query($sql, $id);
         return $query->row_array();
     }
     //all data by nis

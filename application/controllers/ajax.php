@@ -15,7 +15,7 @@ class ajax extends CI_Controller{
 	}
 
 	//FILTER MATERI/SOAL GURU
-	public filter_guru(){
+	public function filter_guru(){
 		//GET AJAX
 		if(isset($this->input->get())){//JIKA SETTING GET
 			$guru = $this->input->get('guru');

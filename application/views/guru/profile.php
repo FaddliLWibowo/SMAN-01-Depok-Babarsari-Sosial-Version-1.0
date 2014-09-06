@@ -232,8 +232,8 @@ function soalGuru(){
       <center>
         <?php
         $dont = array('',' ','-');        
-        if(!in_array($siswa['avatar'] , $dont)){
-          $avatar = base_url('assets/img/avatar/'.$siswa['avatar']);
+        if(!in_array($guru['avatar'] , $dont)){
+          $avatar = base_url('assets/img/avatar/'.$guru['avatar']);
         } else {
           $avatar = base_url('assets/img/avatar/avatar.jpg');
         }

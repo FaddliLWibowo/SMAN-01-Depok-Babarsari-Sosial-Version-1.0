@@ -10,14 +10,13 @@
 	<script src="<?php echo base_url('assets/js/jquery.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
 	<script>
-		// $('#tabs a').click(function () {
-		//   $(this).tab('show')
-		// });
-</script>
-<script>
-	<?php if(isset($script)){echo $script;}//skrip untuk ubah class active di topmenu?>
-</script>
-
+		$(function () {
+        $("[data-toggle='tooltip']").tooltip();
+    });
+	</script>
+	<script>
+		<?php if(isset($script)){echo $script;}//skrip untuk ubah class active di topmenu?>
+	</script>
 </head>
 <body>
 	<section id="topmenu">

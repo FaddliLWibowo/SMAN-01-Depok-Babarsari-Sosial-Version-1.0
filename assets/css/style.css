@@ -235,6 +235,12 @@ a.more:hover{
 .message-item:hover{background-color: #f5f5f5;cursor:link;}
 .message-time{color:gray;font-size: 10px}
 
+/*GROUP MANAGEMENT*/
+a.member>img{
+	width:40px;height:40px;
+}
+a.member{margin:10px;}
+
 /*RESPONSIVE CUSTOMIZATION*/
 @media only screen and (min-width:768px) and (max-width:999px){
 	#padding-top{height:120px;}

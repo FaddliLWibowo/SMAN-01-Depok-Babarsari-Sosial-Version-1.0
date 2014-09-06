@@ -175,8 +175,7 @@ function updateStatus(x,y,z,a,b,c){ //X= ID_SISWA,y = ID_GURU,Z = ID_GRUP | a = 
 	var isi = $('#newpost').val();//GET STATUS FROM TEXAREA
 	if(isi == ''){//NOT FILL UP STATUS = ALERT + REFRESH PAGE
 		alert('Status Harus Diisi');
-		$('#top-loader').hide();//SHOW LOADING
-		$('#newpost').val() = '';//EMPTY STATUS TEXTAREA		
+		$('#top-loader').hide();//SHOW LOADING	
 	} else {
 		$.ajax({
 		type:'POST',
@@ -190,7 +189,7 @@ function updateStatus(x,y,z,a,b,c){ //X= ID_SISWA,y = ID_GURU,Z = ID_GRUP | a = 
 			alert('ERROR'+data);
 		}
 		});
-		$('#newpost').val() = '';//EMPTY STATUS TEXTAREA
+                //$('#newpost').val() = '';//EMPTY STATUS TEXTAREA
 		$('#top-loader').hide();//SHOW LOADING
 	}	
 }
