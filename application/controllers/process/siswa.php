@@ -121,6 +121,7 @@ class siswa extends base{
 				</SCRIPT>");
 			} else { //TIDAK SESUAI RULES
 				$data['title'] = 'Error Ubah Password | ';
+				$data['siswa'] = $this->m_siswa->data_by_id($this->session->userdata('id'));
 				$this->defaultdisplay('siswa/editprofile', $data);
 			}			
 		}else{

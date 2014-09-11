@@ -3,7 +3,7 @@
     <div class="panel-heading">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#pesan">
         <h4 class="panel-title">
-          <span class="glyphicon glyphicon-comment"></span> Pesan <span class="badge">42</span>
+          <span class="glyphicon glyphicon-comment"></span> Pesan
         </h4>        
       </a>
     </div>
@@ -81,6 +81,20 @@
  <div id="soal" class="panel-collapse collapse">
   <div class="panel-body">
     <?php $this->load->view('siswa/menu/soal')?>
+  </div>
+</div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#nilai">
+      <h4 class="panel-title">
+       <span class="glyphicon glyphicon-briefcase"></span> Nilai
+     </h4>
+   </a>
+ </div>
+ <div id="nilai" class="panel-collapse collapse">
+  <div class="panel-body">
+    <?php $this->load->view('siswa/menu/nilai')?>
   </div>
 </div>
 </div>

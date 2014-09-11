@@ -71,4 +71,38 @@ class guru extends base{
 			echo "</table>";
 		}
 	}
+	//NILAI YANG DIUPLOAD GURU
+	public function mynilai(){
+		//SOAL UPLOAD BY GURU , SORT BY TAHUN, KELAS,MATA PELAJARAN
+		$idguru = $this->input->get('idguru');
+		$tahun = $this->input->get('tahun');
+		$mapel = $this->input->get('mapel');
+		$kelas = $this->input->get('idkelas');
+		$params = array($idguru,$tahun,$mapel,$kelas);
+		$materi = $this->m_guru->mynilai($params);
+		if(empty($materi)){
+			echo '<center><p>Materi Kosong</p></center>';
+		}else{
+			echo '<table class="table table-striped" >';
+			foreach($materi as $m):
+				echo '<tr>';
+			echo '<td>'.$m['judul'].'</td>';
+			echo '<td><a target="_blank" href="'.base_url('assets/assets/materi/'.$m['link']).'">download</a></td>';
+			echo '</tr>';
+			endforeach;
+			echo "</table>";
+		}
+	}
+
+	//EDIT PROFILE GURU
+	public function edit_profile(){
+		$this->teacher_login();
+		$data['title']= 'Edit Profile | ';
+		$nip = $this->session->userdata('nip');
+		$data['guru'] = $this->m_guru->data_by_id($this->session->userdata('id'));
+		$data['script'] = "$(document).ready(function(){document.getElementById('home').className='active';});";
+		$password = $this->session->userdata('password');
+		$data['profile'] = $this->m_guru->can_log_in($nip, $password);
+		$this->defaultdisplay('guru/editprofile',$data);
+	}
 }

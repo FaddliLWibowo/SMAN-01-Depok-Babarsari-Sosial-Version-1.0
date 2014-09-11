@@ -217,6 +217,26 @@ function soalGuru(){
   });
   $('#loadingguru').hide();
 }
+//nilai DIUPLOAD GURU
+function nilaiGuru(){
+  $('#loadingguru').show();
+  var tahun=$('#nilaiguru #inputTahun').val();
+  var kelas=$('#nilaiguru #inputKelas').val();
+  var mapel=$('#nilaiguru #inputMapel').val();;
+  var nilaiurl = '<?php echo site_url("guru/mynilai?idguru=".$guru["id"])?>&tahun='+tahun+'&mapel='+mapel+'&idkelas='+kelas;
+  $.ajax({
+    type:"GET",
+    url:nilaiurl,
+    timeout:50000,
+    success:function(data){
+      $('#tampilannilai').html(data);
+    },
+    error:function(data){
+      alert('terjadi masalah, ulangi lagi');
+    }
+  });
+  $('#loadingguru').hide();
+}
 
 </script>
 
@@ -249,7 +269,8 @@ function soalGuru(){
         <li class="active"><a class="btn" href="#sendpost" data-toggle="tab"><span class="glyphicon glyphicon-bullhorn"></span> Post</a></li>
         <li><a class="btn" href="#sendmessage" data-toggle="tab"><span class="glyphicon glyphicon-envelope"></span> Message</a></li>
         <li><a class="btn" href="#materiguru" data-toggle="tab"><span class="glyphicon glyphicon-book"></span> Materi</a></li>
-        <li><a class="btn" href="#soalguru" data-toggle="tab"><span class="glyphicon glyphicon-file"></span> Soal</a></li>
+        <li><a class="btn" href="#soalguru" data-toggle="tab"><span class="glyphicon glyphicon-file"></span> Soal</a></li>        
+        <li><a class="btn" href="#nilaiguru" data-toggle="tab"><span class="glyphicon glyphicon-file"></span> Nilai</a></li>
         <li><a class="btn" href="#info" data-toggle="tab"><span class="glyphicon glyphicon-info-sign"></span> info</a></li>
       </ul>
       <br/><br/>
@@ -276,6 +297,47 @@ function soalGuru(){
               </div>
 
               <div class="tab-pane" id="materiguru">
+                <a class="btn btn-primary btn-xs" href="#uploadmateri" data-toggle="modal">+ Upload Materi</a>
+                <!--modal to upload materi-->
+                <div class="modal fade" id="uploadmateri" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"><span class="glyphicon glyphicon-book"></span> Upload Materi</h4>
+                      </div>
+                      <div class="modal-body">
+                        <form class="form-inline" action="<?php echo site_url('process/guru/addmateri')?>" method="POST" role="form" enctype="multipart/form-data">
+                          <div class="form-group">                           
+                            <select class="form-control input-sm" name="slcKelas">
+                              <option>Kelas</option>
+                              <?php foreach($mengajar as $k):
+                              echo '<option value="'.$k['id_kelas'].'">'.$k['kelas'].'</option>';
+                              endforeach;?>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <select class="form-control input-sm" name="slcMataPelajaran">
+                              <option>Mapel</option>
+                              <?php foreach($mengajar as $m):
+                              echo '<option value="'.$m['id_matapelajaran'].'">'.$m['matapelajaran'].'</option>';
+                              endforeach;?>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <input type="text" placeholder="Judul" name="txtMateri" class="form-control input-sm"/>
+                          </div> 
+                          <div class="form-group">
+                            <input type="file" name="fileUpload" class="input-sm"/><span><small>maks 1MB , support PDF,DOCX,ODT</small></span>
+                          </div><br/> 
+                          <button type="submit" class="btn-xs btn btn-primary">+ Upload</button>
+                        </form>
+                      </div>
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+                <!--end of modal-->
+                <br/><br/>
                 <div class="choose form-inline" id="downloadmateri">
                   <div class="form-group">
                     <select id="inputKelas" class="input-sm form-control" name="kelas" required>
@@ -305,6 +367,46 @@ function soalGuru(){
               </div>
 
               <div class="tab-pane" id="soalguru">
+                <a class="btn btn-primary btn-xs" href="#uploadsoal" data-toggle="modal">+ Upload Soal</a><br/><br/>
+                <!--modal to upload materi-->
+                <div class="modal fade" id="uploadsoal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"><span class="glyphicon glyphicon-book"></span> Upload Soal</h4>
+                      </div>
+                      <div class="modal-body">
+                        <form class="form-inline" action="<?php echo site_url('process/guru/addsoal')?>" method="POST" role="form" enctype="multipart/form-data">
+                          <div class="form-group">                           
+                            <select class="form-control input-sm" name="slcKelas">
+                              <option>Kelas</option>
+                              <?php foreach($mengajar as $k):
+                              echo '<option value="'.$k['id_kelas'].'">'.$k['kelas'].'</option>';
+                              endforeach;?>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <select class="form-control input-sm" name="slcMataPelajaran">
+                              <option>Mapel</option>
+                              <?php foreach($mengajar as $m):
+                              echo '<option value="'.$m['id_matapelajaran'].'">'.$m['matapelajaran'].'</option>';
+                              endforeach;?>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <input type="text" placeholder="Judul" name="txtMateri" class="form-control input-sm"/>
+                          </div> 
+                          <div class="form-group">
+                            <input type="file" name="fileUpload" class="input-sm"/><span><small>maks 1MB , support PDF,DOCX,ODT</small></span>
+                          </div><br/> 
+                          <button type="submit" class="btn-xs btn btn-primary">+ Upload</button>
+                        </form>
+                      </div>
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+                <!--end of modal-->
                 <div class="choose form-inline" id="downloadmateri">
                   <div class="form-group">
                     <select id="inputKelas" class="input-sm form-control" name="kelas" required>
@@ -332,50 +434,118 @@ function soalGuru(){
                   <br/>
                 </div>
 
-                <div class="tab-pane" id="info">
-                  <h4>Info Guru</h4>
-                  <p>Jangan menyalahgunakan data yang ada disini, data guru hanya digunakan untuk urusan kegiatan belajar mengajar</p>
-                  <div class="row">
-                    <div class="col-md-2"><strong>Nama</strong></div><div class="col-md-10"><?php echo $guru['nama_lengkap']?></div>
-                    <div class="col-md-2"><strong>NIP</strong></div><div class="col-md-10"><?php echo $guru['nip']?></div>
-                    <div class="col-md-2"><strong>Alamat</strong></div><div class="col-md-10"><?php echo $guru['alamat']?></div>
-                    <div class="col-md-2"><strong>Email</strong></div><div class="col-md-10"><?php echo $guru['email']?></div>
-                    <div class="col-md-2"><strong>Telp</strong></div><div class="col-md-10"><?php echo $guru['telp']?></div>
+                <div class="tab-pane" id="nilaiguru">
+                  <a class="btn btn-primary btn-xs" href="#uploadnilai" data-toggle="modal">+ Upload nilai</a><br/><br/>
+                  <!--modal to upload materi-->
+                  <div class="modal fade" id="uploadnilai" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title"><span class="glyphicon glyphicon-book"></span> Upload nilai</h4>
+                        </div>
+                        <div class="modal-body">
+                          <form class="form-inline" action="<?php echo site_url('process/guru/addnilai')?>" method="POST" role="form" enctype="multipart/form-data">
+                            <div class="form-group">                           
+                              <select class="form-control input-sm" name="slcKelas">
+                                <option>Kelas</option>
+                                <?php foreach($mengajar as $k):
+                                echo '<option value="'.$k['id_kelas'].'">'.$k['kelas'].'</option>';
+                                endforeach;?>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <select class="form-control input-sm" name="slcMataPelajaran">
+                                <option>Mapel</option>
+                                <?php foreach($mengajar as $m):
+                                echo '<option value="'.$m['id_matapelajaran'].'">'.$m['matapelajaran'].'</option>';
+                                endforeach;?>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <input type="text" placeholder="Judul" name="txtMateri" class="form-control input-sm"/>
+                            </div> 
+                            <div class="form-group">
+                              <input type="file" name="fileUpload" class="input-sm"/><span><small>maks 1MB , support PDF,DOCX,ODT</small></span>
+                            </div><br/> 
+                            <button type="submit" class="btn-xs btn btn-primary">+ Upload</button>
+                          </form>
+                        </div>
+                      </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                  </div><!-- /.modal -->
+                  <!--end of modal-->
+                  <div class="choose form-inline" id="downloadmateri">
+                    <div class="form-group">
+                      <select id="inputKelas" class="input-sm form-control" name="kelas" required>
+                        <option>Kelas</option>
+                        <?php foreach($mengajar as $k):
+                        echo '<option value="'.$k['id_kelas'].'">'.$k['kelas'].'</option>';
+                        endforeach;
+                        ?>
+                      </select></div>
+                      <div class="form-group">
+                        <select id="inputMapel" class="input-sm form-control" name="mapel" required>
+                          <option>Mata Pelajaran</option>
+                          <?php foreach($mengajar as $m):
+                          echo '<option value="'.$m['id_matapelajaran'].'">'.$m['matapelajaran'].'</option>';
+                          endforeach;?>
+                        </select>
+                      </div>
+                      <div class="form-group"><select id="inputTahun" class="input-sm form-control" name="tahun" required>
+                        <option>Tahun</option><option name="2012">2012</option><option name="2013">2013</option><option name="2014">2014</option>
+                      </select></div>
+                      <div class="form-group"><button class="btn btn-xs btn-primary" onclick="nilaiGuru()">Lihat nilai</button></div>
+                      <div id="loadingguru" style="display:none" class="form-group"><img style="width:20px" src="<?php echo base_url('assets/css/loader.gif')?>"></div>
+                    </div>
+                    <div id="tampilannilai"></div>
+                    <br/>
                   </div>
-                  <hr>
-                  <h4>Jadwal Mengajar</h4>
 
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>                 
-                        <th>Mata Pelajaran</th>
-                        <th>Kelas</th>
-                        <th>Jadwal</th>
-                        <th>Ruang</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php foreach($mengajar as $m):?>
-                        <tr>
-                          <td><?php echo $m['matapelajaran']?></td>
-                          <td><?php echo $m['kelas'].' '.$m['subkelas']?></td>
-                          <td>?</td>
-                          <td>?</td>
+                  <div class="tab-pane" id="info">
+                    <h4>Info Guru</h4>
+                    <p>Jangan menyalahgunakan data yang ada disini, data guru hanya digunakan untuk urusan kegiatan belajar mengajar</p>
+                    <div class="row">
+                      <div class="col-md-2"><strong>Nama</strong></div><div class="col-md-10"><?php echo $guru['nama_lengkap']?></div>
+                      <div class="col-md-2"><strong>NIP</strong></div><div class="col-md-10"><?php echo $guru['nip']?></div>
+                      <div class="col-md-2"><strong>Alamat</strong></div><div class="col-md-10"><?php echo $guru['alamat']?></div>
+                      <div class="col-md-2"><strong>Email</strong></div><div class="col-md-10"><?php echo $guru['email']?></div>
+                      <div class="col-md-2"><strong>Telp</strong></div><div class="col-md-10"><?php echo $guru['telp']?></div>
+                    </div>
+                    <hr>
+                    <h4>Jadwal Mengajar</h4>
+
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>                 
+                          <th>Mata Pelajaran</th>
+                          <th>Kelas</th>
+                          <th>Jadwal</th>
+                          <th>Ruang</th>
                         </tr>
-                      <?php endforeach;?>
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        <?php foreach($mengajar as $m):?>
+                          <tr>
+                            <td><?php echo $m['matapelajaran']?></td>
+                            <td><?php echo $m['kelas'].' '.$m['subkelas']?></td>
+                            <td>?</td>
+                            <td>?</td>
+                          </tr>
+                        <?php endforeach;?>
+                      </tbody>
+                    </table>
+                  </div>
+
                 </div>
 
               </div>
 
+              <center id="top-loader" class="col-md-12" style="padding:5px;display:none" ><img width="30px" src="<?php echo base_url('assets/css/loader.gif')?>"/></center>
+              <div id="all-timeline"></div>
+              <center id="bottom-loader" class="col-md-12" style="padding:5px;display:none"><img width="30px" src="<?php echo base_url('assets/css/loader.gif')?>"/></center>
+              <button onclick="showMoreStatusOnProfile()" id="btn-more" style="width:100%;display:none" class="btn btn-default">Berikutnya</button>
+              <!--end of  id all-timeline-->
             </div>
-
-            <center id="top-loader" class="col-md-12" style="padding:5px;display:none" ><img width="30px" src="<?php echo base_url('assets/css/loader.gif')?>"/></center>
-            <div id="all-timeline"></div>
-            <center id="bottom-loader" class="col-md-12" style="padding:5px;display:none"><img width="30px" src="<?php echo base_url('assets/css/loader.gif')?>"/></center>
-            <button onclick="showMoreStatusOnProfile()" id="btn-more" style="width:100%;display:none" class="btn btn-default">Berikutnya</button>
-            <!--end of  id all-timeline-->
           </div>
-        </div>
-      </section>
+        </section>

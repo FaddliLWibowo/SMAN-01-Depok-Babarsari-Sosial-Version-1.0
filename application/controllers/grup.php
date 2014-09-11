@@ -17,18 +17,19 @@ class grup extends base{
 		$idgrup = $this->uri->segment(3); //GET GRUP ID
 		$data['title'] = str_replace('-', '', $this->uri->segment(4)); //GRUP NAME AS TITLE
 		$data['countmember'] = $this->m_all->count_member($idgrup);
-		$data['view'] = $this->m_all->detail_group($idgrup);
-		$user = $this->session->userdata('id');
-		$data['title'] = str_replace('-',' ',$this->uri->segment(4)).' | ';
-		$data['script'] = "$(document).ready(function(){document.getElementById('grup').className='active';});";
+		$data['view'] = $this->m_all->detail_group($idgrup); //GRUP DESCRIPTIONS
+    $data['member'] = $this->m_all->show_all_member($idgrup);//GRUP MEMBER
+    $user = $this->session->userdata('id');
+    $data['title'] = str_replace('-',' ',$this->uri->segment(4)).' | ';
+    $data['script'] = "$(document).ready(function(){document.getElementById('grup').className='active';});";
 		//ARE U TEACHER OR STUDENTS
 		//LOGIN AS STUDENT
-		if($this->session->userdata('siswa_logged_in')) {              
+    if($this->session->userdata('siswa_logged_in')) {              
           //CEK MEMBER OR NOT
-          if($this->m_all->check_member_as_siswa($idgrup,$user)){
-            $data['memo'] = 'Anda login sebagai member';
-            $data['status'] = 'member';
-            $this->defaultdisplay('grup/welcome',$data);
+      if($this->m_all->check_member_as_siswa($idgrup,$user)){
+        $data['memo'] = 'Anda login sebagai member';
+        $data['status'] = 'member';
+        $this->defaultdisplay('grup/welcome',$data);
           } else if($this->m_all->check_admin_as_siswa($idgrup,$user)){ //CEK ADMIN OR NOT
             $data['memo'] = 'Anda login sebagai admin';
             $data['status'] = 'admin';
@@ -37,9 +38,9 @@ class grup extends base{
           	$data['memo'] = 'dilarang masuk';
           	$data['status'] = 'publik';
             echo ("<SCRIPT LANGUAGE='JavaScript'>
-				window.alert('Selain member dilarang masuk');
-				window.location.href='".site_url('grup')."';
-			</SCRIPT>");
+              window.alert('Selain member dilarang masuk');
+              window.location.href='".site_url('grup')."';
+            </SCRIPT>");
           }
          //LOGIN AS TEACHER
         } else if ($this->session->userdata('guru_logged_in')){
@@ -56,11 +57,28 @@ class grup extends base{
           	$data['memo'] = 'dilarang masuk';
           	$data['status'] = 'publik';
             echo ("<SCRIPT LANGUAGE='JavaScript'>
-				window.alert('Selain member dilarang masuk');
-				window.location.href='".site_url('grup')."';
-			</SCRIPT>");
+              window.alert('Selain member dilarang masuk');
+              window.location.href='".site_url('grup')."';
+            </SCRIPT>");
           }
           //GET DATA BUTTON FOR ADMIN.. BUT USER CAN OPEN THE DATA WILL BE CONSIDERING FOREVER
         }
-	}
+      }
+
+    //delete grup
+    public function delete_group(){
+      $id = $this->input->get('id');
+      //query for delete group
+      if($this->m_all->delete_group($id)) {
+        echo ("<SCRIPT LANGUAGE='JavaScript'>
+              window.alert('Success Group Deleted');
+              window.location.href='".site_url('grup')."';
+            </SCRIPT>");
+      } else {
+        echo ("<SCRIPT LANGUAGE='JavaScript'>
+              window.alert('Error Deleting Group');
+              window.location.href='".site_url('grup')."';
+            </SCRIPT>");
+      }
+    }
 }

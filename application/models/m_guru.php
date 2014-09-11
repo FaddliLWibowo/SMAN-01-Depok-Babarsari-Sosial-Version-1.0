@@ -94,6 +94,19 @@ class m_guru extends CI_Model{
         $query = $this->db->get('guru');
         return $query->row_array();
     }
+    //UPDATE PASSWORD
+    public function updatepassword($param){
+        $data = array('password'=>md5($param));
+        $this->db->where('nip', $this->session->userdata('nip'));
+        $this->db->update('guru',$data);//EXEC
+    }
+    //UPDATE PROFILE
+    public function editprofile($params){
+        $sql = "UPDATE guru SET alamat = ?,moto = ?,avatar = ? WHERE id =?";
+        if($this->db->query($sql,$params)){
+            return true;
+        } else {return false;}
+    }
     /*
     * ALL ABOUT AJAR MENGAJAR
     */
@@ -127,6 +140,43 @@ class m_guru extends CI_Model{
         ORDER BY id_soal DESC";
         $query = $this->db->query($sql,$nexus);
         if($query->num_rows()>0){return $query->result_array();}else{return array();}
+    }
+    //nilai By GURU
+    public function mynilai($nexus){
+        $sql = "SELECT * FROM nilai WHERE id_guru = ? AND tahun = ? AND id_matapelajaran= ? AND id_kelas=? 
+        ORDER BY id_nilai DESC";
+        $query = $this->db->query($sql,$nexus);
+        if($query->num_rows()>0){return $query->result_array();}else{return array();}
+    }
+
+    /*ALL ABOUT GROUP*/
+    //BTN JOIN GRUP
+    public function btn_join_grup($x,$y){
+        $this->db->set('id_grup',$x);
+        $this->db->set('id_guru',$y);
+        if($this->db->insert('grup_anggota')){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    //CEK ADMIN GRUP / BUKAN ADMIN
+    public function admin_cek($x,$y){
+        $sql = "SELECT * FROM grup WHERE admin_guru = ".$x." AND id_grup =".$y;
+        $query = $this->db->query($sql);
+        if($query->num_rows>0){
+            return true; //YES ADMIN
+        } else {return false;} //NOT ADMIN
+    }
+    //BTN UNJOIN GRUP
+    public function btn_unjoin_grup($params){ //X = grup | Y = siswa
+        $this->db->where('id_grup',$params[0]);
+        $this->db->where('id_guru',$params[1]);
+        if($this->db->delete('grup_anggota')){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

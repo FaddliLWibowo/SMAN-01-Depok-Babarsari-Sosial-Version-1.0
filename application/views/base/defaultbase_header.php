@@ -70,10 +70,10 @@
 									<span><img src="'.base_url($src).'" /></span> '.$name.' <span class="caret"></span>
 								</a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-									<li><a href="#">My Profile</a></li>
+									<li><a href="'.site_url('guru/profile/'.$this->session->userdata('nip')).'">My Profile</a></li>
 									<li><a href="'.site_url('guru/timeline').'">Timeline</a></li>
 									<li class="divider"></li>
-									<li><a href="#">Edit Profile</a></li>
+									<li><a href="'.site_url('guru/edit_profile').'">Edit Profile</a></li>
 									<li><a href="'.site_url("all/logout").'"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
 								</ul>
 							</div>

@@ -125,12 +125,35 @@ class m_all extends CI_Model{
 		$query = $this->db->query($sql);
 		if($query->num_rows()>0){return $query->result_array();}else{return array();}
 	}
+	//ALL SOAL
+	public function all_nilai($x,$y){
+		$sql="SELECT guru.nama_lengkap AS 'guru',kelas.nama_kelas AS 'kelas',
+		matapelajaran.matapelajaran AS 'mapel', judul,link,tahun 
+		FROM nilai
+		INNER JOIN guru ON guru.id = nilai.id_guru
+		INNER JOIN kelas ON kelas.id_kelas = nilai.id_kelas
+		INNER JOIN matapelajaran ON matapelajaran.id_matapelajaran= nilai.id_matapelajaran
+		LIMIT ".$y.",".$x;
+		$this->db->order_by('id_soal','desc');
+		$query = $this->db->query($sql);
+		if($query->num_rows()>0){return $query->result_array();}else{return array();}
+	}
 	/*
 	* ALL ABOUT GROUP
 	*/
+	//CREATING GRUP
+	public function creategroup($params){
+		$sql = "INSERT INTO grup(nama_grup,deskripsi_grup,admin_siswa,admin_guru,avatar)
+		VALUES(?,?,?,?,?)";
+		if($this->db->query($sql,$params)) {return true;} else {return false;}
+	}
+	public function deletegroup($id){
+		
+	}
+	//DELETE GROUP
 	//SHOW ALL GRUP
 	public function show_all_group($params){//LIMIT + OFFSET
-		$sql = "SELECT * FROM grup LIMIT ?,?";
+		$sql = "SELECT * FROM grup ORDER BY id_grup DESC LIMIT ?,?";
 		$query = $this->db->query($sql,$params);
 		if($query->num_rows>0){
 			return $query->result_array();			
@@ -150,7 +173,13 @@ class m_all extends CI_Model{
 	}
 	//SHOW ALL MEMBER
 	public function show_all_member($id){
-		$sql = '';
+		$sql = "SELECT grup_anggota.id_siswa AS 'siswa', grup_anggota.id_guru AS 'guru'
+		FROM grup_anggota 
+		WHERE grup_anggota.id_grup = ?
+		ORDER BY grup_anggota.joindate DESC
+		LIMIT 0,5";
+		$query = $this->db->query($sql,$id);
+		return $query->result_array();
 	}
 	//COUNT GROUP MEMBER
 	public function count_member($id){

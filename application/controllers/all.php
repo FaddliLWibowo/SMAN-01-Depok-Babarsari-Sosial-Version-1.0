@@ -130,5 +130,70 @@ class all extends base{
 		//RETURN TRUE FROM MODAL
 	}
 
+	/*
+	* ALL ABOUT GROUP
+	*/
+	//group name validation
+	public function groupnamevalidation(){
+		$name = $this->input->get('name');
+		$groupname = explode(' ', $name);
+		$this->db->or_where_in('keyword',$groupname);//GROUPNAME LIKE KEYWORD
+		$query = $this->db->get('grup_keyword');
+		if($query->num_rows()>0){//keyword match
+			echo ' <label>Deskripsi Grup : </label><textarea class="form-control" name="txtGroupDetail" placeholder="About Group" required></textarea><br/>
+                  <label> Cover Grup : </label><input class="form-control" type="file" name="fileGroup" required><br/>
+                  <button class="btn btn-default" type="submit" >Create Group</button><br/>
+                </form>';
+		}else{//keyword not match
+			echo 'Nama Tidak Diperbolehkan';
+		}
+	}
+	//create group
+	public function creategroup(){
+		$groupname = $this->input->post('txtGroupName');//group name
+		$groupdetail = $this->input->post('txtGroupDetail');//group detail
+		$id = $this->session->userdata('id');
+		$img = $_FILES['fileGroup'];
+		//WHO CREATE : TEACHER OR STUDENT
+		if($this->session->userdata('siswa_logged_in')) {
+			//STUDENT IS lOGGED IN
+			$student = $id;
+			$teacher = NULL;
+		} else if($this->session->userdata('guru_logged_in')) {
+			//TEACHER IS LOGGED IN
+			$student = NULL;
+			$teacher = $id;
+		}
+		//PROCESSING GROUP COVER
+		if(isset($_FILES['fileGroup'])){ //UPLOADED COVER
+			$this->load->library('upload');
+			$coverName = str_replace(' ','-',$img['name']);
+			$config['upload_path'] = './assets/img/grup/';
+			$config['allowed_types'] = 'gif|png|jpg|jpeg|GIF|PNG|JPG|JPEG';
+			$config['overwrite'] = true;
+			$config['max_size'] = 1000000; //1MB
+			$this->upload->initialize($config);
+			if(!$this->upload->do_upload('fileGroup')){
+				echo ("<SCRIPT LANGUAGE='JavaScript'>
+					window.alert('Cover Tidak Sesuai');
+					window.location.href='".site_url('grup')."';
+				</SCRIPT>");	
+			} 
+			$params = array($groupname,$groupdetail,$student,$teacher,$coverName);
+			if($this->m_all->creategroup($params)) { //SUCCESS CREATING GROUP
+				echo ("<SCRIPT LANGUAGE='JavaScript'>
+						window.alert('Success Creating Group');
+						window.location.href='".site_url('grup')."';
+					</SCRIPT>");
+			} else { //FAILED CREATING GROUP
+				echo ("<SCRIPT LANGUAGE='JavaScript'>
+						window.alert('Failed Creating Group');
+						window.location.href='".site_url('grup')."';
+					</SCRIPT>");
+		}
+
+	}
+}
+
 	//Membatasi penggunaan user dan manajemen hacker
 }

@@ -10,7 +10,7 @@
       <div class="page-header">
         <h1>Edit Profile <small><?php echo $this->session->userdata('nama_lengkap')?></small></h1>
       </div>
-      <p><form method="POST" action="<?php echo site_url('process/siswa/updateprofile')?>" enctype="multipart/form-data">
+      <p><form method="POST" action="<?php echo site_url('process/guru/updateprofile')?>" enctype="multipart/form-data">
         <h3>Data Diri</h3><br/>
         <?php 
         if(!empty($this->input->get('note'))){
@@ -29,7 +29,7 @@
         </div>
         <br/>
         <div class="row">
-          <div class="col-md-2"><strong>NIS  </strong></div><div class="col-md-10"><?php echo $this->session->userdata('nis')?></div><br/>
+          <div class="col-md-2"><strong>NIP  </strong></div><div class="col-md-10"><?php echo $this->session->userdata('nip')?></div><br/>
         </div>
         <br/>
         <div class="row">
@@ -43,14 +43,14 @@
         <div class="row">
           <div class="col-md-2"><strong>Alamat </strong></div><div class="col-md-10">
           <small>maks 500 karakter</small>
-          <textarea name="txtAlamat" class="form-control" required><?php echo $siswa['alamat']?></textarea><br/>
+          <textarea name="txtAlamat" class="form-control" required><?php echo $guru['alamat']?></textarea><br/>
         </div>
       </div>
       <br/>
       <div class="row">
         <div class="col-md-2"><strong>Moto  </strong></div><div class="col-md-10">
         <small>maks 200 karakter</small>
-        <textarea name="txtMoto" class="form-control" required><?php echo $siswa['moto']?></textarea><br/>
+        <textarea name="txtMoto" class="form-control" required><?php echo $guru['moto']?></textarea><br/>
       </div>
     </div>
     <div class="row">
@@ -58,17 +58,17 @@
       <div class="col-md-10">
         <?php
         //show avatar
-        if(empty($siswa['avatar'])){
+        if(empty($guru['avatar'])){
           $src = base_url('assets/img/avatar/avatar.jpg');
         } else{
-          $myavatar = $siswa['avatar'];
+          $myavatar = $guru['avatar'];
           $src = base_url('assets/img/avatar/'.$myavatar);
         }
         ?>
         <img src="<?php echo $src?>" width="100px" height="100px"/>
         <small>JPG, JPEG, PNG (100px x 100px),Maks 100 MB</small>
         <input type="file" name="myAvatar" class="form-control"/>
-        <input type="hidden" name="reccentAvatar" value="<?php echo $siswa['avatar']?>"/>
+        <input type="hidden" name="reccentAvatar" value="<?php echo $guru['avatar']?>"/>
         <br/>
         <button type="submit" class="btn btn-primary">Update</button>
       </div>
@@ -77,7 +77,7 @@
 </form>
 <hr/>
 <h3>Ubah Password</h3>
-<form method="POST" action="<?php echo site_url('process/siswa/updatepassword')?>">
+<form method="POST" action="<?php echo site_url('process/guru/updatepassword')?>">
  <div class="row">
   <div class="col-md-2"><strong>Ubah password  </strong></div>
   <div class="col-md-10">
