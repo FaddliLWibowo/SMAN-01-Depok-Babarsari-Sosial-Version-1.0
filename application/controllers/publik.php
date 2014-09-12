@@ -13,6 +13,7 @@ class publik extends base{
 		//testing tampilan
 		$data['title'] =''; 
 		$data['script'] = "$(document).ready(function(){document.getElementById('home').className='active';});";
+		$data['berita'] = $this->m_berita->berita(3,0);
 		$this->defaultdisplay('publik/home',$data);
 	}	
 }

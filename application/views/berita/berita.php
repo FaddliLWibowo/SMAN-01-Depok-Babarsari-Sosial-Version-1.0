@@ -15,6 +15,7 @@
      
       <small style="color:gray">Oleh : <?php echo $berita['author']?> | Diposting : <?php echo $berita['created']?> | Update : <?php echo $berita['edited']?></small><br/>
       <br/>
+      <p><img style="width:100%" src="<?php echo base_url('assets/img/news/'.$berita['image'])?>"></p>
       <p><?php echo $berita['konten']?></p>
       <br/>
     </div>

@@ -7,5 +7,5 @@
 	endforeach;
 	?>
 	<hr width="100%"/>	
-	<a href="<?php echo site_url('soal')?>">Semua Soal</a>
+	<a href="<?php echo site_url('nilai')?>">Semua Nilai</a>
 </div>
