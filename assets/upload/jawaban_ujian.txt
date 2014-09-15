@@ -1,0 +1,17 @@
+Chrome :
+Weather: Do I need a jacket tomorrow?
+Locations: Where’s the nearest pharmacy?
+Flight status: When does United Airlines flight 900 depart?
+Time: What time is it in London?
+Events: When is sunset?
+Math: What is the square root of 2209?
+Translation: How do you say cucumber in Spanish?
+Sports: When is the Boston Red Sox game?
+Trivia: How tall is the tallest building in the world?
+Conversions: How many dollars is 2600 rupees?
+Images: Show me pictures of the Golden Gate Bridge.
+
+Go to chrome://flags
+Search for "Enable new profile management system"
+Click the blue "Enable" link.
+Click the "Relaunch Now" button at the bottom of your browser to apply changes

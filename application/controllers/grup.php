@@ -81,4 +81,49 @@ class grup extends base{
             </SCRIPT>");
       }
     }
+
+    //add status
+    public function addstatus(){
+      $this->load->library('user_agent');
+      $status = $this->input->post('txtStatus');
+      $upload = $_FILES['upload'];
+      $idsiswa = $this->input->post('idsiswa');
+      $idguru = $this->input->post('idguru');
+      if ($idsiswa == 0) {
+        $idsiswa = null;
+      }
+      if ($idguru == 0) {
+        $idguru = null;
+      }
+      $idgrup = $this->input->post('idgrup');
+      //upload file management
+      if(!empty($_FILES['upload']['name'])) { //if upload file
+        $this->load->library('upload');
+        $filename = str_replace(' ', '-', $upload['name']);
+        $config['upload_path'] = './assets/upload/';
+        $config['allowed_types'] = 'docx|doc|odt|ods|xls|xlsx|txt|pdf';
+        $config['overwrite'] = true;
+        $config['max_size'] = 1000000; //1MB
+        $this->upload->initialize($config);
+        if(!$this->upload->do_upload('upload')){ //if upload failed
+           echo $this->upload->display_errors();
+           redirect($this->agent->referrer());
+         }
+      } else {
+        $filename = null;
+      }
+      //parameter to insert
+      $params = array($status,$idsiswa,$idguru,$filename,$idgrup);
+      //excute query
+      $sql = "INSERT INTO status(isi_status, id_siswa,id_guru,publik,file,on_id_grup)
+      VALUES (?,?,?,0,?,?)";
+      if($this->db->query($sql,$params)){ //success add post
+        redirect($this->agent->referrer());
+      }else{ //failed add post
+        echo ("<SCRIPT LANGUAGE='JavaScript'>
+          window.alert('Gagal post');
+          window.location.href='".$this->agent->referrer()."';
+        </SCRIPT>");
+      }
+    }
 }

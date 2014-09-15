@@ -1,4 +1,145 @@
 <style type="text/css">.myavatar{background-image: url('<?php echo base_url("assets/img/avatar/".$this->session->userdata("avatar"))?>');background-size: cover}</style>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  grupStatus();//LOAD LATTEST UPDATES
+  setInterval(function(){updatedGrupStatus();},20000);//LOAD LATTEST UPDATES EVERY 20 seconds    
+});
+
+function grupStatus(){
+  $('#top-loader').show();//SHOW LOADING
+  $.ajax({
+    url:'<?php echo site_url("json/grup_start_status?id=".$view['id_grup'])?>',
+    dataType:'json',
+    timeout: 50000,//50000MS
+    success:function(data){
+      timeline ='';
+      $.each(data['result'], function(i,n){
+        timeline = '<div class=\'timeline\'>'+
+        '<div name=\''+n['id']+'\' class=\'row name\'>'+
+        '<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' /><button class=\'btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+        '<h5><a href=\''+n['profile']+'\'><strong>'+n['name']+'</strong></a> > <a href=\''+n['des_profile']+'\'><strong>'+n['des_name']+'</strong></a></h5><h6>'+n['time']+'</h6>'+
+        '</div>'+     
+        '</div>'+
+        '<div class=\'row\'>'+
+        '<div class=\'col-md-12\'>'+
+        '<p>'+n['content']+'</p>'+
+        '<p><small>upload file : <a href="'+n['upload']+'">'+n['uploadname']+'</a></small></p>'+
+        '<p>'+
+        '<button class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span style=\'font-size:10px\'> 234 </span>'+
+        '<button class="btn btn-default btn-xs"> Lihat Komentar</button>'+
+        '</p>'+
+        '</div>'+
+        '</div>'+     
+        '<div class=\'container\'>'+
+        '<div class="comments" name=\''+n['id']+'\'>'        
+        +'</div>'+//END OF #COMMENTS       
+        '</div>'+
+        '</div>'+
+        '</div>';
+        timeline = timeline+'';
+        $('#all-timeline').append(timeline);//ADD NEW TO BOTTOM prepend() //TO TOP
+        $('#top-loader').hide();
+      });
+      $('#btn-more').show();//show btn to more status
+    },
+    error: function(){
+      alert('Tidak Ada Status');
+      $('#top-loader').hide();
+    }
+  });
+}
+
+function updatedGrupStatus(){
+  $('#top-loader').show();//SHOW LOADING
+  lastid = $('#all-timeline .timeline div').first().attr('name');//GET ELEMENT NAME
+  $.ajax({
+    url:'<?php echo site_url("json/grup_start_status?id=".$view['id_grup']."&last=")?>'+lastid,
+    dataType:'json',
+    timeout: 50000,//50000MS
+    success:function(data){
+      timeline ='';
+      $.each(data['result'], function(i,n){
+        timeline = '<div class=\'timeline\'>'+
+        '<div name=\''+n['id']+'\' class=\'row name\'>'+
+        '<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' /><button class=\'btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+        '<h5><a href=\''+n['profile']+'\'><strong>'+n['name']+'</strong></a> > <a href=\''+n['des_profile']+'\'><strong>'+n['des_name']+'</strong></a></h5><h6>'+n['time']+'</h6>'+
+        '</div>'+     
+        '</div>'+
+        '<div class=\'row\'>'+
+        '<div class=\'col-md-12\'>'+
+        '<p>'+n['content']+'</p>'+
+        '<p><small>upload file : <a href="'+n['upload']+'">'+n['uploadname']+'</a></small></p>'+
+        '<p>'+
+        '<button class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span style=\'font-size:10px\'> 234 </span>'+
+        '<button class="btn btn-default btn-xs"> Lihat Komentar</button>'+
+        '</p>'+
+        '</div>'+
+        '</div>'+     
+        '<div class=\'container\'>'+
+        '<div class="comments" name=\''+n['id']+'\'>'        
+        +'</div>'+//END OF #COMMENTS       
+        '</div>'+
+        '</div>'+
+        '</div>';
+        timeline = timeline+'';
+        $('#all-timeline').prepend(timeline);//ADD NEW TO BOTTOM prepend() //TO TOP
+        $('#top-loader').hide();
+      });
+      $('#btn-more').show();//show btn to more status
+    },
+    error: function(){
+      //alert('Tidak Ada Status');
+      $('#top-loader').hide();
+    }
+  });
+}
+
+function moreGrupStatus(){
+  $('#bottom-loader').show();//SHOW LOADING
+  smallid = $('#all-timeline .timeline div').last().attr('name');//GET ELEMENT NAME
+  $.ajax({
+    url:'<?php echo site_url("json/grup_start_status?id=".$view['id_grup']."&small=")?>'+smallid,
+    dataType:'json',
+    timeout: 50000,//50000MS
+    success:function(data){
+      timeline ='';
+      $.each(data['result'], function(i,n){
+        timeline = '<div class=\'timeline\'>'+
+        '<div name=\''+n['id']+'\' class=\'row name\'>'+
+        '<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' /><button class=\'btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+        '<h5><a href=\''+n['profile']+'\'><strong>'+n['name']+'</strong></a> > <a href=\''+n['des_profile']+'\'><strong>'+n['des_name']+'</strong></a></h5><h6>'+n['time']+'</h6>'+
+        '</div>'+     
+        '</div>'+
+        '<div class=\'row\'>'+
+        '<div class=\'col-md-12\'>'+
+        '<p>'+n['content']+'</p>'+
+        '<p><small>upload file : <a href="'+n['upload']+'">'+n['uploadname']+'</a></small></p>'+
+        '<p>'+
+        '<button class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span style=\'font-size:10px\'> 234 </span>'+
+        '<button class="btn btn-default btn-xs"> Lihat Komentar</button>'+
+        '</p>'+
+        '</div>'+
+        '</div>'+     
+        '<div class=\'container\'>'+
+        '<div class="comments" name=\''+n['id']+'\'>'        
+        +'</div>'+//END OF #COMMENTS       
+        '</div>'+
+        '</div>'+
+        '</div>';
+        timeline = timeline+'';
+        $('#all-timeline').append(timeline);//ADD NEW TO BOTTOM prepend() //TO TOP
+        $('#bottom-loader').hide();
+      });
+      $('#btn-more').show();//show btn to more status
+    },
+    error: function(){
+      alert('Tidak Ada Status');
+      $('#bottom-loader').hide();
+    }
+  });
+}
+</script>
+
 <section id="padding-top"></section>
 <section id="timeline-place">
   <div class="container">
@@ -31,7 +172,7 @@
       <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
         <li class="active"><a class="btn" href="#post" data-toggle="tab"><span class="glyphicon glyphicon-bullhorn"></span> Post to group</a></li>
         <li><a class="btn" href="#member" data-toggle="tab"><span class="glyphicon glyphicon-envelope"></span> Member</a></li>
-        <li><a class="btn" href="#files" data-toggle="tab"><span class="glyphicon glyphicon-list-alt"></span> Files</a></li>
+        <!-- <li><a class="btn" href="#files" data-toggle="tab"><span class="glyphicon glyphicon-list-alt"></span> Files</a></li> -->
         <?php 
         if($status == 'admin') {
           echo ' <li><a class="btn" href="#admin" data-toggle="tab"><span class="glyphicon glyphicon-cog"></span> admin</a></li>';
@@ -41,16 +182,19 @@
       <br/><br/>
       <div id="my-tab-content" class="tab-content">
         <div class="tab-pane active" id="post">
-          <form action="" enctype="multipart/form-data">
-            <textarea rows="5" class="form-control" id="newpost" placeholder="type here..."></textarea>
-            <h6>support : pdf,odt,doc,docx</h6>
-            <input type="file" class="form-control" name="uploadfile" placeholder="upload">
+          <form method="POST" action="<?php echo site_url('grup/addstatus')?>" enctype="multipart/form-data">
+            <textarea name="txtStatus" rows="5" class="form-control" id="newpost" placeholder="type here..." required></textarea>
+            <h6>support : pdf,odt,ods,doc,docx,txt | maks : 1 MB</h6>
+            <input name="upload" type="file" class="form-control" placeholder="upload">
+            <input name="idgrup" type="hidden" value="<?php echo $view['id_grup']?>">
            <?php //CEK YANG LOGIN 
            if($this->session->userdata('siswa_logged_in')){
             ?>
-            <button onclick="updateSiswaStatus(<?php echo $this->session->userdata('id')?>,0,0,0,0,<?php echo $view['id_grup']?>)" id="btn-newpost">Post</button>  
+              <input name="idsiswa" type="hidden" value="<?php echo $this->session->userdata('id');?>" />
+              <button type="submit" id="btn-newpost">Post</button>  
             <?php } else if($this->session->userdata('guru_logged_in')){?>
-            <button onclick="updateSiswaStatus(0,<?php echo $this->session->userdata('id')?>,0,0,0,<?php echo $view['id_grup']?>)" id="btn-newpost">Post</button> 
+              <input name="idguru" type="hidden" value="<?php echo $this->session->userdata('id');?>"/>
+              <button type="submit" id="btn-newpost">Post</button> 
             <?php } ?> <br/><br/>
           </div>
           
@@ -161,7 +305,7 @@
           <center id="top-loader" class="col-md-12" style="padding:5px;display:none" ><img width="30px" src="<?php echo base_url('assets/css/loader.gif')?>"/></center>
           <div id="all-timeline"></div>
           <center id="bottom-loader" class="col-md-12" style="padding:5px;display:none"><img width="30px" src="<?php echo base_url('assets/css/loader.gif')?>"/></center>
-          <button onclick="showMoreStatusOnProfile()" id="btn-more" style="width:100%;display:none" class="btn btn-default">Berikutnya</button>
+          <button onclick="moreGrupStatus()" id="btn-more" style="width:100%;display:none" class="btn btn-default">Berikutnya</button>
           <!--end of  id all-timeline-->
         </div>
       </div>

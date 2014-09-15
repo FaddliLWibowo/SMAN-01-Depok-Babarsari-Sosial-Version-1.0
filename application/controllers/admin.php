@@ -8,8 +8,31 @@ class admin extends base{
 	//ADMIN LOGIN
 	public function index(){
 		//CLEAR  ALL SESSION
-		$this->session->sess_destroy();
-		$data['title'] = 'Admin Login | ';
-		$this->defaultdisplay('admin/login',$data);
+		if($this->session->userdata('admin_logged_in')){
+			redirect(site_url('admin/dashboard'));
+		} else {
+			$this->session->sess_destroy();
+			$data['title'] = 'Admin Login | ';
+			$this->defaultdisplay('admin/login',$data);
+		}		
+		
+	}
+	//ADMIN DASHBOARD
+	public function dashboard(){
+		if(!$this->session->userdata('admin_logged_in')){
+			redirect(site_url('admin'));
+		}
+		$data['title'] = 'Dashboard | ';
+		$this->defaultdisplay('admin/dashboard',$data);
+	}
+
+	////////////////////////////////////////////////////////////////////
+	/////////////// ALL ABOUT PROCESSING ///////////////////////////////
+	////////////////////////////////////////////////////////////////////
+
+	public function login(){
+		$email = $this->input->post('txtEmail');
+		$password = md5($this->input->post('txtPassword'));
+		
 	}
 }

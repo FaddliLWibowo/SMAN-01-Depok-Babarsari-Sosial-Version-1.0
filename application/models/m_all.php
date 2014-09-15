@@ -21,6 +21,38 @@ class m_all extends CI_Model{
 		}else{return array();}
 	}
 
+	public function grup_start_status($id){
+		$this->db->where('on_id_grup',$id);
+		$this->db->limit(8);
+		$this->db->order_by('id_status','desc');
+		$query = $this->db->get('status');
+		if($query->num_rows()>0){
+			return $query->result_array();
+		}else{return array();}
+	}
+
+	public function grup_update_status($id,$lastid){
+		$this->db->where('id_status >',$lastid);
+		$this->db->where('on_id_grup',$id);
+		$this->db->limit(8);
+		$this->db->order_by('id_status','desc');
+		$query = $this->db->get('status');
+		if($query->num_rows()>0){
+			return $query->result_array();
+		}else{return array();}
+	}
+
+	public function grup_more_status($id,$smallid){
+		$this->db->where('id_status <',$smallid);
+		$this->db->where('on_id_grup',$id);
+		$this->db->limit(5);
+		$this->db->order_by('id_status','desc');
+		$query = $this->db->get('status');
+		if($query->num_rows()>0){
+			return $query->result_array();
+		}else{return array();}
+	}
+
 	//SHOW UPDATED STATUS
 	public function show_updated_status($lastid){
 		$this->db->where('publik',1);

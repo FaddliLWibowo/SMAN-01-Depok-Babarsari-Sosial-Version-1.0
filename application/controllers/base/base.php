@@ -13,6 +13,7 @@ class base extends CI_Controller {
 		$this->load->model('m_all');
 		$this->load->model('m_berita');
 		$this->load->model('m_event');
+		$this->load->model('m_grup');
 	}
 
 	public function index(){
