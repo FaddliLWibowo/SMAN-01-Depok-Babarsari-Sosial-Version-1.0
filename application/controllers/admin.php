@@ -3,6 +3,7 @@ require_once 'application/controllers/base/base.php';
 class admin extends base{
 	public function __construct(){
 		parent::__construct();
+		$this->load->model('m_admin');
 	}
 	
 	//ADMIN LOGIN
@@ -33,6 +34,8 @@ class admin extends base{
 	public function login(){
 		$email = $this->input->post('txtEmail');
 		$password = md5($this->input->post('txtPassword'));
-		
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('txtEmail','email','required|xss_clean');
+		$this->form_validation->set_rules('txtPassword','password','required|md5|xss_clean');
 	}
 }
