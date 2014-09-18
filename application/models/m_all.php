@@ -242,4 +242,7 @@ class m_all extends CI_Model{
 		$query = $this->db->query($sql);
 		if($query->num_rows>0){return true;}else{return false;}	
 	}
+
+	///////////////////// FOR ADMIN ONLY /////////////////////////
+	
 }

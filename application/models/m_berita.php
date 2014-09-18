@@ -13,4 +13,14 @@ class m_berita extends CI_Model{
 		$query = $this->db->get('berita');
 		if($query->num_rows()>0){return $query->row_array();}else{return array();}
 	}
+
+	//////////FOR ADMIN//////////
+	function add_berita($params){
+		$sql = "INSERT INTO berita(judul,konten,image) VALUES(?,?,?)";
+		if($this->db->query($sql,$params)){return true;} else{return false;}
+	}
+	function edit_berita($params){
+		$sql = "UPDATE berita SET judul=?,konten=?,image=?,edited=CURTIME() WHERE id_berita=?";
+		if($this->db->query($sql,$params)){return true;} else{return false;}
+	}
 }

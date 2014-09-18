@@ -64,7 +64,7 @@
           <img height="200px" src="<?php echo $avatar;?>" alt="...">
           <div class="caption">
             <h3><a href="<?php echo site_url('grup/welcome/'.$idgrup.'/'.$url_nama_grup)?>"><?php echo $v['nama_grup']?></a></h3>
-            <small>Created <?php echo $v['created']?></small>
+            <small>Created <?php echo $v['created']?> | <?php echo $v['status']?></small>
             <p><?php echo $v['deskripsi_grup']?></p>
             <?php 
             //CEK YANG LOGIN SISWA ATAU GURU

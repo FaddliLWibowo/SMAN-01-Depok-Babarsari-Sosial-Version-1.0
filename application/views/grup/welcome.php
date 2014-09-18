@@ -1,3 +1,8 @@
+<?php
+  if($view['status'] = 'blocked'){
+    redirect(site_url('grup'));
+  }
+?>
 <style type="text/css">.myavatar{background-image: url('<?php echo base_url("assets/img/avatar/".$this->session->userdata("avatar"))?>');background-size: cover}</style>
 <script type="text/javascript">
 $(document).ready(function(){ 
