@@ -18,5 +18,16 @@ class m_admin extends CI_Model{
         } else {
             return array();
         }
-	}
+    }
+
+    //GURU
+    public function all_teacher($params){//OFFSET LIMIT
+         $sql = "SELECT * FROM guru LIMIT ?,?";
+         $query=$this->db->query($sql,$params);
+         if($query->num_rows() > 0){
+            return $query->result_array();
+        } else {
+            return array();
+        }
+    }
 }

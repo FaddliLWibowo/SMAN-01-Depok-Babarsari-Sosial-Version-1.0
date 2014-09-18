@@ -107,6 +107,110 @@ class admin extends base{
 		}
 	} 
 
+	public function guru(){		
+		//pagination
+		$this->load->library('pagination');
+		$config['base_url'] = site_url('admin/guru?act=0');
+		$config['total_rows'] = $this->db->count_all('guru');
+		$config['per_page']= 20;
+		$config['num_link']=2;
+		$config['page_query_string'] = TRUE;
+		$this->pagination->initialize($config); 
+		$data['page'] = $this->pagination->create_links();		
+		if(isset($_GET['per_page'])) {
+			if($_GET['per_page'] == '') { 
+				$uri = 0;
+			} else {
+				$uri = $_GET['per_page'];
+			}
+		} else {
+			$uri = 0;
+		}
+			//end of pagination
+		switch ($this->input->get('act')) {
+			case 'edit':
+			$data['title']= 'Edit Data Guru |';
+			$idguru = $this->input->get('id');
+			$data['profile'] = $this->m_guru->data_by_id($idguru);
+			$data['ajar'] = $this->m_guru->guru_ajar($idguru);
+			$this->defaultdisplay('admin/editguru',$data);
+			break;
+
+			case 'add':
+			$nip = $this->input->post('nip');
+			$nama = $this->input->post('nama');
+			$status = $this->input->post('status');
+			$kelamin = $this->input->post('kelamin');
+			$password = md5($nip);
+			$data = array('nip'=>$nip,'nama_lengkap'=>$nama,'password'=>$password,'status'=>$status,'kelamin'=>$kelamin);
+			$this->db->insert('guru',$data);
+			redirect(site_url('admin/guru'));
+			break;
+
+			case 'delete':
+			$idguru = $this->input->get('id');
+			$this->db->delete('guru', array('id' => $idguru));
+			redirect(site_url('admin/guru')); 
+			break;
+
+			case 'ajaxsubkelas':
+			$idkelas = $this->input->get('idkelas');
+			$this->db->where('kelas',$idkelas);
+			$subkelas = $this->db->get('subkelas');
+			$subkelas = $subkelas->result_array();
+			echo '<select class="form-control" name="subkelas">
+			<option>Subkelas</option>';
+			foreach($subkelas as $s):
+				echo '<option value="'.$s['id_subkelas'].'">'.$s['nama'].'</option>';
+			endforeach;
+			echo '</select>';
+			break;
+
+			case 'addajar':
+				$idguru = $this->input->post('guru');
+				$subkelas = $this->input->post('subkelas');
+				$matapelajaran = $this->input->post('matapelajaran');
+				$params = array('id_guru'=>$idguru,'id_subkelas'=>$subkelas,'id_matapelajaran'=>$matapelajaran);
+				$this->db->insert('mengajar',$params);
+				redirect('admin/guru?act=edit&id='.$idguru);
+			break;
+
+			case 'deleteajar':
+				$idajar = $this->input->get('idajar');
+				$idguru = $this->input->get('guru');
+				$this->db->delete('mengajar',array('id_mengajar'=>$idajar));
+				redirect('admin/guru?act=edit&id='.$idguru);
+			break;
+
+			case 'editprofileguru':
+				$id = $this->input->post('id');				
+				$nip = $this->input->post('nip');
+				$nama = $this->input->post('nama');
+				$status = $this->input->post('status');
+				$data=array('nip'=>$nip,'nama_lengkap'=>$nama,'status'=>$status);
+				$this->db->where('id',$id);
+				$this->db->update('guru',$data);
+				redirect('admin/guru?act=edit&id='.$id);
+			break;
+
+			case 'search':
+				$data['title'] = 'Pencarian Guru |';
+				$q = $this->input->get('q');
+				$params = array($uri,$config['per_page'],$q);//params for pagination
+				$data['view'] = $this->m_admin->search_teacher($params);
+				$this->defaultdisplay('admin/guru',$data);
+			break;
+			
+			default:
+			$data['title']= 'Guru |';
+			$params = array($uri,$config['per_page']);//params for pagination
+			$data['view'] = $this->m_admin->all_teacher($params);
+			$this->defaultdisplay('admin/guru',$data);
+			break;		
+		}
+		
+	}
+
 	public function kelas(){
 		$allclass = $this->db->get('kelas'); 
 		$data['button'] = $allclass->result_array();
@@ -132,7 +236,7 @@ class admin extends base{
 				$this->db->query($sql,$params);
 				redirect(site_url('admin/kelas?act=subkelas&id='.$idkelas));
 				break;
-			
+
 				case 'hapussubkelas':
 				$idkelas = $this->input->get('id');
 				$idsubkelas = $this->input->get('sub');

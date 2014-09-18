@@ -111,7 +111,7 @@ class m_guru extends CI_Model{
     * ALL ABOUT AJAR MENGAJAR
     */
     public function guru_ajar($idguru){//GURU + SUBCLASS + MATA PELAJARAN
-        $sql = "SELECT guru.nama_lengkap AS 'nama',kelas.id_kelas AS 'id_kelas',kelas.nama_kelas AS 'kelas',subkelas.nama AS 'subkelas',
+        $sql = "SELECT mengajar.id_mengajar AS 'ajar', guru.nama_lengkap AS 'nama',kelas.id_kelas AS 'id_kelas',kelas.nama_kelas AS 'kelas',subkelas.nama AS 'subkelas',
         matapelajaran.id_matapelajaran AS 'id_matapelajaran', matapelajaran.matapelajaran AS 'matapelajaran' 
         FROM mengajar 
         LEFT JOIN guru ON guru.id=mengajar.id_guru
