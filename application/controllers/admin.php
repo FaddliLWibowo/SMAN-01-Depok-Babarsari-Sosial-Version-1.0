@@ -107,6 +107,65 @@ class admin extends base{
 		}
 	} 
 
+	///SISWA CONTROLER///
+	public function siswa(){
+		//pagination
+		$this->load->library('pagination');
+		$config['base_url'] = site_url('admin/siswa?act=0');
+		$config['total_rows'] = $this->db->count_all('siswa');
+		$config['per_page']= 20;
+		$config['num_link']=2;
+		$config['page_query_string'] = TRUE;
+		$this->pagination->initialize($config); 
+		$data['page'] = $this->pagination->create_links();		
+		if(isset($_GET['per_page'])) {
+			if($_GET['per_page'] == '') { 
+				$uri = 0;
+			} else {
+				$uri = $_GET['per_page'];
+			}
+		} else {
+			$uri = 0;
+		}
+		//end of pagination
+		switch ($this->input->get('act')) {
+			case 'add'://add students
+				$nis = $this->input->post('nis');
+				$nama = $this->input->post('nama');
+				$status = $this->input->post('status');
+				$kelamin = $this->input->post('kelamin');
+				$angkatan = $this->input->post('angkatan');
+				$password = md5($nis);
+				$data = array('nis'=>$nis,'nama_lengkap'=>$nama,'password'=>$password,'status'=>$status,'kelamin'=>$kelamin,'angkatan'=>$angkatan);
+				$this->db->insert('siswa',$data);
+				redirect(site_url('admin/siswa'));
+				break;
+
+			case 'delete'://delete siswa
+				$idsiswa = $this->input->get('id');
+				$this->db->delete('siswa', array('id' => $idsiswa));
+				redirect(site_url('admin/siswa')); 
+				break;
+
+			case 'edit':
+				$data['title']= 'Edit Data Guru |';
+				$idsiswa = $this->input->get('id');
+				$data['profile'] = $this->m_siswa->data_by_id($idsiswa);
+				$kelas = $this->db->get('kelas');
+				$data['kelas'] = $kelas->result_array();
+				$this->defaultdisplay('admin/editsiswa',$data);
+			break;
+			
+			default:
+				$data['title']= 'Siswa |';
+				$params = array($uri,$config['per_page']);//params for pagination
+				$data['view'] = $this->m_admin->all_students($params);
+				$this->defaultdisplay('admin/siswa',$data);
+				break;
+		}
+	}
+
+	///GURU CONTROLER///
 	public function guru(){		
 		//pagination
 		$this->load->library('pagination');
@@ -126,7 +185,7 @@ class admin extends base{
 		} else {
 			$uri = 0;
 		}
-			//end of pagination
+		//end of pagination
 		switch ($this->input->get('act')) {
 			case 'edit':
 			$data['title']= 'Edit Data Guru |';
@@ -251,7 +310,39 @@ class admin extends base{
 		}
 	}
 
+	//Mata Pelajaran Controller
+	public function matapelajaran(){		
+		switch ($this->input->get('act')) {
+			case 'delete':
+				$id= $this->input->get('id');
+				$this->db->delete('matapelajaran',array('id_matapelajaran'=>$id));
+				redirect(site_url('admin/matapelajaran'));
+				break;
 
+			case 'add':
+				$mapel = $this->input->post('matapelajaran');
+				$sql = "INSERT INTO matapelajaran(matapelajaran) VALUES(?)";
+				$this->db->query($sql,$mapel);
+				redirect(site_url('admin/matapelajaran'));
+				break;
+
+			case 'procedit':
+				$id = $this->input->post('id_matapelajaran');
+				$mapel = $this->input->post('matapelajaran');
+				$data = array('matapelajaran'=>$mapel);
+				$this->db->where('id_matapelajaran',$id);
+				$this->db->update('matapelajaran',$data);
+				redirect(site_url('admin/matapelajaran'));
+				break;
+			
+			default:
+				$data['title'] = 'Mata Pelajaran | ';
+				$matapelajaran = $this->db->get('matapelajaran');
+				$data['mapel'] = $matapelajaran->result_array();
+				$this->defaultdisplay('admin/matapelajaran',$data);
+				break;
+		}
+	}
 
 	////////////////////////////////////////////////////////////////////
 	/////////////// ALL ABOUT PROCESSING ///////////////////////////////

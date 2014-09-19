@@ -30,4 +30,15 @@ class m_admin extends CI_Model{
             return array();
         }
     }
+
+    //SISWA
+    public function all_students($params){//OFFSET LIMIT
+         $sql = "SELECT * FROM siswa LIMIT ?,?";
+         $query=$this->db->query($sql,$params);
+         if($query->num_rows() > 0){
+            return $query->result_array();
+        } else {
+            return array();
+        }
+    }
 }
