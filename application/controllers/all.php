@@ -130,6 +130,15 @@ class all extends base{
 		//RETURN TRUE FROM MODAL
 	}
 
+
+	//ADD LIKE
+	public function addlike(){
+		$idstatus = $this->input->get('idpost');
+		//update table
+		$sql = "UPDATE status SET likes = likes + 1 WHERE id_status = ?";
+		return $this->db->query($sql,$idstatus);
+	}
+
 	/*
 	* ALL ABOUT GROUP
 	*/

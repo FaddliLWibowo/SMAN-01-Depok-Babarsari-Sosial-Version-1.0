@@ -37,7 +37,7 @@ $.ajax({
 			'<div class=\'col-md-12\'>'+
 			'<p>'+n['content']+'</p>'+
 			'<p>'+
-			'<button class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span style=\'font-size:10px\'> 234 </span>'+
+			'<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'> '+n['like']+' </span>'+
 			
 			'<button onclick=\'getCommentById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
 			'</p>'+
@@ -90,7 +90,7 @@ $.ajax({
 			'<div class=\'col-md-12\'>'+
 			'<p>'+n['content']+'</p>'+
 			'<p>'+
-			'<button class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span style=\'font-size:10px\'> 234 </span>'+
+			'<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'>'+n['like']+'</span>'+
 			
 			'<button class="btn btn-default btn-xs"> Lihat Komentar</button>'+
 			'</p>'+
@@ -141,7 +141,7 @@ $.ajax({
 			'<div class=\'col-md-12\'>'+
 			'<p>'+n['content']+'</p>'+
 			'<p>'+
-			'<button class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span style=\'font-size:10px\'> 234 </span>'+
+			'<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'>'+n['like']+'</span>'+
 			
 			'<button class="btn btn-default btn-xs"> Lihat Komentar</button>'+
 			'</p>'+
@@ -229,6 +229,23 @@ function getCommentById(x){ //COMMENT BY ID STATUS
 			alert('Tidak ada komentar');
 		}
 	});
+}
+
+function addlike(x){ //x id status
+	like = $('.'+x).html();
+	newlike = parseInt(like);//convert to INT
+	newlike = newlike + 1;
+	//ajax to insert DB
+	$.ajax({
+		url:'http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/index.php/all/addlike?idpost='+x,
+		success:function(){
+			$('.'+x).html();
+			$('.'+x).html(newlike);
+		},
+		error:function(){
+			alert('error add like');			
+		}
+	});	
 }
 
 

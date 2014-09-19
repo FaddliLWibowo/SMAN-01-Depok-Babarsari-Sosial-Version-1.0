@@ -1,6 +1,9 @@
 <?php
-  if($view['status'] = 'blocked'){
-    redirect(site_url('grup'));
+  if($view['status'] == 'blocked'){
+    echo ("<SCRIPT LANGUAGE='JavaScript'>
+            window.alert('Grup diblokir');
+            window.location.href='".site_url('grup')."';
+          </SCRIPT>");
   }
 ?>
 <style type="text/css">.myavatar{background-image: url('<?php echo base_url("assets/img/avatar/".$this->session->userdata("avatar"))?>');background-size: cover}</style>
@@ -30,7 +33,7 @@ function grupStatus(){
         '<p>'+n['content']+'</p>'+
         '<p><small>upload file : <a href="'+n['upload']+'">'+n['uploadname']+'</a></small></p>'+
         '<p>'+
-        '<button class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span style=\'font-size:10px\'> 234 </span>'+
+        '<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'> '+n['like']+' </span>'+
         '<button class="btn btn-default btn-xs"> Lihat Komentar</button>'+
         '</p>'+
         '</div>'+
@@ -75,7 +78,7 @@ function updatedGrupStatus(){
         '<p>'+n['content']+'</p>'+
         '<p><small>upload file : <a href="'+n['upload']+'">'+n['uploadname']+'</a></small></p>'+
         '<p>'+
-        '<button class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span style=\'font-size:10px\'> 234 </span>'+
+        '<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'> '+n['like']+' </span>'+
         '<button class="btn btn-default btn-xs"> Lihat Komentar</button>'+
         '</p>'+
         '</div>'+
@@ -120,7 +123,7 @@ function moreGrupStatus(){
         '<p>'+n['content']+'</p>'+
         '<p><small>upload file : <a href="'+n['upload']+'">'+n['uploadname']+'</a></small></p>'+
         '<p>'+
-        '<button class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span style=\'font-size:10px\'> 234 </span>'+
+        '<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'> '+n['like']+' </span>'+
         '<button class="btn btn-default btn-xs"> Lihat Komentar</button>'+
         '</p>'+
         '</div>'+

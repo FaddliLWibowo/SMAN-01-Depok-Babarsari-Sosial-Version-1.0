@@ -71,6 +71,7 @@ class json extends CI_Controller{
 		$des_id_guru=$s['on_id_guru'];
 		$des_id_grup=$s['on_id_grup'];	
 		$waktu=$s['waktu'];
+		$like =$s['likes'];
 			//GET RESOURCE NAME,LINK,AVATAR
 		if(!is_null($id_siswa)){
 				$data = $this->m_siswa->data_by_id($id_siswa);//GET STUDENT NAME BY ID
@@ -107,7 +108,7 @@ class json extends CI_Controller{
 			}
 
 			$result[] = array('id'=>$id,'content'=>$content,'tag'=>$tag,'profile'=>$link,'name'=>$name,'avatar'=>$avatar,
-				'des_profile'=>$des_link,'des_name'=>$des_name,'des_avatar'=>$des_avatar,'time'=>$waktu);
+				'des_profile'=>$des_link,'des_name'=>$des_name,'des_avatar'=>$des_avatar,'time'=>$waktu,'like'=>$like);
 			endforeach;
 		//ENCODE TO JSON
 			$json['result'] = $result;
@@ -249,6 +250,7 @@ class json extends CI_Controller{
 			$des_id_grup=$s['on_id_grup'];	
 			$waktu=$s['waktu'];
 			$noupload= array(' ','','null','0');
+			$like=$s['likes'];
 			if(in_array($s['file'], $noupload)) {			
 				$uploadname = 'kosong';
 				$upload = null;
@@ -283,7 +285,7 @@ class json extends CI_Controller{
 				}
 
 				$result[] = array('id'=>$id,'content'=>$content,'tag'=>$tag,'profile'=>$link,'name'=>$name,'avatar'=>$avatar,
-					'des_profile'=>$des_link,'des_name'=>$des_name,'des_avatar'=>$des_avatar,'time'=>$waktu, 'upload'=>$upload,'uploadname'=>$uploadname);
+					'des_profile'=>$des_link,'des_name'=>$des_name,'des_avatar'=>$des_avatar,'time'=>$waktu, 'upload'=>$upload,'uploadname'=>$uploadname,'like'=>$like);
 				endforeach;
 			//ENCODE TO JSON
 				$json['result'] = $result;
