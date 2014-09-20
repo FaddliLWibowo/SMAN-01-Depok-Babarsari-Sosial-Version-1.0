@@ -135,8 +135,23 @@ class all extends base{
 	public function addlike(){
 		$idstatus = $this->input->get('idpost');
 		//update table
+		$
 		$sql = "UPDATE status SET likes = likes + 1 WHERE id_status = ?";
 		return $this->db->query($sql,$idstatus);
+	}
+
+	//ADD COMMENT
+	public function addcomment(){
+		$comment = $this->input->get('comment');
+		$idpost = $this->input->get('idpost');
+		$idsiswa = $this->input->get('idsiswa');
+		$idguru = $this->input->get('idguru');
+		if($idsiswa==''){$idsiswa=NULL;}
+		if($idguru==''){$idguru=NULL;}
+		$params = array($idsiswa,$idpost,$idguru,$comment,$idpost);
+		$sql = "INSERT INTO status_komentar(id_siswa,id_status,id_guru,komentar)
+		VALUES(?,?,?,?)";
+		return $this->db->query($sql,$params);
 	}
 
 	/*

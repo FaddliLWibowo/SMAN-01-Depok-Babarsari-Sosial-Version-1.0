@@ -44,13 +44,13 @@ $.ajax({
 			'</div>'+
 			'</div>'+			
 			'<div class=\'container\'>'+
-			'<div class="comments" name=\''+n['id']+'\'>'
-						
+			'<div class="comments'+n['id']+'" name=\''+n['id']+'\'>'
+
 			+'</div>'+//END OF #COMMENTS
 			'<div class=\'comment row\'>'+
 			'<div class=\'col-md-2\'><img class="myavatar" /></div>'+
 			'<div class=\'col-md-10\'>'+
-			'<textarea class=\'form-control\' id=\'comment\' placeholder=\'your comment...\'></textarea>'+
+			'<div class="input-group"><textarea id="writecomment'+n['id']+'" class=\'form-control\' id=\'comment\' placeholder=\'your comment...\'></textarea><span class="input-group-btn"><button class="btn btn-default" onclick="writecomment('+n['id']+')"><span class="glyphicon glyphicon-play"></span></button></span></div>'+
 			'</div>'+
 			'</div>'+
 			'</div>'+
@@ -92,23 +92,23 @@ $.ajax({
 			'<p>'+
 			'<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'>'+n['like']+'</span>'+
 			
-			'<button class="btn btn-default btn-xs"> Lihat Komentar</button>'+
+			'<button onclick=\'getCommentById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
 			'</p>'+
 			'</div>'+
 			'</div>'+
 			'<div class=\'container\'>'+
-			'<div class="comments" name=\''+n['id']+'\'>'+
+			'<div class="comments'+n['id']+'" name=\''+n['id']+'\'>'+
 			
 			'</div>'+//END #COMMENTS 
 			'<div class=\'comment row\'>'+
 			'<div class=\'col-md-2\'><img class="myavatar" /></div>'+
 			'<div class=\'col-md-10\'>'+
-			'<textarea class=\'form-control\' id=\'comment\' placeholder=\'your comment...\'></textarea>'+
+			'<div class="input-group"><textarea id="writecomment'+n['id']+'" class=\'form-control\' id=\'comment\' placeholder=\'your comment...\'></textarea><span class="input-group-btn"><button class="btn btn-default" onclick="writecomment('+n['id']+')"><span class="glyphicon glyphicon-play"></span></button></span></div>'+
 			'</div>'+
 			'</div>'+
 			'</div>'+
 			'</div>';
-		timeline = timeline+'';
+			timeline = timeline+'';
 		$('#all-timeline').prepend(timeline);//ADD NEW TO BOTTOM prepend() //TO TOP
 	});
 },
@@ -143,22 +143,22 @@ $.ajax({
 			'<p>'+
 			'<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'>'+n['like']+'</span>'+
 			
-			'<button class="btn btn-default btn-xs"> Lihat Komentar</button>'+
+			'<button onclick=\'getCommentById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
 			'</p>'+
 			'</div>'+
 			'</div>'+
 			'<div class=\'container\'>'+
-			'<div class="comments" name=\''+n['id']+'\'>'+			
+			'<div class="comments'+n['id']+'" name=\''+n['id']+'\'>'+			
 			'</div>'+//end of #comments
 			'<div class=\'comment row\'>'+
 			'<div class=\'col-md-2\'><img class="myavatar" /></div>'+
 			'<div class=\'col-md-10\'>'+
-			'<textarea class=\'form-control\' id=\'comment\' placeholder=\'your comment...\'></textarea>'+
+			'<div class="input-group"><textarea id="writecomment'+n['id']+'" class=\'form-control\' id=\'comment\' placeholder=\'your comment...\'></textarea><span class="input-group-btn"><button class="btn btn-default" onclick="writecomment('+n['id']+')"><span class="glyphicon glyphicon-play"></span></button></span></div>'+
 			'</div>'+
 			'</div>'+
 			'</div>'+
 			'</div>';
-		timeline = timeline+'';
+			timeline = timeline+'';
 		$('#all-timeline').append(timeline);//ADD NEW TO BOTTOM prepend() //TO TOP
 	});
 },
@@ -178,8 +178,8 @@ function updateStatus(x,y,z,a,b,c){ //X= ID_SISWA,y = ID_GURU,Z = ID_GRUP | a = 
 		$('#top-loader').hide();//SHOW LOADING	
 	} else {
 		$.ajax({
-		type:'POST',
-		url:'http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/index.php/all/update_status',
+			type:'POST',
+			url:'http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/index.php/all/update_status',
 		timeout: 50000,//50000MS
 		data:{idsiswa:x,idguru:y,idgrup:z,isi:isi,desidsiswa:a,desidguru:b,desidgrup:c},
 		success:function(data){ //SUCCESS INSERT TO DB
@@ -188,7 +188,7 @@ function updateStatus(x,y,z,a,b,c){ //X= ID_SISWA,y = ID_GURU,Z = ID_GRUP | a = 
 		error:function(data){
 			alert('ERROR'+data);
 		}
-		});
+	});
                 //$('#newpost').val() = '';//EMPTY STATUS TEXTAREA
 		$('#top-loader').hide();//SHOW LOADING
 	}	
@@ -206,9 +206,11 @@ function deleteMyStatus(){
 function getCommentById(x){ //COMMENT BY ID STATUS	
 	$.ajax({ //x=id_status		
 		type:'GET',
+		dataType:'json',
 		url:'http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/index.php/json/show_comment_by_id?id='+x,
 		timeout: 50000,//50000MS
 		success:function(data){ //SUCCESS INSERT TO DB
+			$('.comments'+x).html();
 			//alert(x);
 			$.each(data['result'], function(i,n){//LOPPING COMMENTS
 				comment = '<div class=\'comment row\'>'+
@@ -216,14 +218,14 @@ function getCommentById(x){ //COMMENT BY ID STATUS
 				'<img src=\''+n['avatar']+'\' />'+
 				'</div>'+
 				'<div class=\'col-md-10\'>'+
-				'<p><span><strong><a href=\'#\'>'+n['name']+'</a></strong>'+n['isi']+'</p>'+
-				'<h6>'+n['time']+'</h6>'+
+				'<p><span><strong><a href=\'#\'>'+n['name']+'</a></strong> '+n['isi']+'</p>'+
+				'<h6>'+n['waktu']+'</h6>'+
 				'</div>'+
 				'</div>';
 				comment = comment+'';
-				
-			});
-			alert(comment);
+				$('.comments'+x).append(comment);							
+			});		
+							
 		},
 		error:function(){
 			alert('Tidak ada komentar');
@@ -247,7 +249,6 @@ function addlike(x){ //x id status
 		}
 	});	
 }
-
 
 /*****************************
 AJAX UNTUK SEMUA

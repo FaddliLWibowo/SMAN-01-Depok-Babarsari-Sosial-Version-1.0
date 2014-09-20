@@ -1,19 +1,43 @@
 <?php
-  if($view['status'] == 'blocked'){
-    echo ("<SCRIPT LANGUAGE='JavaScript'>
-            window.alert('Grup diblokir');
-            window.location.href='".site_url('grup')."';
-          </SCRIPT>");
-  }
+if($view['status'] == 'blocked'){
+  echo ("<SCRIPT LANGUAGE='JavaScript'>
+    window.alert('Grup diblokir');
+    window.location.href='".site_url('grup')."';
+  </SCRIPT>");
+}
 ?>
 <style type="text/css">.myavatar{background-image: url('<?php echo base_url("assets/img/avatar/".$this->session->userdata("avatar"))?>');background-size: cover}</style>
 <script type="text/javascript">
-$(document).ready(function(){ 
+  $(document).ready(function(){ 
   grupStatus();//LOAD LATTEST UPDATES
   setInterval(function(){updatedGrupStatus();},20000);//LOAD LATTEST UPDATES EVERY 20 seconds    
 });
 
-function grupStatus(){
+   //write comment
+  function writecomment(x){ //x=is id status : y = id siswa : z = id guru
+    comment = $('#writecomment'+x).val();
+    <?php if($this->session->userdata('siswa_logged_in')) {
+      $sis = $this->session->userdata('id');
+      $gur = null;
+    } else {
+      $gur = $this->session->userdata('id');
+      $sis = null;
+    }
+    ?>
+    //insert to database
+    $.ajax({
+      url:'<?php echo site_url("all/addcomment");?>?idsiswa=<?php echo $sis;?>&idguru=<?php echo $gur;?>&idpost='+x+'&comment='+comment,
+      success:function(){
+        getCommentById(x);
+      },
+      error:function(){
+        alert('error add comment');
+      },
+    });
+    $('#writecomment'+x).val()='';
+  }
+
+  function grupStatus(){
   $('#top-loader').show();//SHOW LOADING
   $.ajax({
     url:'<?php echo site_url("json/grup_start_status?id=".$view['id_grup'])?>',
@@ -34,12 +58,12 @@ function grupStatus(){
         '<p><small>upload file : <a href="'+n['upload']+'">'+n['uploadname']+'</a></small></p>'+
         '<p>'+
         '<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'> '+n['like']+' </span>'+
-        '<button class="btn btn-default btn-xs"> Lihat Komentar</button>'+
+        '<button onclick=\'getCommentById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
         '</p>'+
         '</div>'+
         '</div>'+     
         '<div class=\'container\'>'+
-        '<div class="comments" name=\''+n['id']+'\'>'        
+        '<div class="comments'+n['id']+'" name=\''+n['id']+'\'>'        
         +'</div>'+//END OF #COMMENTS       
         '</div>'+
         '</div>'+
@@ -79,12 +103,12 @@ function updatedGrupStatus(){
         '<p><small>upload file : <a href="'+n['upload']+'">'+n['uploadname']+'</a></small></p>'+
         '<p>'+
         '<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'> '+n['like']+' </span>'+
-        '<button class="btn btn-default btn-xs"> Lihat Komentar</button>'+
+        '<button onclick=\'getCommentById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
         '</p>'+
         '</div>'+
         '</div>'+     
         '<div class=\'container\'>'+
-        '<div class="comments" name=\''+n['id']+'\'>'        
+        '<div class="comments'+n['id']+'" name=\''+n['id']+'\'>'        
         +'</div>'+//END OF #COMMENTS       
         '</div>'+
         '</div>'+
@@ -124,12 +148,12 @@ function moreGrupStatus(){
         '<p><small>upload file : <a href="'+n['upload']+'">'+n['uploadname']+'</a></small></p>'+
         '<p>'+
         '<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'> '+n['like']+' </span>'+
-        '<button class="btn btn-default btn-xs"> Lihat Komentar</button>'+
+        '<button onclick=\'getCommentById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
         '</p>'+
         '</div>'+
         '</div>'+     
         '<div class=\'container\'>'+
-        '<div class="comments" name=\''+n['id']+'\'>'        
+        '<div class="comments'+n['id']+'" name=\''+n['id']+'\'>'        
         +'</div>'+//END OF #COMMENTS       
         '</div>'+
         '</div>'+
@@ -198,11 +222,11 @@ function moreGrupStatus(){
            <?php //CEK YANG LOGIN 
            if($this->session->userdata('siswa_logged_in')){
             ?>
-              <input name="idsiswa" type="hidden" value="<?php echo $this->session->userdata('id');?>" />
-              <button type="submit" id="btn-newpost">Post</button>  
+            <input name="idsiswa" type="hidden" value="<?php echo $this->session->userdata('id');?>" />
+            <button type="submit" id="btn-newpost">Post</button>  
             <?php } else if($this->session->userdata('guru_logged_in')){?>
-              <input name="idguru" type="hidden" value="<?php echo $this->session->userdata('id');?>"/>
-              <button type="submit" id="btn-newpost">Post</button> 
+            <input name="idguru" type="hidden" value="<?php echo $this->session->userdata('id');?>"/>
+            <button type="submit" id="btn-newpost">Post</button> 
             <?php } ?> <br/><br/>
           </div>
           

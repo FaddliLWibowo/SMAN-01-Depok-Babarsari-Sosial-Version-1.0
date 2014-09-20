@@ -5,7 +5,32 @@
     lattestStatus();//LOAD LATTEST UPDATES
     setInterval(function(){showUpdatedStatus();},20000);//LOAD LATTEST UPDATES EVERY 20 seconds    
   });
-  
+
+  //write comment
+  function writecomment(x){ //x=is id status : y = id siswa : z = id guru
+    comment = $('#writecomment'+x).val();
+    <?php if($this->session->userdata('siswa_logged_in')) {
+      $sis = $this->session->userdata('id');
+      $gur = null;
+    } else {
+      $gur = $this->session->userdata('id');
+      $sis = null;
+    }
+    ?>
+    //insert to database
+    $.ajax({
+      url:'<?php echo site_url("all/addcomment");?>?idsiswa=<?php echo $sis;?>&idguru=<?php echo $gur;?>&idpost='+x+'&comment='+comment,
+      success:function(){
+        getCommentById(x);
+      },
+      error:function(){
+        alert('error add comment');
+      },
+    });
+    $('#writecomment'+x).val()='';
+  }
+
+
 </script>
 
 <section id="padding-top"></section>

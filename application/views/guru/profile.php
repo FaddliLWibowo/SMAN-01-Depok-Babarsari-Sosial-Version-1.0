@@ -5,6 +5,29 @@ $(document).ready(function(){
   profileStatus();//LOAD LATTEST UPDATES
   setInterval(function(){showUpdatedStatusOnProfile();},20000);//LOAD LATTEST UPDATES EVERY 20 seconds    
 });
+ //write comment
+  function writecomment(x){ //x=is id status : y = id siswa : z = id guru
+    comment = $('#writecomment'+x).val();
+    <?php if($this->session->userdata('siswa_logged_in')) {
+      $sis = $this->session->userdata('id');
+      $gur = null;
+    } else {
+      $gur = $this->session->userdata('id');
+      $sis = null;
+    }
+    ?>
+    //insert to database
+    $.ajax({
+      url:'<?php echo site_url("all/addcomment");?>?idsiswa=<?php echo $sis;?>&idguru=<?php echo $gur;?>&idpost='+x+'&comment='+comment,
+      success:function(){
+        getCommentById(x);
+      },
+      error:function(){
+        alert('error add comment');
+      },
+    });
+    $('#writecomment'+x).val()='';
+  }
 //STATUS BY ME OR FOR ME
 function profileStatus(){
   $('#top-loader').show();//SHOW LOADING
@@ -26,18 +49,18 @@ function profileStatus(){
         '<p>'+n['content']+'</p>'+
         '<p>'+
         '<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'>'+n['like']+'</span>'+
-        '<button class="btn btn-default btn-xs"> Lihat Komentar</button>'+
+        '<button onclick=\'getCommentById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
         '</p>'+
         '</div>'+
         '</div>'+     
         '<div class=\'container\'>'+
-        '<div class="comments" name=\''+n['id']+'\'>'
+        '<div class="comments'+n['id']+'" name=\''+n['id']+'\'>'
         
         +'</div>'+//END OF #COMMENTS
         '<div class=\'comment row\'>'+
         '<div class=\'col-md-2\'><img class="myavatar" /></div>'+
         '<div class=\'col-md-10\'>'+
-        '<textarea class=\'form-control\' id=\'comment\' placeholder=\'your comment...\'></textarea>'+
+        '<div class="input-group"><textarea id="writecomment'+n['id']+'" class=\'form-control\' id=\'comment\' placeholder=\'your comment...\'></textarea><span class="input-group-btn"><button class="btn btn-default" onclick="writecomment('+n['id']+')"><span class="glyphicon glyphicon-play"></span></button></span></div>'+
         '</div>'+
         '</div>'+
         '</div>'+
@@ -76,18 +99,18 @@ $.ajax({
       '<p>'+n['content']+'</p>'+
       '<p>'+
       '<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'>'+n['like']+'</span>'+
-      '<button class="btn btn-default btn-xs"> Lihat Komentar</button>'+
+      '<button onclick=\'getCommentById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
       '</p>'+
       '</div>'+
       '</div>'+
       '<div class=\'container\'>'+
-      '<div class="comments" name=\''+n['id']+'\'>'+
+      '<div class="comments'+n['id']+'" name=\''+n['id']+'\'>'+
       
       '</div>'+//END #COMMENTS 
       '<div class=\'comment row\'>'+
       '<div class=\'col-md-2\'><img class="myavatar" /></div>'+
       '<div class=\'col-md-10\'>'+
-      '<textarea class=\'form-control\' id=\'comment\' placeholder=\'your comment...\'></textarea>'+
+      '<div class="input-group"><textarea id="writecomment'+n['id']+'" class=\'form-control\' id=\'comment\' placeholder=\'your comment...\'></textarea><span class="input-group-btn"><button class="btn btn-default" onclick="writecomment('+n['id']+')"><span class="glyphicon glyphicon-play"></span></button></span></div>'+
       '</div>'+
       '</div>'+
       '</div>'+
@@ -126,18 +149,18 @@ function showMoreStatusOnProfile(){
         '<p>'+n['content']+'</p>'+
         '<p>'+
         '<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'>'+n['like']+'</span>'+
-        '<button class="btn btn-default btn-xs"> Lihat Komentar</button>'+
+        '<button onclick=\'getCommentById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
         '</p>'+
         '</div>'+
         '</div>'+
         '<div class=\'container\'>'+
-        '<div class="comments" name=\''+n['id']+'\'>'+
+        '<div class="comments'+n['id']+'" name=\''+n['id']+'\'>'+
         
         '</div>'+//end of #comments
         '<div class=\'comment row\'>'+
         '<div class=\'col-md-2\'><img class="myavatar" /></div>'+
         '<div class=\'col-md-10\'>'+
-        '<textarea class=\'form-control\' id=\'comment\' placeholder=\'your comment...\'></textarea>'+
+        '<div class="input-group"><textarea id="writecomment'+n['id']+'" class=\'form-control\' id=\'comment\' placeholder=\'your comment...\'></textarea><span class="input-group-btn"><button class="btn btn-default" onclick="writecomment('+n['id']+')"><span class="glyphicon glyphicon-play"></span></button></span></div>'+
         '</div>'+
         '</div>'+
         '</div>'+
