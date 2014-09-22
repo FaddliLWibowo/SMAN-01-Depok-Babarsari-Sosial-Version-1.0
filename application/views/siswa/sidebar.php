@@ -37,7 +37,7 @@
     </div>
     <div id="jadwal" class="panel-collapse collapse">
       <div class="panel-body">
-       isi menu
+       <?php $this->load->view('siswa/menu/pelajaran')?>
      </div>
    </div>
  </div>

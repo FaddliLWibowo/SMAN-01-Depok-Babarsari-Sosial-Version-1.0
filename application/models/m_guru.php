@@ -1,7 +1,7 @@
 <?php
 
 class m_guru extends CI_Model{
-	//TES LOGIN UNTUK SISWA
+	//TES LOGIN UNTUK guru
 	public function can_log_in($nip, $password){
 		//membuat perintah sql dengan menggunakan fungsi bawaan ci
         //untuk perintah SELECT
@@ -22,6 +22,16 @@ class m_guru extends CI_Model{
     /*
     * ALL ABOUT STATUS
     */
+    //SEMUA PESAN BERDASAR NIP
+    public function semuapesan($penerima){
+        $sql = "SELECT pesan.id_pesan AS 'id', pesan.pengirim AS 'pengirim',pesan.penerima AS 'penerima', pesan.isi AS 'isi',pesan.waktu AS 'waktu' FROM (SELECT * FROM pesan WHERE penerima=? ORDER BY id_pesan DESC) AS pesan GROUP BY pesan.pengirim";
+        $result = $this->db->query($sql, array($penerima,$penerima));
+        if($result->num_rows()>0){
+            return $result->result_array();
+        }else{
+            return array();
+        }
+    }
     //STATUS RES/DES by id guru
     public function profile_timeline($id){
         $this->db->where('id_guru',$id);//IF RESOURCE = $id
@@ -112,7 +122,7 @@ class m_guru extends CI_Model{
     */
     public function guru_ajar($idguru){//GURU + SUBCLASS + MATA PELAJARAN
         $sql = "SELECT mengajar.id_mengajar AS 'ajar', guru.nama_lengkap AS 'nama',kelas.id_kelas AS 'id_kelas',kelas.nama_kelas AS 'kelas',subkelas.nama AS 'subkelas',
-        matapelajaran.id_matapelajaran AS 'id_matapelajaran', matapelajaran.matapelajaran AS 'matapelajaran' 
+        matapelajaran.id_matapelajaran AS 'id_matapelajaran', matapelajaran.matapelajaran AS 'matapelajaran',mengajar.hari AS 'hari',mengajar.jam_mulai AS 'mulai',mengajar.jam_selesai AS 'selesai' 
         FROM mengajar 
         LEFT JOIN guru ON guru.id=mengajar.id_guru
         LEFT JOIN matapelajaran ON matapelajaran.id_matapelajaran=mengajar.id_matapelajaran
@@ -122,6 +132,19 @@ class m_guru extends CI_Model{
         ";
         $query = $this->db->query($sql,$idguru);
         if($query->num_rows()>0){return $query->result_array();}else{return array();}
+    }
+    public function ajar($idajar){//GURU + SUBCLASS + MATA PELAJARAN
+        $sql = "SELECT mengajar.id_mengajar AS 'ajar', guru.nama_lengkap AS 'nama',kelas.id_kelas AS 'id_kelas',kelas.nama_kelas AS 'kelas',mengajar.id_subkelas AS 'id_subkelas',subkelas.nama AS 'subkelas',
+        matapelajaran.id_matapelajaran AS 'id_matapelajaran', matapelajaran.matapelajaran AS 'matapelajaran',mengajar.hari AS 'hari',mengajar.jam_mulai AS 'mulai',mengajar.jam_selesai AS 'selesai' 
+        FROM mengajar 
+        LEFT JOIN guru ON guru.id=mengajar.id_guru
+        LEFT JOIN matapelajaran ON matapelajaran.id_matapelajaran=mengajar.id_matapelajaran
+        LEFT JOIN subkelas ON mengajar.id_subkelas=subkelas.id_subkelas
+        LEFT JOIN kelas ON subkelas.kelas = kelas.id_kelas 
+        WHERE mengajar.id_mengajar=?;
+        ";
+        $query = $this->db->query($sql,$idajar);
+        if($query->num_rows()>0){return $query->row_array();}else{return array();}
     }
     //MATERI BY GURU
     public function mymateri($nexus){
@@ -150,6 +173,18 @@ class m_guru extends CI_Model{
     }
 
     /*ALL ABOUT GROUP*/
+    //SHOW JOINED GROUp
+    public function joined_grup($params){//idguru-idguru-limit-offset
+        $sql = "SELECT grup.nama_grup AS 'nama', grup.id_grup AS 'idgrup'
+        FROM grup INNER JOIN grup_anggota ON grup_anggota.id_grup = grup.id_grup 
+        WHERE grup.admin_guru = ? OR grup_anggota.id_guru = ?  ORDER BY grup_anggota.joindate ASC LIMIT ?,?";
+        $query = $this->db->query($sql,$params);
+        if($query->num_rows>0){
+            return $query->result_array();
+        }else {
+            return array();
+        }
+    }
     //BTN JOIN GRUP
     public function btn_join_grup($x,$y){
         $this->db->set('id_grup',$x);
@@ -169,13 +204,29 @@ class m_guru extends CI_Model{
         } else {return false;} //NOT ADMIN
     }
     //BTN UNJOIN GRUP
-    public function btn_unjoin_grup($params){ //X = grup | Y = siswa
+    public function btn_unjoin_grup($params){ //X = grup | Y = guru
         $this->db->where('id_grup',$params[0]);
         $this->db->where('id_guru',$params[1]);
         if($this->db->delete('grup_anggota')){
             return true;
         } else {
             return false;
+        }
+    }
+    //jadwal saya
+    public function mengajar($id){//id guru
+        $sql = "SELECT mengajar.id_guru AS  'guru', kelas.nama_kelas AS  'kelas', subkelas.nama AS  'subkelas', matapelajaran.matapelajaran AS  'mapel', mengajar.hari AS 'hari', mengajar.jam_mulai AS  'mulai', mengajar.jam_selesai AS  'selesai'
+        FROM mengajar
+        INNER JOIN guru ON mengajar.id_guru = guru.id
+        INNER JOIN matapelajaran ON matapelajaran.id_matapelajaran = mengajar.id_matapelajaran
+        INNER JOIN subkelas ON subkelas.id_subkelas = mengajar.id_subkelas
+        INNER JOIN kelas ON kelas.id_kelas = subkelas.kelas
+        WHERE mengajar.id_guru = ?";
+        $query = $this->db->query($sql,$id);
+        if($query->num_rows()>0){
+            return $query->result_array();
+        } else {
+            return array();
         }
     }
 

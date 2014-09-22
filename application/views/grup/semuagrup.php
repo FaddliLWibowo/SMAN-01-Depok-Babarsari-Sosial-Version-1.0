@@ -40,6 +40,7 @@
                   <h6>Jika nama sesuai dengan kebijakan, maka grup dapat dibuat</h6>
                   <label>Nama Grup :</label><input onkeyup="groupNameValidation()" class="form-control" id="txtGroupName" name="txtGroupName" type="text" placeholder="Nama Grup" required/><br/>
                   <div id="showadd"></div>
+                </form>
               </div>
             </div><!-- /.modal-content -->
           </div><!-- /.modal-dialog -->

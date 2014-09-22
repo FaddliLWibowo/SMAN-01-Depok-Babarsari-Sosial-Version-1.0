@@ -99,7 +99,7 @@ class grup extends base{
       //upload file management
       if(!empty($_FILES['upload']['name'])) { //if upload file
         $this->load->library('upload');
-        $filename = str_replace(' ', '-', $upload['name']);
+        $filename = str_replace(' ', '_', $upload['name']);
         $config['upload_path'] = './assets/upload/';
         $config['allowed_types'] = 'docx|doc|odt|ods|xls|xlsx|txt|pdf';
         $config['overwrite'] = true;

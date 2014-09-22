@@ -191,7 +191,9 @@ function updateStatus(x,y,z,a,b,c){ //X= ID_SISWA,y = ID_GURU,Z = ID_GRUP | a = 
 	});
                 //$('#newpost').val() = '';//EMPTY STATUS TEXTAREA
 		$('#top-loader').hide();//SHOW LOADING
-	}	
+		$('#newpost').val() = ' ';
+	}
+
 }
 
 //DELETE MY STATUS
@@ -209,9 +211,9 @@ function getCommentById(x){ //COMMENT BY ID STATUS
 		dataType:'json',
 		url:'http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/index.php/json/show_comment_by_id?id='+x,
 		timeout: 50000,//50000MS
-		success:function(data){ //SUCCESS INSERT TO DB
-			$('.comments'+x).html();
+		success:function(data){ //SUCCESS INSERT TO DB			
 			//alert(x);
+			$('.comments'+x).html('<div></div>');
 			$.each(data['result'], function(i,n){//LOPPING COMMENTS
 				comment = '<div class=\'comment row\'>'+
 				'<div class=\'col-md-2\'>'+            
@@ -224,8 +226,7 @@ function getCommentById(x){ //COMMENT BY ID STATUS
 				'</div>';
 				comment = comment+'';
 				$('.comments'+x).append(comment);							
-			});		
-							
+			});								
 		},
 		error:function(){
 			alert('Tidak ada komentar');

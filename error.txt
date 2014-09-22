@@ -1,0 +1,9 @@
+1. like status [fixed][checked]
+2. tampilan komentar looping [fixed]
+3. post status guru [fixed]
+4. tampilan pesan belom bisa [fixed]
+5. file tidak ditemukan di post group [fixed]
+6. jadwal pelajaran : 
+7. jadwal mengajar : tambah kolom hari 
+8. gabisa tambah komentar di guru/timeline [fixed]
+9. Sidebar grup guru [fixed]

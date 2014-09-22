@@ -169,4 +169,20 @@ class m_siswa extends CI_Model{
             return false;
         }
     }
+     //jadwal saya
+        public function pelajaran($subkelas){//id guru
+        $sql = "SELECT guru.nama_lengkap AS 'guru',  kelas.nama_kelas AS  'kelas', subkelas.nama AS  'subkelas', matapelajaran.matapelajaran AS  'mapel', mengajar.hari AS 'hari', mengajar.jam_mulai AS  'mulai', mengajar.jam_selesai AS  'selesai'
+        FROM mengajar
+        INNER JOIN guru ON mengajar.id_guru = guru.id
+        INNER JOIN matapelajaran ON matapelajaran.id_matapelajaran = mengajar.id_matapelajaran
+        INNER JOIN subkelas ON subkelas.id_subkelas = mengajar.id_subkelas
+        INNER JOIN kelas ON kelas.id_kelas = subkelas.kelas
+        WHERE mengajar.id_subkelas = ?";
+        $query = $this->db->query($sql,$subkelas);
+        if($query->num_rows()>0){
+            return $query->result_array();
+        } else {
+            return array();
+        }
+    }
 }

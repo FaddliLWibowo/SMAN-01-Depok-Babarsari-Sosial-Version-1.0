@@ -229,9 +229,36 @@ class admin extends base{
 				$idguru = $this->input->post('guru');
 				$subkelas = $this->input->post('subkelas');
 				$matapelajaran = $this->input->post('matapelajaran');
-				$params = array('id_guru'=>$idguru,'id_subkelas'=>$subkelas,'id_matapelajaran'=>$matapelajaran);
+				$hari = $this->input->post('hari');
+				$mulai = $this->input->post('mulai');
+				$selesai = $this->input->post('selesai');
+				$params = array('id_guru'=>$idguru,'id_subkelas'=>$subkelas,'id_matapelajaran'=>$matapelajaran, 'hari'=>$hari,'jam_mulai'=>$mulai,'jam_selesai'=>$selesai);
 				$this->db->insert('mengajar',$params);
 				redirect('admin/guru?act=edit&id='.$idguru);
+			break;
+
+			case 'editajar':
+				$data['title'] = 'Edit Jadwal Ajar';
+				$idajar = $this->input->get('idajar');
+				$data['id_guru'] = $this->input->get('guru');
+				$data['id_ajar'] = $idajar;
+				$data['ajar'] = $this->m_guru->ajar($idajar);
+				$this->defaultdisplay('admin/editajarmakul',$data);
+			break;
+
+			case 'updateajar':
+				$id_guru = $this->input->get('idguru');
+				$id_ajar = $this->input->get('idajar');
+				$subkelas = $this->input->post('subkelas');
+				$matapelajaran = $this->input->post('matapelajaran');
+				$hari = $this->input->post('hari');
+				$mulai = $this->input->post('mulai');
+				$selesai = $this->input->post('selesai');
+				$data = array('id_mengajar'=>$id_ajar,'id_subkelas'=>$subkelas,
+					'id_matapelajaran'=>$matapelajaran,'hari'=>$hari,'jam_mulai'=>$mulai,'jam_selesai'=>$selesai);
+				$this->db->where('id_mengajar', $id_ajar);
+				$this->db->update('mengajar', $data);
+				redirect('admin/guru?act=edit&id='.$id_guru); 
 			break;
 
 			case 'deleteajar':

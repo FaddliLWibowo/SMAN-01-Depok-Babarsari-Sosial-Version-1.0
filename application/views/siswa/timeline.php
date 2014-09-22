@@ -17,6 +17,7 @@
       $sis = null;
     }
     ?>
+    $('.comments'+x).html();
     //insert to database
     $.ajax({
       url:'<?php echo site_url("all/addcomment");?>?idsiswa=<?php echo $sis;?>&idguru=<?php echo $gur;?>&idpost='+x+'&comment='+comment,

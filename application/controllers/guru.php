@@ -18,6 +18,16 @@ class guru extends base{
 		$data['script'] = "$(document).ready(function(){document.getElementById('home').className='active';});";
 		$this->defaultdisplay('guru/timeline',$data);
 	}
+	//MENAMPILKAN SEMUA PESAN
+	public function messages(){
+		$this->teacher_login();
+		$data['title'] = 'Pesan | ';
+		$data['script'] = "$(document).ready(function(){document.getElementById('home').className='active';});";
+		$nip = $this->session->userdata('nip');
+		$data['messages'] = $this->m_guru->semuapesan($nip);
+		$this->defaultdisplay('siswa/messages',$data);
+
+	}
 	//GURU PROFILE
 	public function profile(){
 		$nip = $this->uri->segment(3);

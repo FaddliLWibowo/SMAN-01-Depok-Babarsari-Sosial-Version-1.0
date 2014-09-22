@@ -97,20 +97,29 @@ if(isset($script)){
 				<a data-toggle="modal" href="#addmengajar" class="btn btn-primary">+ Add Mengajar</a>
 				<br/><br/>
 				<table class="table table-striped">
-					<tr>
+					<!-- <tr>
 						<td><strong>No.</strong></td>
 						<td><strong>Kelas</strong></td>
 						<td><strong>SubKelas</strong></td>
 						<td><strong>Mata Pelajaran</strong></td>
+						<td><strong>Hari</strong><td>
+						<td><strong>Mulai</strong><td>
+						<td><strong>Selesai</strong><td>
 						<td></td>
-					</tr>
+					</tr> -->
 					<?php $n=1;foreach($ajar as $a):?>
 					<tr>
 						<td><?php echo $n;?></td>
 						<td><?php echo $a['kelas'];?></td>
 						<td><?php echo $a['subkelas'];?></td>
 						<td><?php echo $a['matapelajaran'];?></td>
-						<td><a class="btn btn-default" onclick="return confirm('Anda Yakin')" href="<?php echo site_url('admin/guru?act=deleteajar&idajar='.$a['ajar'].'&guru='.$profile['id'])?>"><span class="glyphicon glyphicon-trash"></span></a></td>
+						<td><?php echo $a['hari'];?></td>
+						<td><?php echo $a['mulai'];?></td>
+						<td><?php echo $a['selesai'];?></td>
+						<td>
+						<a class="btn btn-default" onclick="return confirm('Anda Yakin')" href="<?php echo site_url('admin/guru?act=editajar&idajar='.$a['ajar'].'&guru='.$profile['id'])?>"><span class="glyphicon glyphicon-pencil"></span></a>
+						<a class="btn btn-default" onclick="return confirm('Anda Yakin')" href="<?php echo site_url('admin/guru?act=deleteajar&idajar='.$a['ajar'].'&guru='.$profile['id'])?>"><span class="glyphicon glyphicon-trash"></span></a>
+						</td>
 					</tr>
 					<?php $n++;endforeach;?>
 				</table>
@@ -154,6 +163,22 @@ if(isset($script)){
 											?>
 										</select>
 									</div>										
+									<div class="form-group">
+										<select class="form-control" name="hari">
+											<option value="senin">senin</option>
+											<option value="selasa">selasa</option>
+											<option value="rabu">rabu</option>
+											<option value="kamis">kamis</option>
+											<option value="jumat">jum'at</option>
+											<option value="sabtu">sabtu</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<input class="form-control" type="text" name="mulai" placeholder="mulai:08:00:00"/>
+									</div>
+									<div class="form-group">
+										<input class="form-control" type="text" name="selesai" placeholder="selesai:08:00:00"/>
+									</div>
 									<button type="submit" class="btn btn-primary">+ Tambah</button>
 								</form>
 							</div>							

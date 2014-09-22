@@ -135,7 +135,6 @@ class all extends base{
 	public function addlike(){
 		$idstatus = $this->input->get('idpost');
 		//update table
-		$
 		$sql = "UPDATE status SET likes = likes + 1 WHERE id_status = ?";
 		return $this->db->query($sql,$idstatus);
 	}
@@ -167,7 +166,7 @@ class all extends base{
 			echo ' <label>Deskripsi Grup : </label><textarea class="form-control" name="txtGroupDetail" placeholder="About Group" required></textarea><br/>
                   <label> Cover Grup : </label><input class="form-control" type="file" name="fileGroup" required><br/>
                   <button class="btn btn-default" type="submit" >Create Group</button><br/>
-                </form>';
+               ';
 		}else{//keyword not match
 			echo 'Nama Tidak Diperbolehkan';
 		}
