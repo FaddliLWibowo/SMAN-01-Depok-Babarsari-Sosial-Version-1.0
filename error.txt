@@ -10,5 +10,6 @@
 
 ------------------------------------
 
-hapus ajax search materi, soal, search guru
+hapus ajax search materi, soal, search guru (fixed)
 kelas waktu ambil materi/nilai/soal
+

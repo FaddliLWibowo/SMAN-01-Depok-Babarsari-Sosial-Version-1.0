@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 23, 2014 at 02:18 
+-- Generation Time: Sep 23, 2014 at 02:06 
 -- Server version: 5.6.12
 -- PHP Version: 5.5.3
 
@@ -243,7 +243,7 @@ CREATE TABLE IF NOT EXISTS `matapelajaran` (
   `id_matapelajaran` int(11) NOT NULL AUTO_INCREMENT,
   `matapelajaran` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_matapelajaran`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `matapelajaran`
@@ -251,9 +251,9 @@ CREATE TABLE IF NOT EXISTS `matapelajaran` (
 
 INSERT INTO `matapelajaran` (`id_matapelajaran`, `matapelajaran`) VALUES
 (1, 'Pendidikan Kewarganegaraan (PKn)'),
-(2, 'PKN'),
 (3, 'Kimia A'),
-(5, 'xxxx');
+(5, 'xxxx'),
+(6, 'Pendidikan Kewarganegaraan 2 (PKN 2)');
 
 -- --------------------------------------------------------
 
@@ -303,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `mengajar` (
   KEY `id_guru` (`id_guru`),
   KEY `id_subkelas` (`id_subkelas`),
   KEY `id_matapelajaran` (`id_matapelajaran`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `mengajar`
@@ -311,11 +311,12 @@ CREATE TABLE IF NOT EXISTS `mengajar` (
 
 INSERT INTO `mengajar` (`id_mengajar`, `id_guru`, `id_subkelas`, `id_matapelajaran`, `hari`, `jam_mulai`, `jam_selesai`) VALUES
 (1, 1, 1, 1, 'senin', '10:00:00', '11:16:00'),
-(3, 2, 1, 3, 'senin', '00:00:00', '00:00:00'),
+(3, 2, 1, 3, 'senin', '07:00:00', '08:05:00'),
 (4, 1, 2, 1, 'senin', '00:00:00', '00:00:00'),
-(7, 1, 3, 1, 'senin', '00:00:00', '00:00:00'),
+(7, 1, 3, 6, 'senin', '00:00:00', '00:00:00'),
 (8, 3, 1, 3, 'senin', '00:00:00', '00:00:00'),
-(9, 1, 9, 1, 'selasa', '00:00:00', '00:00:00');
+(9, 1, 9, 6, 'selasa', '00:00:00', '00:00:00'),
+(10, 2, 4, 3, 'senin', '10:00:00', '11:15:00');
 
 -- --------------------------------------------------------
 
@@ -335,15 +336,15 @@ CREATE TABLE IF NOT EXISTS `nilai` (
   KEY `id_kelas` (`id_kelas`),
   KEY `id_guru` (`id_guru`),
   KEY `id_matapelajaran` (`id_matapelajaran`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `nilai`
 --
 
 INSERT INTO `nilai` (`id_nilai`, `id_matapelajaran`, `id_guru`, `id_kelas`, `judul`, `link`, `tahun`) VALUES
-(3, 1, 1, 1, 'nilai PKN', 'A-&-I--Menggunakan-Git-di-Linux.html', '2014'),
-(5, 1, 1, 1, 'Nilai PKN minggu 2', 'Generating-SSH-Keys-?-GitHub-Help.pdf', '2014');
+(7, 1, 1, 1, 'Nilai PKN minggu 2', 'Inkscape_Tutorial_-_Perspective_Transforms___Built_to_Spec.pdf', '2014'),
+(8, 1, 1, 1, 'nilai kelas 10A', 'Dan_Dar3__Android_SDK_Tools_on_Ubuntu_14.pdf', '2014');
 
 -- --------------------------------------------------------
 
@@ -418,7 +419,7 @@ CREATE TABLE IF NOT EXISTS `siswa` (
 --
 
 INSERT INTO `siswa` (`id`, `angkatan`, `nama_lengkap`, `subkelas1`, `subkelas2`, `subkelas3`, `alamat`, `status`, `nis`, `password`, `moto`, `avatar`, `email`, `telp`, `kelamin`) VALUES
-(8, 2014, 'Clara Primadewi', 3, NULL, NULL, 'Jalan begalan 45 Sumedang', 'aktif', '8208', 'ac43724f16e9241d990427ab7c8f4228', 'Hidup adalah perjuangan', 'LiSA.jpg', 'clara-pd@gmail.com', '...', 'perempuan'),
+(8, 2014, 'Clara Primadewi', 3, 4, 12, 'Jalan begalan 45 Sumedang', 'aktif', '8208', 'ac43724f16e9241d990427ab7c8f4228', 'Hidup adalah perjuangan', 'LiSA.jpg', 'clara-pd@gmail.com', '...', 'perempuan'),
 (9, 2014, 'Ervita Raihanah Aprilia', 3, NULL, NULL, '', 'aktif', '8222', 'ac43724f16e9241d990427ab7c8f4228', 'Jangan boros', '', 'ervitamax@live.com', '...', 'perempuan'),
 (11, 2011, 'xxx', NULL, NULL, NULL, '', 'aktif', '8223', '3e91970f771a2c473ae36b60d1146068', '', '', '...', '...', 'laki-laki');
 
@@ -440,7 +441,7 @@ CREATE TABLE IF NOT EXISTS `soal` (
   KEY `id_kelas` (`id_kelas`),
   KEY `id_guru` (`id_guru`),
   KEY `id_matapelajaran` (`id_matapelajaran`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `soal`
@@ -448,7 +449,7 @@ CREATE TABLE IF NOT EXISTS `soal` (
 
 INSERT INTO `soal` (`id_soal`, `id_matapelajaran`, `id_guru`, `id_kelas`, `judul`, `link`, `tahun`) VALUES
 (2, 3, 1, 1, 'Soal latihan tanah dan plastik', 'tanah-dan-plastik.pdf', '2014'),
-(3, 1, 1, 1, 'soal PKN', 'A-&-I--Menggunakan-Git-di-Linux.html', '2014');
+(5, 1, 1, 1, 'soal hari ke2', 'tenses.pdf', '2014');
 
 -- --------------------------------------------------------
 
@@ -476,7 +477,7 @@ CREATE TABLE IF NOT EXISTS `status` (
   KEY `id_grup_2` (`id_grup`),
   KEY `on_id_siswa` (`on_id_siswa`,`on_id_guru`,`on_id_grup`),
   KEY `on_id_guru` (`on_id_guru`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=88 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=90 ;
 
 --
 -- Dumping data for table `status`
@@ -492,13 +493,14 @@ INSERT INTO `status` (`id_status`, `file`, `isi_status`, `tag`, `id_siswa`, `id_
 (73, 'jawaban-ujian.txt', 'Ini jawaban saya, tolong dikoreksi', NULL, 8, NULL, NULL, '2014-09-14 14:30:04', 0, NULL, NULL, 4, 0),
 (74, NULL, 'Apakah grup ini sehat', NULL, 8, NULL, NULL, '2014-09-14 14:31:30', 0, NULL, NULL, 7, 0),
 (79, NULL, 'bisa', NULL, 8, NULL, NULL, '2014-09-19 14:41:06', 0, NULL, NULL, 4, 3),
-(80, 'tenses.pdf', 'ini buat latihan dirumah yak ::::', NULL, NULL, 1, NULL, '2014-09-19 14:48:28', 0, NULL, NULL, 4, 2),
+(80, 'tenses.pdf', 'ini buat latihan dirumah yak ::::', NULL, NULL, 1, NULL, '2014-09-23 07:28:49', 0, NULL, NULL, 4, 3),
 (81, NULL, 'siap untuk permulaan', NULL, 9, NULL, NULL, '2014-09-15 01:20:15', 0, NULL, NULL, 4, 0),
 (82, NULL, 'status kematian', NULL, 8, NULL, NULL, '2014-09-22 02:14:10', 1, 8, NULL, NULL, 6),
 (84, NULL, 'makan', NULL, NULL, 3, NULL, '2014-09-22 02:50:55', 1, NULL, 3, NULL, 1),
 (85, 'pembayaran_spp_variabel.pdf', 'ini upload saya', NULL, NULL, 3, NULL, '2014-09-22 03:22:55', 0, NULL, NULL, 4, 0),
 (86, NULL, 'kemampuan', NULL, NULL, 3, NULL, '2014-09-22 03:48:41', 1, NULL, 3, NULL, 0),
-(87, NULL, 'inilah status saya hari ini...', NULL, NULL, 3, NULL, '2014-09-22 03:49:27', 1, NULL, 3, NULL, 0);
+(87, NULL, 'inilah status saya hari ini...', NULL, NULL, 3, NULL, '2014-09-22 03:49:27', 1, NULL, 3, NULL, 0),
+(89, NULL, 'apakah bisa kirim bapak', NULL, 8, NULL, NULL, '2014-09-23 03:14:10', 1, NULL, 1, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -517,7 +519,7 @@ CREATE TABLE IF NOT EXISTS `status_komentar` (
   KEY `id_siswa` (`id_siswa`),
   KEY `id_status` (`id_status`),
   KEY `id_guru` (`id_guru`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `status_komentar`
@@ -534,7 +536,9 @@ INSERT INTO `status_komentar` (`id_komentar`, `id_status`, `id_siswa`, `id_guru`
 (8, 82, 8, NULL, 'buset2', '2014-09-20 12:11:15'),
 (11, 56, 8, NULL, 'itotito', '2014-09-20 12:19:02'),
 (12, 84, NULL, 3, 'siap pak yussan', '2014-09-22 02:52:51'),
-(15, 84, NULL, 3, 'makan apakah', '2014-09-22 03:58:13');
+(15, 84, NULL, 3, 'makan apakah', '2014-09-22 03:58:13'),
+(16, 85, 8, NULL, 'terimakasih', '2014-09-23 07:28:19'),
+(17, 80, 8, NULL, 'sudah dikerjakan', '2014-09-23 07:28:38');
 
 -- --------------------------------------------------------
 
@@ -548,7 +552,7 @@ CREATE TABLE IF NOT EXISTS `subkelas` (
   `nama` char(1) NOT NULL,
   PRIMARY KEY (`id_subkelas`),
   KEY `kelas` (`kelas`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `subkelas`
@@ -565,7 +569,14 @@ INSERT INTO `subkelas` (`id_subkelas`, `kelas`, `nama`) VALUES
 (9, 5, '1'),
 (10, 2, '3'),
 (11, 4, '1'),
-(12, 4, '2');
+(12, 4, '2'),
+(13, 3, '3'),
+(14, 4, '3'),
+(15, 5, '2'),
+(16, 5, '3'),
+(17, 1, 'D'),
+(18, 1, 'E'),
+(19, 1, 'F');
 
 -- --------------------------------------------------------
 

@@ -2,41 +2,19 @@
 	$(function() { //SET DEFAULT SUBKATEGORI
 		var status = '<?php echo $profile['status']?>';
 		$('#status').val(status);
-	});
-
-	function subkelas10(){
-		$('#subkelas').html();
-		$('#subkelas').show();
-		$('#subkelas').html('loading subkelas...');
-		var idkelas = $('#kelas').val();
-		$.ajax({
-			url:'<?php echo site_url("admin/siswa?act=ajaxsubkelas&idkelas=")?>'+idkelas,
-			success:function(data){
-				$('#subkelas').html();
-				$('#subkelas').html(data);
-			},
-			error:function(data){
-				alert(data);
-			}
-		});
-	}
-
-	function subkelas11(){
-		$('#subkelas').html();
-		$('#subkelas').show();
-		$('#subkelas').html('loading subkelas...');
-		var idkelas = $('#kelas').val();
-		$.ajax({
-			url:'<?php echo site_url("admin/siswa?act=ajaxsubkelas&idkelas=")?>'+idkelas,
-			success:function(data){
-				$('#subkelas').html();
-				$('#subkelas').html(data);
-			},
-			error:function(data){
-				alert(data);
-			}
-		});
-	}
+		<?php if(!empty($profile['subkelas1'])){ ?>
+			var subkelas10 = '<?php echo $profile['subkelas1']?>';
+			$('#subkelas10').val(subkelas10);
+			<?php } ?>
+			<?php if(!empty($profile['subkelas2'])){ ?>
+				var subkelas11 = '<?php echo $profile['subkelas2']?>';
+				$('#subkelas11').val(subkelas11);
+				<?php } ?>
+				<?php if(!empty($profile['subkelas3'])){ ?>
+					var subkelas12 = '<?php echo $profile['subkelas3']?>';
+					$('#subkelas12').val(subkelas12);
+					<?php } ?>
+				});	
 </script>
 <section id="padding-top"></section>
 <?php 
@@ -77,60 +55,45 @@ if(isset($script)){
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-lg-2 control-label">Kelas 10</label>
-						<div class="col-lg-2">
-							<select class="form-control" id="kelas10" name="kelas10">
-								<option>Kelas 10</option>
-								<?php foreach($kelas as $k):
-									echo '<option value="'.$k['id_kelas'].'">'.$k['nama_kelas'].'</option>';
-								endforeach;?>
-							</select>							
-						</div>
+						<label class="col-lg-2 control-label">Kelas 10</label>						
 						<div class="col-lg-2">
 							<select class="form-control" id="subkelas10" name="subkelas10">
-								<option>Sub Kelas 10</option>
-								<?php foreach($kelas as $k):
-									echo '<option value="'.$k['id_kelas'].'">'.$k['nama_kelas'].'</option>';
-								endforeach;?>
+								<option value="">Pilih Subkelas</option>
+								<option value="1">Kelas 10 A</option>
+								<option value="2">Kelas 10 B</option>
+								<option value="3">Kelas 10 C</option>
+								<option value="17">Kelas 10 D</option>
+								<option value="18">Kelas 10 E</option>
+								<option value="19">Kelas 10 F</option>								
 							</select>							
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-lg-2 control-label">Kelas 11</label>
-						<div class="col-lg-2">
-							<select class="form-control" id="kelas11" name="kelas11">
-								<option >Kelas 11</option>
-								<?php foreach($kelas as $k):
-									echo '<option value="'.$k['id_kelas'].'">'.$k['nama_kelas'].'</option>';
-								endforeach;?>
-							</select>							
-						</div>
+						<label class="col-lg-2 control-label">Kelas 11</label>						
 						<div class="col-lg-2">
 							<select class="form-control" id="subkelas11" name="subkelas11">
-								<option >Sub Kelas 11</option>
-								<?php foreach($kelas as $k):
-									echo '<option value="'.$k['id_kelas'].'">'.$k['nama_kelas'].'</option>';
-								endforeach;?>
+								<option value="">Pilih Subkelas</option>
+								<option value="4">Kelas 11 IPA 1</option>
+								<option value="5">Kelas 11 IPA 2</option>
+								<option value="10">Kelas 11 IPA 3</option>
+								<option value="6">Kelas 11 IPS 1</option>
+								<option value="7">Kelas 11 IPS 2</option>
+								<option value="13">Kelas 11 IPS 3</option>
 							</select>							
 						</div>
 					</div>		
 					<div class="form-group">
-						<label class="col-lg-2 control-label">Kelas 12</label>
-						<div class="col-lg-2">
-							<select class="form-control" id="kelas12" name="kelas12">
-								<option>Kelas 12</option>
-								<?php foreach($kelas as $k):
-									echo '<option value="'.$k['id_kelas'].'">'.$k['nama_kelas'].'</option>';
-								endforeach;?>
-							</select>							
-						</div>
+						<label class="col-lg-2 control-label">Kelas 12</label>						
 						<div class="col-lg-2">
 							<select class="form-control" id="subkelas12" name="subkelas12">
-								<option >Sub Kelas 11</option>
-								<?php foreach($kelas as $k):
-									echo '<option value="'.$k['id_kelas'].'">'.$k['nama_kelas'].'</option>';
-								endforeach;?>
-							</select>							
+								<option value="">Pilih Subkelas</option>
+								<option value="11">Kelas 12 IPA 1</option>
+								<option value="12">Kelas 12 IPA 2</option>
+								<option value="14">Kelas 12 IPA 3</option>
+								<option value="9">Kelas 12 IPS 2</option>
+								<option value="15">Kelas 12 IPS 2</option>
+								<option value="16">Kelas 12 IPS 3</option>
+							</select>						
 						</div>
 					</div>	
 					<div class="form-group">
@@ -155,6 +118,7 @@ if(isset($script)){
 						<label class="col-lg-2 control-label">Status</label>
 						<div class="col-lg-5">
 							<select id="status" class="form-control" name="status">
+								<option>Status</option>
 								<option value="aktif">Aktif</option>	
 								<option value="nonaktif">NonAktif</option>	
 							</select>

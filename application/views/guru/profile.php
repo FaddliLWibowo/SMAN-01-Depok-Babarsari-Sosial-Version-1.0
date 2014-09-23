@@ -405,7 +405,7 @@ function nilaiGuru(){
                             <select class="form-control input-sm" name="slcKelas">
                               <option>Kelas</option>
                               <?php foreach($mengajar as $k):
-                              echo '<option value="'.$k['id_kelas'].'">'.$k['kelas'].'</option>';
+                              echo '<option value="'.$k['id_kelas'].'">'.$k['kelas'].' </option>';
                               endforeach;?>
                             </select>
                           </div>
@@ -473,7 +473,7 @@ function nilaiGuru(){
                               <select class="form-control input-sm" name="slcKelas">
                                 <option>Kelas</option>
                                 <?php foreach($mengajar as $k):
-                                echo '<option value="'.$k['id_kelas'].'">'.$k['kelas'].'</option>';
+                                echo '<option value="'.$k['id_kelas'].'">'.$k['kelas'].'  </option>';
                                 endforeach;?>
                               </select>
                             </div>
@@ -503,7 +503,7 @@ function nilaiGuru(){
                       <select id="inputKelas" class="input-sm form-control" name="kelas" required>
                         <option>Kelas</option>
                         <?php foreach($mengajar as $k):
-                        echo '<option value="'.$k['id_kelas'].'">'.$k['kelas'].'</option>';
+                        echo '<option value="'.$k['id_kelas'].'">'.$k['kelas'].' </option>';
                         endforeach;
                         ?>
                       </select></div>

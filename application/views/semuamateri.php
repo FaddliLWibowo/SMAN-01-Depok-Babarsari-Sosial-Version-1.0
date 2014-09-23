@@ -1,12 +1,11 @@
 <script type="text/javascript">
   function materiSorter(){
-    if($('#txtguru').val()==''){//TXT GURU EMPTY
-      $('#loader-sorter').hide();
-    } else {//TXT GURU NOT EMPTY
-      $('#loader-sorter').show();
-      //AJAX START
-    }
-    
+    // if($('#txtguru').val()==''){//TXT GURU EMPTY
+    //   $('#loader-sorter').hide();
+    // } else {//TXT GURU NOT EMPTY
+    //   $('#loader-sorter').show();
+    //   //AJAX START
+    // }    
   }
 </script>
 
@@ -21,9 +20,9 @@
 
     <div class="timeline">
       <div class="page-header">
-        <h1>Materi <small>Untuk filter materi lebih lengkap,silahkan mengunjungi halaman profil guru</small></h1>
+        <h1>Materi <small>materi dari guru</small></h1>
       </div>
-      <form role="form" class="form-inline">
+      <!-- <form role="form" class="form-inline">
         <div class="form-group"><input id="txtguru" onkeyup="materiSorter()" name="guru" class="input-sm form-control" type="text" placeholder="guru"/></div>
         <img id="loader-sorter" style="display:none" width="20px" class="form-group" src="<?php echo base_url('assets/css/loader.gif')?>"/>
         <div id="sorting" class="form-group">
@@ -32,7 +31,7 @@
           <div class="form-group"><select name="tahun" class="input-sm form-control"><option value="">Tahun</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option></select></div>
           <button class="input-sm btn btn-primary">cari</button>
         </div>
-      </form>
+      </form> -->
       <br/>
       <table class="table table-striped">  
         <tr><th>Judul</th><th>Guru</th><th>Mata Pelajaran</th><th>Kelas</th><th>Tahun</th><th></th></tr>

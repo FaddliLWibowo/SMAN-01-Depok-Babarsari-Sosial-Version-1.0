@@ -128,7 +128,7 @@ class m_guru extends CI_Model{
         LEFT JOIN matapelajaran ON matapelajaran.id_matapelajaran=mengajar.id_matapelajaran
         LEFT JOIN subkelas ON mengajar.id_subkelas=subkelas.id_subkelas
         LEFT JOIN kelas ON subkelas.kelas = kelas.id_kelas 
-        WHERE mengajar.id_guru=?;
+        WHERE mengajar.id_guru=?  GROUP BY kelas.id_kelas
         ";
         $query = $this->db->query($sql,$idguru);
         if($query->num_rows()>0){return $query->result_array();}else{return array();}

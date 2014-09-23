@@ -148,12 +148,30 @@ class admin extends base{
 				break;
 
 			case 'edit':
-				$data['title']= 'Edit Data Guru |';
+				$data['title']= 'Edit Data Siswa |';
 				$idsiswa = $this->input->get('id');
 				$data['profile'] = $this->m_siswa->data_by_id($idsiswa);
 				$kelas = $this->db->get('kelas');
 				$data['kelas'] = $kelas->result_array();
 				$this->defaultdisplay('admin/editsiswa',$data);
+			break;
+
+			case 'editprofilesiswa':
+				$id_siswa = $this->input->post('id');
+				$nama = $this->input->post('nama');
+				$nis = $this->input->post('nis');
+				$subkelas1 = $this->input->post('subkelas10');
+				$subkelas2 = $this->input->post('subkelas11');
+				$subkelas3 = $this->input->post('subkelas12');
+				if(empty($subkelas1)){$subkelas1=NULL;}
+				if(empty($subkelas2)){$subkelas2=NULL;}
+				if(empty($subkelas3)){$subkelas3=NULL;}
+				$status = $this->input->post('status');
+				$data = array('nama_lengkap'=>$nama,'nis'=>$nis,
+					'subkelas1'=>$subkelas1,'subkelas2'=>$subkelas2,'subkelas3'=>$subkelas3,'status'=>$status);
+				$this->db->where('id',$id_siswa);
+				$this->db->update('siswa',$data);
+				redirect(site_url('admin/siswa?act=edit&id='.$id_siswa));
 			break;
 			
 			default:
