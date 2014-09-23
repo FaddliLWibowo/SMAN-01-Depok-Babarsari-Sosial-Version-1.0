@@ -27,9 +27,9 @@ $.ajax({
 	success:function(data){
 		timeline ='';
 		$.each(data['result'], function(i,n){
-			timeline = '<div class=\'timeline\'>'+
-			'<div name=\''+n['id']+'\' class=\'row name\'>'+
-			'<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' /><button onclick="deleteMyStatus()" class=\'btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+			timeline = '<div class=\'timeline\'> <button data-dismiss="alert" onclick="deleteMyStatus()" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+			'<div name=\''+n['id']+'\' class=\'row name\'> '+
+			'<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' />'+
 			'<h5><a href=\''+n['profile']+'\'><strong>'+n['name']+'</strong></a> > <a href=\''+n['des_profile']+'\'><strong>'+n['des_name']+'</strong></a></h5><h6>'+n['time']+'</h6>'+
 			'</div>'+     
 			'</div>'+
@@ -80,9 +80,9 @@ $.ajax({
 	success:function(data){
 		timeline ='';
 		$.each(data['result'], function(i,n){
-			timeline = '<div class=\'timeline\'>'+
+			timeline = '<div class=\'timeline\'><button data-dismiss="alert" onclick="deleteMyStatus()" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
 			'<div name=\''+n['id']+'\' class=\'row name\'>'+
-			'<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' /><button  class=\'btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+			'<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' />'+
 			'<h5><a href=\''+n['profile']+'\'><strong>'+n['name']+'</strong></a> > <a href=\''+n['des_profile']+'\'><strong>'+n['des_name']+'</strong></a></h5><h6>'+n['time']+'</h6>'+
 			'</div>'+     
 			'</div>'+
@@ -131,9 +131,9 @@ $.ajax({
 	success:function(data){
 		timeline ='';
 		$.each(data['result'], function(i,n){
-			timeline = '<div class=\'timeline\'>'+
+			timeline = '<div class=\'timeline\'><button data-dismiss="alert" onclick="deleteMyStatus()" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
 			'<div name=\''+n['id']+'\' class=\'row name\'>'+
-			'<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' /><button onclick="deleteMyStatus()" class=\'btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+			'<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' />'+
 			'<h5><a href=\''+n['profile']+'\'><strong>'+n['name']+'</strong></a> > <a href=\''+n['des_profile']+'\'><strong>'+n['des_name']+'</strong></a></h5><h6>'+n['time']+'</h6>'+
 			'</div>'+     
 			'</div>'+

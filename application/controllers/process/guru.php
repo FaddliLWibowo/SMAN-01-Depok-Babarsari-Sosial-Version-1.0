@@ -194,7 +194,7 @@ class guru extends base{
 		$this->form_validation->set_rules('txtMateri', 'Materi', 'required');
 		if($this->form_validation->run()){ //DATA VALID
 			$this->load->library('upload');
-			$title = str_replace(' ', '-', $link['name']);//GET NAME FROM UPLOADED MATERI
+			$title = str_replace(' ', '_', $link['name']);//GET NAME FROM UPLOADED MATERI
 			$config['upload_path'] = './assets/assets/materi/';
 			$config['allowed_types'] = 'doc|docx|pdf|xls|xlsx|odt|ods';
 			$config['overwrite'] = true;
@@ -243,7 +243,7 @@ class guru extends base{
 		$this->form_validation->set_rules('txtMateri', 'Materi', 'required');
 		if($this->form_validation->run()){ //DATA VALID
 			$this->load->library('upload');
-			$title = str_replace(' ', '-', $link['name']);//GET NAME FROM UPLOADED MATERI
+			$title = str_replace(' ', '_', $link['name']);//GET NAME FROM UPLOADED MATERI
 			$config['upload_path'] = './assets/assets/materi/';
 			$config['allowed_types'] = 'doc|docx|pdf|xls|xlsx|odt|ods';
 			$config['overwrite'] = true;
@@ -291,7 +291,7 @@ class guru extends base{
     $this->form_validation->set_rules('txtMateri', 'Materi', 'required');
     if($this->form_validation->run()){ //DATA VALID
       $this->load->library('upload');
-      $title = str_replace(' ', '-', $link['name']);//GET NAME FROM UPLOADED MATERI
+      $title = str_replace(' ', '_', $link['name']);//GET NAME FROM UPLOADED MATERI
       $config['upload_path'] = './assets/assets/materi/';
       $config['allowed_types'] = 'doc|docx|pdf|xls|xlsx|odt|ods';
       $config['overwrite'] = true;

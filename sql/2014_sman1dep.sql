@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 22, 2014 at 06:39 
+-- Generation Time: Sep 23, 2014 at 02:18 
 -- Server version: 5.6.12
 -- PHP Version: 5.5.3
 
@@ -303,18 +303,19 @@ CREATE TABLE IF NOT EXISTS `mengajar` (
   KEY `id_guru` (`id_guru`),
   KEY `id_subkelas` (`id_subkelas`),
   KEY `id_matapelajaran` (`id_matapelajaran`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `mengajar`
 --
 
 INSERT INTO `mengajar` (`id_mengajar`, `id_guru`, `id_subkelas`, `id_matapelajaran`, `hari`, `jam_mulai`, `jam_selesai`) VALUES
-(1, 1, 1, 1, 'senin', '00:00:00', '00:00:00'),
+(1, 1, 1, 1, 'senin', '10:00:00', '11:16:00'),
 (3, 2, 1, 3, 'senin', '00:00:00', '00:00:00'),
 (4, 1, 2, 1, 'senin', '00:00:00', '00:00:00'),
 (7, 1, 3, 1, 'senin', '00:00:00', '00:00:00'),
-(8, 3, 1, 3, 'senin', '00:00:00', '00:00:00');
+(8, 3, 1, 3, 'senin', '00:00:00', '00:00:00'),
+(9, 1, 9, 1, 'selasa', '00:00:00', '00:00:00');
 
 -- --------------------------------------------------------
 
@@ -417,7 +418,7 @@ CREATE TABLE IF NOT EXISTS `siswa` (
 --
 
 INSERT INTO `siswa` (`id`, `angkatan`, `nama_lengkap`, `subkelas1`, `subkelas2`, `subkelas3`, `alamat`, `status`, `nis`, `password`, `moto`, `avatar`, `email`, `telp`, `kelamin`) VALUES
-(8, 2014, 'Clara Primadewi', NULL, NULL, NULL, 'Jalan begalan 45 Sumedang', 'aktif', '8208', 'ac43724f16e9241d990427ab7c8f4228', 'Hidup adalah perjuangan', 'LiSA.jpg', 'clara-pd@gmail.com', '...', 'perempuan'),
+(8, 2014, 'Clara Primadewi', 3, NULL, NULL, 'Jalan begalan 45 Sumedang', 'aktif', '8208', 'ac43724f16e9241d990427ab7c8f4228', 'Hidup adalah perjuangan', 'LiSA.jpg', 'clara-pd@gmail.com', '...', 'perempuan'),
 (9, 2014, 'Ervita Raihanah Aprilia', 3, NULL, NULL, '', 'aktif', '8222', 'ac43724f16e9241d990427ab7c8f4228', 'Jangan boros', '', 'ervitamax@live.com', '...', 'perempuan'),
 (11, 2011, 'xxx', NULL, NULL, NULL, '', 'aktif', '8223', '3e91970f771a2c473ae36b60d1146068', '', '', '...', '...', 'laki-laki');
 

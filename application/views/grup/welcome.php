@@ -46,9 +46,9 @@ if($view['status'] == 'blocked'){
     success:function(data){
       timeline ='';
       $.each(data['result'], function(i,n){
-        timeline = '<div class=\'timeline\'>'+
+        timeline = '<div class=\'timeline\'><button data-dismiss="alert" onclick="deleteMyStatus()" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
         '<div name=\''+n['id']+'\' class=\'row name\'>'+
-        '<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' /><button class=\'btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+        '<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' />'+
         '<h5><a href=\''+n['profile']+'\'><strong>'+n['name']+'</strong></a> > <a href=\''+n['des_profile']+'\'><strong>'+n['des_name']+'</strong></a></h5><h6>'+n['time']+'</h6>'+
         '</div>'+     
         '</div>'+
@@ -63,8 +63,14 @@ if($view['status'] == 'blocked'){
         '</div>'+
         '</div>'+     
         '<div class=\'container\'>'+
-        '<div class="comments'+n['id']+'" name=\''+n['id']+'\'>'        
-        +'</div>'+//END OF #COMMENTS       
+        '<div class="comments'+n['id']+'" name=\''+n['id']+'\'>'+        
+        '</div>'+//END OF #COMMENTS   
+        '<div class=\'comment row\'>'+
+        '<div class=\'col-md-2\'><img class="myavatar" /></div>'+
+        '<div class=\'col-md-10\'>'+
+        '<div class="input-group"><textarea id="writecomment'+n['id']+'" class=\'form-control\' id=\'comment\' placeholder=\'your comment...\'></textarea><span class="input-group-btn"><button class="btn btn-default" onclick="writecomment('+n['id']+')"><span class="glyphicon glyphicon-play"></span></button></span></div>'+
+        '</div>'+
+        '</div>'+    
         '</div>'+
         '</div>'+
         '</div>';
@@ -91,9 +97,9 @@ function updatedGrupStatus(){
     success:function(data){
       timeline ='';
       $.each(data['result'], function(i,n){
-        timeline = '<div class=\'timeline\'>'+
+        timeline = '<div class=\'timeline\'><button data-dismiss="alert" onclick="deleteMyStatus()" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
         '<div name=\''+n['id']+'\' class=\'row name\'>'+
-        '<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' /><button class=\'btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+        '<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' />'+
         '<h5><a href=\''+n['profile']+'\'><strong>'+n['name']+'</strong></a> > <a href=\''+n['des_profile']+'\'><strong>'+n['des_name']+'</strong></a></h5><h6>'+n['time']+'</h6>'+
         '</div>'+     
         '</div>'+
@@ -109,7 +115,13 @@ function updatedGrupStatus(){
         '</div>'+     
         '<div class=\'container\'>'+
         '<div class="comments'+n['id']+'" name=\''+n['id']+'\'>'        
-        +'</div>'+//END OF #COMMENTS       
+        +'</div>'+//END OF #COMMENTS
+        '<div class=\'comment row\'>'+
+        '<div class=\'col-md-2\'><img class="myavatar" /></div>'+
+        '<div class=\'col-md-10\'>'+
+        '<div class="input-group"><textarea id="writecomment'+n['id']+'" class=\'form-control\' id=\'comment\' placeholder=\'your comment...\'></textarea><span class="input-group-btn"><button class="btn btn-default" onclick="writecomment('+n['id']+')"><span class="glyphicon glyphicon-play"></span></button></span></div>'+
+        '</div>'+
+        '</div>'+       
         '</div>'+
         '</div>'+
         '</div>';
@@ -136,9 +148,9 @@ function moreGrupStatus(){
     success:function(data){
       timeline ='';
       $.each(data['result'], function(i,n){
-        timeline = '<div class=\'timeline\'>'+
+        timeline = '<div class=\'timeline\'><button data-dismiss="alert" onclick="deleteMyStatus()" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
         '<div name=\''+n['id']+'\' class=\'row name\'>'+
-        '<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' /><button class=\'btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+        '<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' />'+
         '<h5><a href=\''+n['profile']+'\'><strong>'+n['name']+'</strong></a> > <a href=\''+n['des_profile']+'\'><strong>'+n['des_name']+'</strong></a></h5><h6>'+n['time']+'</h6>'+
         '</div>'+     
         '</div>'+
@@ -155,6 +167,12 @@ function moreGrupStatus(){
         '<div class=\'container\'>'+
         '<div class="comments'+n['id']+'" name=\''+n['id']+'\'>'        
         +'</div>'+//END OF #COMMENTS       
+        '<div class=\'comment row\'>'+
+        '<div class=\'col-md-2\'><img class="myavatar" /></div>'+
+        '<div class=\'col-md-10\'>'+
+        '<div class="input-group"><textarea id="writecomment'+n['id']+'" class=\'form-control\' id=\'comment\' placeholder=\'your comment...\'></textarea><span class="input-group-btn"><button class="btn btn-default" onclick="writecomment('+n['id']+')"><span class="glyphicon glyphicon-play"></span></button></span></div>'+
+        '</div>'+
+        '</div>'+
         '</div>'+
         '</div>'+
         '</div>';

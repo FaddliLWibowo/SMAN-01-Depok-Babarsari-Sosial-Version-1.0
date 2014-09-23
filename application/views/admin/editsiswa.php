@@ -84,7 +84,15 @@ if(isset($script)){
 								<?php foreach($kelas as $k):
 									echo '<option value="'.$k['id_kelas'].'">'.$k['nama_kelas'].'</option>';
 								endforeach;?>
-							</select>
+							</select>							
+						</div>
+						<div class="col-lg-2">
+							<select class="form-control" id="subkelas10" name="subkelas10">
+								<option>Sub Kelas 10</option>
+								<?php foreach($kelas as $k):
+									echo '<option value="'.$k['id_kelas'].'">'.$k['nama_kelas'].'</option>';
+								endforeach;?>
+							</select>							
 						</div>
 					</div>
 					<div class="form-group">
@@ -95,7 +103,15 @@ if(isset($script)){
 								<?php foreach($kelas as $k):
 									echo '<option value="'.$k['id_kelas'].'">'.$k['nama_kelas'].'</option>';
 								endforeach;?>
-							</select>
+							</select>							
+						</div>
+						<div class="col-lg-2">
+							<select class="form-control" id="subkelas11" name="subkelas11">
+								<option >Sub Kelas 11</option>
+								<?php foreach($kelas as $k):
+									echo '<option value="'.$k['id_kelas'].'">'.$k['nama_kelas'].'</option>';
+								endforeach;?>
+							</select>							
 						</div>
 					</div>		
 					<div class="form-group">
@@ -106,7 +122,15 @@ if(isset($script)){
 								<?php foreach($kelas as $k):
 									echo '<option value="'.$k['id_kelas'].'">'.$k['nama_kelas'].'</option>';
 								endforeach;?>
-							</select>
+							</select>							
+						</div>
+						<div class="col-lg-2">
+							<select class="form-control" id="subkelas12" name="subkelas12">
+								<option >Sub Kelas 11</option>
+								<?php foreach($kelas as $k):
+									echo '<option value="'.$k['id_kelas'].'">'.$k['nama_kelas'].'</option>';
+								endforeach;?>
+							</select>							
 						</div>
 					</div>	
 					<div class="form-group">

@@ -15,7 +15,7 @@ class admin extends base{
 			$this->session->sess_destroy();
 			$data['title'] = 'Admin Login | ';
 			$this->defaultdisplay('admin/login',$data);
-		}		
+		}
 		
 	}
 	//ADMIN DASHBOARD

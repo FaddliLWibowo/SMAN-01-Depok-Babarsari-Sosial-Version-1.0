@@ -7,3 +7,8 @@
 7. jadwal mengajar : tambah kolom hari 
 8. gabisa tambah komentar di guru/timeline [fixed]
 9. Sidebar grup guru [fixed]
+
+------------------------------------
+
+hapus ajax search materi, soal, search guru
+kelas waktu ambil materi/nilai/soal
