@@ -7,7 +7,7 @@ $('#loader').show();//SHOW LOADING
 var iduser = $('#txtsearchuser').val();//LOAD ID USER ON INPUT TEXT
 $.ajax({
 	type:"GET",
-	url:"http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/index.php/all/search_user",
+	url:"../index.php/all/search_user",
 	data:"iduser="+iduser,
 	success:function(result){
 		$('#resultuser').html(result);//RESULT USER
@@ -21,7 +21,7 @@ function lattestStatus(){
 //alert('work');
 $('#top-loader').show();//SHOW LOADING
 $.ajax({
-	url:'http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/index.php/json/start_status',
+	url:'../index.php/json/start_status',
 	dataType:'json',
 	timeout: 50000,//50000MS
 	success:function(data){
@@ -74,7 +74,7 @@ function showUpdatedStatus(){
 $('#top-loader').show();//SHOW LOADING
 lastid = $('#all-timeline .timeline div').first().attr('name');//GET ELEMENT NAME
 $.ajax({
-	url:'http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/index.php/json/start_status?lastid='+lastid,
+	url:'../index.php/json/start_status?lastid='+lastid,
 	dataType:'json',
 	timeout: 50000,//50000MS
 	success:function(data){
@@ -125,7 +125,7 @@ $('#bottom-loader').show();//SHOW LOADING
 var id = $('#all-timeline .timeline .name').last().attr('name');//GET ELEMENT NAME
 //alert(id);
 $.ajax({
-	url:'http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/index.php/json/start_status?smallid='+id,
+	url:'../index.php/json/start_status?smallid='+id,
 	dataType:'json',
 	timeout: 50000,//50000MS
 	success:function(data){
@@ -179,7 +179,7 @@ function updateStatus(x,y,z,a,b,c){ //X= ID_SISWA,y = ID_GURU,Z = ID_GRUP | a = 
 	} else {
 		$.ajax({
 			type:'POST',
-			url:'http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/index.php/all/update_status',
+			url:'../index.php/all/update_status',
 		timeout: 50000,//50000MS
 		data:{idsiswa:x,idguru:y,idgrup:z,isi:isi,desidsiswa:a,desidguru:b,desidgrup:c},
 		success:function(data){ //SUCCESS INSERT TO DB
@@ -209,7 +209,7 @@ function getCommentById(x){ //COMMENT BY ID STATUS
 	$.ajax({ //x=id_status		
 		type:'GET',
 		dataType:'json',
-		url:'http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/index.php/json/show_comment_by_id?id='+x,
+		url:'../index.php/json/show_comment_by_id?id='+x,
 		timeout: 50000,//50000MS
 		success:function(data){ //SUCCESS INSERT TO DB			
 			//alert(x);
@@ -240,7 +240,7 @@ function addlike(x){ //x id status
 	newlike = newlike + 1;
 	//ajax to insert DB
 	$.ajax({
-		url:'http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/index.php/all/addlike?idpost='+x,
+		url:'../index.php/all/addlike?idpost='+x,
 		success:function(){
 			$('.'+x).html();
 			$('.'+x).html(newlike);
@@ -261,7 +261,7 @@ function showmessage(x,y){
 	$('#loader').show();
 	$.ajax({
 		type:"GET",
-		url:"http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/index.php/all/isi_pesan_saya",
+		url:"../index.php/all/isi_pesan_saya",
 		data:{pengirim:x,penerima:y},
 		success:function(result){
 			$('#loader').hide();//HIDE LOADING
@@ -278,12 +278,12 @@ function sendmessageviamodal(x,y){ //x=pengirim, y=penerima
 	//KIRIM PESAN KE SERVER
 	$.ajax({
 		type:"POST",
-		url:"http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/index.php/all/kirim_pesan_via_modal",
+		url:"../index.php/all/kirim_pesan_via_modal",
 		data:{isi:isi,pengirim:x,penerima:y},
 		success:function(){ //SUCCESS
 			$.ajax({ //REFRESH THREAD
 				type:"GET",
-				url:"http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/index.php/all/isi_pesan_saya",
+				url:"../index.php/all/isi_pesan_saya",
 				data:{pengirim:y,penerima:x},
 				success:function(result){
 				$('#loader').hide();//HIDE LOADING

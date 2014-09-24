@@ -15,7 +15,7 @@
         <tr><th>Judul</th><th>Guru</th><th>Mata Pelajaran</th><th>Kelas</th><th>Tahun</th><th></th></tr>
         <?php foreach($view as $v):
         echo '<tr>
-        <td>'.$v['judul'].'</td><td>'.$v['guru'].'</td><td>'.$v['kelas'].'<td>'.$v['mapel'].'</td></td><td>'.$v['tahun'].'</td><td><a href="'.base_url('assets/assets/materi'.$v['link']).'" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span></a></td>
+        <td>'.$v['judul'].'</td><td>'.$v['guru'].'</td><td>'.$v['kelas'].'<td>'.$v['mapel'].'</td></td><td>'.$v['tahun'].'</td><td><a href="'.base_url('assets/assets/materi/'.$v['link']).'" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span></a></td>
         </tr>';
         endforeach;?>
       </table>

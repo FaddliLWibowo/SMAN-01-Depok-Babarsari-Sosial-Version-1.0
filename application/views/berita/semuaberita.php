@@ -15,7 +15,7 @@
         $konten = substr($b['konten'], 0,300)
         ?>
           <a href="<?php echo site_url('berita/baca/'.$b['id_berita'])?>"><h2><?php echo $b['judul']?></h2></a><small style="color:gray">Oleh Admin | Post | Update</small><br/>
-          <p><?php echo $konten?></p><p><a class="btn btn-warning" href="#">selengkapnya</a></p>
+          <p><?php echo $konten?></p><p><a class="btn btn-warning" href="<?php echo site_url('berita/baca/'.$b['id_berita'])?>">selengkapnya</a></p>
           <br/>
         <?php endforeach;?>
         <center><?php echo $page?></center>
