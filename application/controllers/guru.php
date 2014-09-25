@@ -28,15 +28,31 @@ class guru extends base{
 		$this->defaultdisplay('siswa/messages',$data);
 
 	}
+
 	//GURU PROFILE
 	public function profile(){
 		$nip = $this->uri->segment(3);
-		$nama = $this->m_guru->name_by_NIP($nip);//completed
-		$data['script'] = "$(document).ready(function(){document.getElementById('home').className='active';});";
-		$data['title'] = $nama.' | ';
-		$data['guru'] = $this->m_guru->data_by_nip($nip);
-		$data['mengajar'] =$this->m_guru->guru_ajar($data['guru']['id']);
-		$this->defaultdisplay('guru/profile', $data);
+		if($this->m_guru->check_nip($nip)) {
+			$nama = $this->m_guru->name_by_NIP($nip);//completed
+			$data['script'] = "$(document).ready(function(){document.getElementById('home').className='active';});";
+			$data['title'] = $nama.' | ';
+			$data['guru'] = $this->m_guru->data_by_nip($nip);
+			$data['mengajar'] =$this->m_guru->guru_ajar($data['guru']['id']);
+			$this->defaultdisplay('guru/profile', $data);
+		} else {
+			if($this->session->userdata('siswa_logged_in')) { //redirect to timeline siswa
+				echo ("<SCRIPT LANGUAGE='JavaScript'>
+					window.alert('NIP tidak ditemukan');
+					window.location.href='".site_url('siswa/timeline')."';
+				</SCRIPT>");
+			} else { //redirect to timeline guru
+				echo ("<SCRIPT LANGUAGE='JavaScript'>
+					window.alert('NIP tidak ditemukan');
+					window.location.href='".site_url('guru/timeline')."';
+				</SCRIPT>");
+			}
+		}	
+		
 	}
 	//MATERI YANG DIUPLOAD GURU
 	public function mymateri(){

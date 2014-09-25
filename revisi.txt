@@ -1,0 +1,20 @@
+24 Sep 2014
+
+Upload data siswa dan guru menggunakan data yang sudah diberikan secara massal.
+bagian sidebar, hanya soal untuk siswa tsb.
+bagian sidebar, hanya nilai untuk siswa tsb.
+bagian sidebar, hanya materi untuk siswa tsb.
+
+bagian sidebar, hanya soal untuk guru tsb. [fixed]
+bagian sidebar, hanya nilai untuk guru tsb. [fixed]
+bagian sidebar, hanya materi untuk guru tsb.[fixed]
+
+guru semua materi [fixed]
+guru semua soal
+guru semua nilai
+
+guru semua materi + materi saya by guru [fixed]
+siswa semua materi + materi saya by class 
+jika salah nip/nis dihalaman profile [fixed]
+menu untuk link aktif + sidebar
+menu untuk tab aktif

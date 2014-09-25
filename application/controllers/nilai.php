@@ -24,8 +24,20 @@ class nilai extends base{
 		} else {
 			$uri = 0;
 		}
-		//end pagination setup
-		$data['view'] = $this->m_all->all_nilai($config['per_page'],$uri);
+		switch ($this->input->get('act')) {
+			case 'byclass':
+				$data['view'] = $this->m_guru->nilai_saya($config['per_page'],$uri,$this->session->userdata('id'));
+				break;
+
+			case 'all':
+				$data['view'] = $this->m_all->all_nilai($config['per_page'],$uri);
+				break;
+			
+			default:
+				redirect('guru?act=byclass');
+				break;
+		}
+		//end pagination setup		
 		$this->defaultdisplay('semuanilai',$data);
 	}
 }

@@ -82,9 +82,19 @@ class m_siswa extends CI_Model{
             return array();
         }   
     }
+    //check nis
+    public function check_nis($nis){
+        $sql = "SELECT * FROM siswa WHERE nis = ? ";
+        $result = $this->db->query($sql,$nis);
+        if($result->num_rows>0){
+            return true;
+        } else {
+            return false;
+        }
+    }
     //SEARCH SISWA
     public function searchsiswa($id){
-        $sql = "SELECT * FROM siswa WHERE nis = ?";
+        $sql = "SELECT * FROM siswa WHERE nip = ?";
         $result = $this->db->query($sql, $id);
         if($result->num_rows()>0) {
             $result = $result->row_array();

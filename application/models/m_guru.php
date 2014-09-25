@@ -70,6 +70,16 @@ class m_guru extends CI_Model{
         }        
         return $v;
     }
+    //check nip
+    public function check_nip($nip){
+        $sql = "SELECT * FROM guru WHERE nip = ? ";
+        $result = $this->db->query($sql,$nip);
+        if($result->num_rows>0){
+            return true;
+        } else {
+            return false;
+        }
+    }
     //GET NAME BY ID
     public function name_by_id($id){
         $this->db->select('nama_lengkap');
@@ -229,5 +239,46 @@ class m_guru extends CI_Model{
             return array();
         }
     }
-
+    /*ALL ABOUT MATERI*/
+    public function materi_saya($x,$y,$guru){
+        $sql="SELECT guru.nip AS 'nip',guru.nama_lengkap AS 'guru',kelas.nama_kelas AS 'kelas',
+        matapelajaran.matapelajaran AS 'mapel', judul,link,tahun 
+        FROM materi
+        INNER JOIN guru ON guru.id = materi.id_guru
+        INNER JOIN kelas ON kelas.id_kelas = materi.id_kelas
+        INNER JOIN matapelajaran ON matapelajaran.id_matapelajaran= materi.id_matapelajaran
+        WHERE materi.id_guru = ".$guru."
+        LIMIT ".$y.",".$x;
+        $this->db->order_by('id_materi','desc');
+        $query = $this->db->query($sql);
+        if($query->num_rows()>0){return $query->result_array();}else{return array();}
+    }
+    /*ALL ABOUT SOAL*/
+    public function soal_saya($x,$y,$guru){
+        $sql="SELECT guru.nama_lengkap AS 'guru',kelas.nama_kelas AS 'kelas',
+        matapelajaran.matapelajaran AS 'mapel', judul,link,tahun 
+        FROM soal
+        INNER JOIN guru ON guru.id = soal.id_guru
+        INNER JOIN kelas ON kelas.id_kelas = soal.id_kelas
+        INNER JOIN matapelajaran ON matapelajaran.id_matapelajaran= soal.id_matapelajaran
+        WHERE soal.id_guru = ".$guru."
+        LIMIT ".$y.",".$x;
+        $this->db->order_by('id_soal','desc');
+        $query = $this->db->query($sql);
+        if($query->num_rows()>0){return $query->result_array();}else{return array();}
+    }
+    /*ALL ABOUT NILAI*/
+    public function nilai_saya($x,$y,$guru){
+        $sql="SELECT guru.nama_lengkap AS 'guru',kelas.nama_kelas AS 'kelas',
+        matapelajaran.matapelajaran AS 'mapel', judul,link,tahun 
+        FROM nilai
+        INNER JOIN guru ON guru.id = nilai.id_guru
+        INNER JOIN kelas ON kelas.id_kelas = nilai.id_kelas
+        INNER JOIN matapelajaran ON matapelajaran.id_matapelajaran= nilai.id_matapelajaran
+        WHERE nilai.id_guru = ".$guru."
+        LIMIT ".$y.",".$x;
+        $this->db->order_by('id_soal','desc');
+        $query = $this->db->query($sql);
+        if($query->num_rows()>0){return $query->result_array();}else{return array();}
+    }
 }

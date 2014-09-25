@@ -1,12 +1,17 @@
-<script type="text/javascript">
-  function materiSorter(){
-    // if($('#txtguru').val()==''){//TXT GURU EMPTY
-    //   $('#loader-sorter').hide();
-    // } else {//TXT GURU NOT EMPTY
-    //   $('#loader-sorter').show();
-    //   //AJAX START
-    // }    
+<script>
+$(function() {
+<?php
+  switch ($this->input->get('act')) {
+    case 'byclass':
+      echo "$('#materikelas').addClass('active')";
+      break;
+
+    case 'all':
+      echo "$('#materisemua').addClass('active')";
+      break;    
   }
+?>
+});
 </script>
 
 <section id="padding-top"></section>
@@ -20,7 +25,25 @@
 
     <div class="timeline">
       <div class="page-header">
-        <h1>Materi <small>materi dari guru</small></h1>
+        <h1>Materi <small>materi dari guru 
+          <?php
+          switch ($this->input->get('act')) {
+            case 'byclass':
+            echo 'berdasarkan kelas';
+            break;
+            case 'all':
+            echo 'semua materi';
+            break;          
+            default:
+            echo 'error';
+            break;
+          }
+          ?>
+        </small></h1>
+        <ul class="nav nav-tabs">
+          <li id="materikelas"><a href="?act=byclass">Materi Saya</a></li>
+          <li id="materisemua"><a href="?act=all">Semua Materi</a></li>
+        </ul>
       </div>
       <!-- <form role="form" class="form-inline">
         <div class="form-group"><input id="txtguru" onkeyup="materiSorter()" name="guru" class="input-sm form-control" type="text" placeholder="guru"/></div>

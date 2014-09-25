@@ -29,11 +29,26 @@ class siswa extends base{
 
 	public function profile(){
 		$nis = $this->uri->segment(3);
-		$nama = $this->m_siswa->name_by_NIS($nis);
-		$data['script'] = "$(document).ready(function(){document.getElementById('home').className='active';});";
-		$data['title'] = $nama.' | ';
-		$data['siswa'] = $this->m_siswa->data_by_nis($nis);
-		$this->defaultdisplay('siswa/profile', $data);
+		//cek nis
+		if($this->m_siswa->check_nis($nis)){ //found nis on database
+			$nama = $this->m_siswa->name_by_NIS($nis);
+			$data['script'] = "$(document).ready(function(){document.getElementById('home').className='active';});";
+			$data['title'] = $nama.' | ';
+			$data['siswa'] = $this->m_siswa->data_by_nis($nis);
+			$this->defaultdisplay('siswa/profile', $data);
+		} else {//nis not found
+			if($this->session->userdata('siswa_logged_in')) { //redirect to timeline siswa
+				echo ("<SCRIPT LANGUAGE='JavaScript'>
+					window.alert('NIS tidak ditemukan');
+					window.location.href='".site_url('siswa/timeline')."';
+				</SCRIPT>");
+			} else { //redirect to timeline guru
+				echo ("<SCRIPT LANGUAGE='JavaScript'>
+					window.alert('NIS tidak ditemukan');
+					window.location.href='".site_url('guru/timeline')."';
+				</SCRIPT>");
+			}
+		}		
 	}
 
 	public function edit_profile(){

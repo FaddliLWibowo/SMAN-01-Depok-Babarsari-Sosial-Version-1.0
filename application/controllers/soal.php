@@ -24,8 +24,21 @@ class soal extends base{
 		} else {
 			$uri = 0;
 		}
+		switch ($this->input->get('act')) {
+			case 'byclass':
+				$data['view'] = $this->m_guru->soal_saya($config['per_page'],$uri,$this->session->userdata('id'));
+				break;
+							
+			case 'all':
+				$data['view'] = $this->m_all->all_soal($config['per_page'],$uri);
+				break;
+
+			default:
+				redirect('soal?act=byclass');
+				break;
+		}
 		//end pagination setup
-		$data['view'] = $this->m_all->all_soal($config['per_page'],$uri);
+		
 		$this->defaultdisplay('semuasoal',$data);
 	}
 }
