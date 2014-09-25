@@ -20,6 +20,7 @@ class admin extends base{
 	}
 	//ADMIN DASHBOARD
 	public function dashboard(){
+		$data['scriptadmin'] = "$('#dashboard').addClass('active')";
 		if(!$this->session->userdata('admin_logged_in')){
 			redirect(site_url('admin'));
 		}
@@ -28,6 +29,7 @@ class admin extends base{
 	}
 	//ADMIN DASHBOARD FOR NEWS
 	public function berita(){
+		$data['scriptadmin'] = "$('#berita').addClass('active')";
 		if(!$this->session->userdata('admin_logged_in')){
 			redirect(site_url('admin'));
 		}
@@ -74,6 +76,7 @@ class admin extends base{
 	}
 	//GROUP MANAGEMENT
 	public function grup(){
+		$data['scriptadmin'] = "$('#grup').addClass('active')";
 		if(!$this->session->userdata('admin_logged_in')){
 			redirect(site_url('admin'));
 		}
@@ -109,6 +112,7 @@ class admin extends base{
 
 	///SISWA CONTROLER///
 	public function siswa(){
+		$data['siswa'] = "$('#dashboard').addClass('active')";
 		//pagination
 		$this->load->library('pagination');
 		$config['base_url'] = site_url('admin/siswa?act=0');
@@ -130,120 +134,121 @@ class admin extends base{
 		//end of pagination
 		switch ($this->input->get('act')) {
 			case 'add'://add students
-				$nis = $this->input->post('nis');
-				$nama = $this->input->post('nama');
-				$status = $this->input->post('status');
-				$kelamin = $this->input->post('kelamin');
-				$angkatan = $this->input->post('angkatan');
-				$password = md5($nis);
-				$data = array('nis'=>$nis,'nama_lengkap'=>$nama,'password'=>$password,'status'=>$status,'kelamin'=>$kelamin,'angkatan'=>$angkatan);
-				$this->db->insert('siswa',$data);
-				redirect(site_url('admin/siswa'));
-				break;
+			$nis = $this->input->post('nis');
+			$nama = $this->input->post('nama');
+			$status = $this->input->post('status');
+			$kelamin = $this->input->post('kelamin');
+			$angkatan = $this->input->post('angkatan');
+			$password = md5($nis);
+			$data = array('nis'=>$nis,'nama_lengkap'=>$nama,'password'=>$password,'status'=>$status,'kelamin'=>$kelamin,'angkatan'=>$angkatan);
+			$this->db->insert('siswa',$data);
+			redirect(site_url('admin/siswa'));
+			break;
 
 			case 'delete'://delete siswa
-				$idsiswa = $this->input->get('id');
-				$this->db->delete('siswa', array('id' => $idsiswa));
-				redirect(site_url('admin/siswa')); 
-				break;
+			$idsiswa = $this->input->get('id');
+			$this->db->delete('siswa', array('id' => $idsiswa));
+			redirect(site_url('admin/siswa')); 
+			break;
 
 			case 'edit':
-				$data['title']= 'Edit Data Siswa |';
-				$idsiswa = $this->input->get('id');
-				$data['profile'] = $this->m_siswa->data_by_id($idsiswa);
-				$kelas = $this->db->get('kelas');
-				$data['kelas'] = $kelas->result_array();
-				$this->defaultdisplay('admin/editsiswa',$data);
+			$data['title']= 'Edit Data Siswa |';
+			$idsiswa = $this->input->get('id');
+			$data['profile'] = $this->m_siswa->data_by_id($idsiswa);
+			$kelas = $this->db->get('kelas');
+			$data['kelas'] = $kelas->result_array();
+			$this->defaultdisplay('admin/editsiswa',$data);
 			break;
 
 			case 'editprofilesiswa':
-				$id_siswa = $this->input->post('id');
-				$nama = $this->input->post('nama');
-				$nis = $this->input->post('nis');
-				$subkelas1 = $this->input->post('subkelas10');
-				$subkelas2 = $this->input->post('subkelas11');
-				$subkelas3 = $this->input->post('subkelas12');
-				if(empty($subkelas1)){$subkelas1=NULL;}
-				if(empty($subkelas2)){$subkelas2=NULL;}
-				if(empty($subkelas3)){$subkelas3=NULL;}
-				$status = $this->input->post('status');
-				$data = array('nama_lengkap'=>$nama,'nis'=>$nis,
-					'subkelas1'=>$subkelas1,'subkelas2'=>$subkelas2,'subkelas3'=>$subkelas3,'status'=>$status);
-				$this->db->where('id',$id_siswa);
-				$this->db->update('siswa',$data);
-				redirect(site_url('admin/siswa?act=edit&id='.$id_siswa));
+			$id_siswa = $this->input->post('id');
+			$nama = $this->input->post('nama');
+			$nis = $this->input->post('nis');
+			$subkelas1 = $this->input->post('subkelas10');
+			$subkelas2 = $this->input->post('subkelas11');
+			$subkelas3 = $this->input->post('subkelas12');
+			if(empty($subkelas1)){$subkelas1=NULL;}
+			if(empty($subkelas2)){$subkelas2=NULL;}
+			if(empty($subkelas3)){$subkelas3=NULL;}
+			$status = $this->input->post('status');
+			$data = array('nama_lengkap'=>$nama,'nis'=>$nis,
+				'subkelas1'=>$subkelas1,'subkelas2'=>$subkelas2,'subkelas3'=>$subkelas3,'status'=>$status);
+			$this->db->where('id',$id_siswa);
+			$this->db->update('siswa',$data);
+			redirect(site_url('admin/siswa?act=edit&id='.$id_siswa));
 			break;
 			
 			default:
-				$data['title']= 'Siswa |';
+			$data['title']= 'Siswa |';
 				$params = array($uri,$config['per_page']);//params for pagination
 				$data['view'] = $this->m_admin->all_students($params);
 				$this->defaultdisplay('admin/siswa',$data);
 				break;
+			}
 		}
-	}
 
 	///GURU CONTROLER///
-	public function guru(){		
+		public function guru(){		
+			$data['guru'] = "$('#dashboard').addClass('active')";
 		//pagination
-		$this->load->library('pagination');
-		$config['base_url'] = site_url('admin/guru?act=0');
-		$config['total_rows'] = $this->db->count_all('guru');
-		$config['per_page']= 20;
-		$config['num_link']=2;
-		$config['page_query_string'] = TRUE;
-		$this->pagination->initialize($config); 
-		$data['page'] = $this->pagination->create_links();		
-		if(isset($_GET['per_page'])) {
-			if($_GET['per_page'] == '') { 
-				$uri = 0;
+			$this->load->library('pagination');
+			$config['base_url'] = site_url('admin/guru?act=0');
+			$config['total_rows'] = $this->db->count_all('guru');
+			$config['per_page']= 20;
+			$config['num_link']=2;
+			$config['page_query_string'] = TRUE;
+			$this->pagination->initialize($config); 
+			$data['page'] = $this->pagination->create_links();		
+			if(isset($_GET['per_page'])) {
+				if($_GET['per_page'] == '') { 
+					$uri = 0;
+				} else {
+					$uri = $_GET['per_page'];
+				}
 			} else {
-				$uri = $_GET['per_page'];
+				$uri = 0;
 			}
-		} else {
-			$uri = 0;
-		}
 		//end of pagination
-		switch ($this->input->get('act')) {
-			case 'edit':
-			$data['title']= 'Edit Data Guru |';
-			$idguru = $this->input->get('id');
-			$data['profile'] = $this->m_guru->data_by_id($idguru);
-			$data['ajar'] = $this->m_guru->guru_ajar($idguru);
-			$this->defaultdisplay('admin/editguru',$data);
-			break;
+			switch ($this->input->get('act')) {
+				case 'edit':
+				$data['title']= 'Edit Data Guru |';
+				$idguru = $this->input->get('id');
+				$data['profile'] = $this->m_guru->data_by_id($idguru);
+				$data['ajar'] = $this->m_guru->guru_ajar($idguru);
+				$this->defaultdisplay('admin/editguru',$data);
+				break;
 
-			case 'add':
-			$nip = $this->input->post('nip');
-			$nama = $this->input->post('nama');
-			$status = $this->input->post('status');
-			$kelamin = $this->input->post('kelamin');
-			$password = md5($nip);
-			$data = array('nip'=>$nip,'nama_lengkap'=>$nama,'password'=>$password,'status'=>$status,'kelamin'=>$kelamin);
-			$this->db->insert('guru',$data);
-			redirect(site_url('admin/guru'));
-			break;
+				case 'add':
+				$nip = $this->input->post('nip');
+				$nama = $this->input->post('nama');
+				$status = $this->input->post('status');
+				$kelamin = $this->input->post('kelamin');
+				$password = md5($nip);
+				$data = array('nip'=>$nip,'nama_lengkap'=>$nama,'password'=>$password,'status'=>$status,'kelamin'=>$kelamin);
+				$this->db->insert('guru',$data);
+				redirect(site_url('admin/guru'));
+				break;
 
-			case 'delete':
-			$idguru = $this->input->get('id');
-			$this->db->delete('guru', array('id' => $idguru));
-			redirect(site_url('admin/guru')); 
-			break;
+				case 'delete':
+				$idguru = $this->input->get('id');
+				$this->db->delete('guru', array('id' => $idguru));
+				redirect(site_url('admin/guru')); 
+				break;
 
-			case 'ajaxsubkelas':
-			$idkelas = $this->input->get('idkelas');
-			$this->db->where('kelas',$idkelas);
-			$subkelas = $this->db->get('subkelas');
-			$subkelas = $subkelas->result_array();
-			echo '<select class="form-control" name="subkelas">
-			<option>Subkelas</option>';
-			foreach($subkelas as $s):
-				echo '<option value="'.$s['id_subkelas'].'">'.$s['nama'].'</option>';
-			endforeach;
-			echo '</select>';
-			break;
+				case 'ajaxsubkelas':
+				$idkelas = $this->input->get('idkelas');
+				$this->db->where('kelas',$idkelas);
+				$subkelas = $this->db->get('subkelas');
+				$subkelas = $subkelas->result_array();
+				echo '<select class="form-control" name="subkelas">
+				<option>Subkelas</option>';
+				foreach($subkelas as $s):
+					echo '<option value="'.$s['id_subkelas'].'">'.$s['nama'].'</option>';
+				endforeach;
+				echo '</select>';
+				break;
 
-			case 'addajar':
+				case 'addajar':
 				$idguru = $this->input->post('guru');
 				$subkelas = $this->input->post('subkelas');
 				$matapelajaran = $this->input->post('matapelajaran');
@@ -253,18 +258,18 @@ class admin extends base{
 				$params = array('id_guru'=>$idguru,'id_subkelas'=>$subkelas,'id_matapelajaran'=>$matapelajaran, 'hari'=>$hari,'jam_mulai'=>$mulai,'jam_selesai'=>$selesai);
 				$this->db->insert('mengajar',$params);
 				redirect('admin/guru?act=edit&id='.$idguru);
-			break;
+				break;
 
-			case 'editajar':
+				case 'editajar':
 				$data['title'] = 'Edit Jadwal Ajar';
 				$idajar = $this->input->get('idajar');
 				$data['id_guru'] = $this->input->get('guru');
 				$data['id_ajar'] = $idajar;
 				$data['ajar'] = $this->m_guru->ajar($idajar);
 				$this->defaultdisplay('admin/editajarmakul',$data);
-			break;
+				break;
 
-			case 'updateajar':
+				case 'updateajar':
 				$id_guru = $this->input->get('idguru');
 				$id_ajar = $this->input->get('idajar');
 				$subkelas = $this->input->post('subkelas');
@@ -277,16 +282,16 @@ class admin extends base{
 				$this->db->where('id_mengajar', $id_ajar);
 				$this->db->update('mengajar', $data);
 				redirect('admin/guru?act=edit&id='.$id_guru); 
-			break;
+				break;
 
-			case 'deleteajar':
+				case 'deleteajar':
 				$idajar = $this->input->get('idajar');
 				$idguru = $this->input->get('guru');
 				$this->db->delete('mengajar',array('id_mengajar'=>$idajar));
 				redirect('admin/guru?act=edit&id='.$idguru);
-			break;
+				break;
 
-			case 'editprofileguru':
+				case 'editprofileguru':
 				$id = $this->input->post('id');				
 				$nip = $this->input->post('nip');
 				$nama = $this->input->post('nama');
@@ -295,18 +300,18 @@ class admin extends base{
 				$this->db->where('id',$id);
 				$this->db->update('guru',$data);
 				redirect('admin/guru?act=edit&id='.$id);
-			break;
+				break;
 
-			case 'search':
+				case 'search':
 				$data['title'] = 'Pencarian Guru |';
 				$q = $this->input->get('q');
 				$params = array($uri,$config['per_page'],$q);//params for pagination
 				$data['view'] = $this->m_admin->search_teacher($params);
 				$this->defaultdisplay('admin/guru',$data);
-			break;
-			
-			default:
-			$data['title']= 'Guru |';
+				break;
+
+				default:
+				$data['title']= 'Guru |';
 			$params = array($uri,$config['per_page']);//params for pagination
 			$data['view'] = $this->m_admin->all_teacher($params);
 			$this->defaultdisplay('admin/guru',$data);
@@ -316,6 +321,7 @@ class admin extends base{
 	}
 
 	public function kelas(){
+		$data['scriptadmin'] = "$('#kelas').addClass('active')";
 		$allclass = $this->db->get('kelas'); 
 		$data['button'] = $allclass->result_array();
 		if(!empty($this->input->get('act'))) {
@@ -356,36 +362,37 @@ class admin extends base{
 	}
 
 	//Mata Pelajaran Controller
-	public function matapelajaran(){		
+	public function matapelajaran(){	
+		$data['scriptadmin'] = "$('#mapel').addClass('active')";	
 		switch ($this->input->get('act')) {
 			case 'delete':
-				$id= $this->input->get('id');
-				$this->db->delete('matapelajaran',array('id_matapelajaran'=>$id));
-				redirect(site_url('admin/matapelajaran'));
-				break;
+			$id= $this->input->get('id');
+			$this->db->delete('matapelajaran',array('id_matapelajaran'=>$id));
+			redirect(site_url('admin/matapelajaran'));
+			break;
 
 			case 'add':
-				$mapel = $this->input->post('matapelajaran');
-				$sql = "INSERT INTO matapelajaran(matapelajaran) VALUES(?)";
-				$this->db->query($sql,$mapel);
-				redirect(site_url('admin/matapelajaran'));
-				break;
+			$mapel = $this->input->post('matapelajaran');
+			$sql = "INSERT INTO matapelajaran(matapelajaran) VALUES(?)";
+			$this->db->query($sql,$mapel);
+			redirect(site_url('admin/matapelajaran'));
+			break;
 
 			case 'procedit':
-				$id = $this->input->post('id_matapelajaran');
-				$mapel = $this->input->post('matapelajaran');
-				$data = array('matapelajaran'=>$mapel);
-				$this->db->where('id_matapelajaran',$id);
-				$this->db->update('matapelajaran',$data);
-				redirect(site_url('admin/matapelajaran'));
-				break;
+			$id = $this->input->post('id_matapelajaran');
+			$mapel = $this->input->post('matapelajaran');
+			$data = array('matapelajaran'=>$mapel);
+			$this->db->where('id_matapelajaran',$id);
+			$this->db->update('matapelajaran',$data);
+			redirect(site_url('admin/matapelajaran'));
+			break;
 			
 			default:
-				$data['title'] = 'Mata Pelajaran | ';
-				$matapelajaran = $this->db->get('matapelajaran');
-				$data['mapel'] = $matapelajaran->result_array();
-				$this->defaultdisplay('admin/matapelajaran',$data);
-				break;
+			$data['title'] = 'Mata Pelajaran | ';
+			$matapelajaran = $this->db->get('matapelajaran');
+			$data['mapel'] = $matapelajaran->result_array();
+			$this->defaultdisplay('admin/matapelajaran',$data);
+			break;
 		}
 	}
 

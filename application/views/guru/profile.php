@@ -543,8 +543,10 @@ function nilaiGuru(){
                         <tr>                 
                           <th>Mata Pelajaran</th>
                           <th>Kelas</th>
-                          <th>Jadwal</th>
-                          <th>Ruang</th>
+                          <th>Mapel</th>
+                          <th>Hari</th>
+                          <th>Mulai</th>
+                          <th>Selesai</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -552,8 +554,10 @@ function nilaiGuru(){
                           <tr>
                             <td><?php echo $m['matapelajaran']?></td>
                             <td><?php echo $m['kelas'].' '.$m['subkelas']?></td>
-                            <td>?</td>
-                            <td>?</td>
+                            <td><?php echo $m['matapelajaran'];?></td>
+                            <td><?php echo $m['hari'];?></td>
+                            <td><?php echo $m['mulai'];?></td>
+                            <td><?php echo $m['selesai'];?></td>
                           </tr>
                         <?php endforeach;?>
                       </tbody>

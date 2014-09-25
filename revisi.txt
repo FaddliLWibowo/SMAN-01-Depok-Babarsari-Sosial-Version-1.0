@@ -10,8 +10,10 @@ bagian sidebar, hanya nilai untuk guru tsb. [fixed]
 bagian sidebar, hanya materi untuk guru tsb.[fixed]
 
 guru semua materi [fixed]
-guru semua soal
-guru semua nilai
+guru semua soal [fixed]
+guru semua nilai [fixed]
+
+jadwal di profile guru [fixed]
 
 guru semua materi + materi saya by guru [fixed]
 siswa semua materi + materi saya by class 
