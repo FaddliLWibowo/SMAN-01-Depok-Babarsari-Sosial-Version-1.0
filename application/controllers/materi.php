@@ -29,15 +29,9 @@ class materi extends base{
 			case 'byclass':
 			//who login
 			if($this->session->userdata('siswa_logged_in')){ //siswa login
-				$sqlclass = "SELECT kelas.nama_kelas AS 'kelas' FROM siswa
-				INNER JOIN subkelas.id_subkelas = siswa.subkelas1
-				INNER JOIN subkelas.id_subkelas = siswa.subkelas2
-				INNER JOIN subkelas.id_subkelas = siswa.subkelas3
-				INNER JOIN kelas.id_kelas = subkelas.kelas
-				WHERE siswa.id = ".$this->session->userdata('id');
-				$result = $this->db->query($sqlclass);
-				$result = $result->result_array();				
-				$data['view'] = $this->m_all->my_class_materi($config['per_page'],$uri,1);
+				//result : my last class
+				$lastclass = $this->my_last_class($this->session->userdata('id'));
+				$data['view'] = $this->m_siswa->my_class_materi($config['per_page'],$uri,$lastclass);
 			} else if($this->session->userdata('guru_logged_in')) { //guru login
 				$data['scriptmenu'] = "<script>$('#materikelas').addClass('active');</script>";
 				$data['view'] = $this->m_guru->materi_saya(10,0,$this->session->userdata('id'));

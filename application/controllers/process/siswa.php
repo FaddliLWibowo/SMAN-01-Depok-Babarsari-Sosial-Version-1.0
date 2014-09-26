@@ -31,6 +31,7 @@ class siswa extends base{
 				//set session
 				$sessionData = $userdata;
 				$sessionData['siswa_logged_in'] = 1;
+				//$sessionData['lastclass'] = $this->my_last_class($userdata['id']);
 				//activate session
 				$this->session->set_userdata($sessionData);
 				//alert login berhasil

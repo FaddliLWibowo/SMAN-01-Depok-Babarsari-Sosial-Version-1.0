@@ -50,4 +50,23 @@ class base extends CI_Controller {
 	public function teacher_login(){
 		if(!$this->session->userdata('guru_logged_in')) {return redirect(site_url());}
 	}
+	//show my class
+	public function my_last_class($idsiswa){
+		$data = $this->session->userdata;
+		//check last class
+		if(!empty($data['subkelas3'])){
+			$subkelas = $data['subkelas3'];
+		} else if(!empty($data['subkelas2'])){
+			$subkelas = $data['subkelas2'];
+		} else if(!empty($data['subkelas1'])){
+			$subkelas = $data['subkelas1'];
+		}
+		//check my class
+		$sql = "SELECT kelas.id_kelas AS 'class' FROM subkelas
+		INNER JOIN kelas ON kelas.id_kelas = subkelas.kelas
+		WHERE subkelas.id_subkelas = ? ";
+		$myclass = $this->db->query($sql,$subkelas);
+		$myclass = $myclass->row_array();
+		return $myclass['class'];//result my last class
+	}
 }

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 <head>
 	<title><?php echo $title.' '?>SMAN 1 Depok Social</title>

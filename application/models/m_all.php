@@ -144,20 +144,6 @@ class m_all extends CI_Model{
 		$query = $this->db->query($sql);
 		if($query->num_rows()>0){return $query->result_array();}else{return array();}
 	}
-	//Materi berdasarkan kelas
-	public function my_class_materi($x,$y,$kelas){
-		$sql="SELECT guru.nip AS 'nip',guru.nama_lengkap AS 'guru',kelas.nama_kelas AS 'kelas',
-		matapelajaran.matapelajaran AS 'mapel', judul,link,tahun 
-		FROM materi
-		INNER JOIN guru ON guru.id = materi.id_guru
-		INNER JOIN kelas ON kelas.id_kelas = materi.id_kelas
-		INNER JOIN matapelajaran ON matapelajaran.id_matapelajaran= materi.id_matapelajaran
-		WHERE materi.id_kelas = ".$kelas."
-		LIMIT ".$y.",".$x; //kelas dari siswa
-		$this->db->order_by('id_materi','desc');
-		$query = $this->db->query($sql);
-		if($query->num_rows()>0){return $query->result_array();}else{return array();}
-	}
 	//ALL SOAL
 	public function all_soal($x,$y){
 		$sql="SELECT guru.nama_lengkap AS 'guru',kelas.nama_kelas AS 'kelas',

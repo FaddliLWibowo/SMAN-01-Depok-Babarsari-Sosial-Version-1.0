@@ -1,4 +1,4 @@
- <div class="panel-group" id="accordion">
+<div class="panel-group" id="accordion">
   <div class="panel panel-default">
     <div class="panel-heading">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#pesan">
@@ -41,7 +41,7 @@
      </div>
    </div>
  </div>
- 
+
  <div class="panel panel-default">
   <div class="panel-heading">
     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#news">

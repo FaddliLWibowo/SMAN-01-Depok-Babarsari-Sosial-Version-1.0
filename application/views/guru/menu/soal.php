@@ -1,6 +1,7 @@
 <div class="message">
 	<?php 
-	$soal = $this->m_all->all_soal(10,0);
+	$soal = $this->m_guru->soal_saya(10,0,$this->session->userdata('id'));
+	
 	foreach($soal as $s):
 		echo '<p>'.$s['guru'].'<br/>';
 		echo '<a href="'.base_url('assets/assets/materi/'.$s['link']).'">'.$s['judul'].'</a></p>';

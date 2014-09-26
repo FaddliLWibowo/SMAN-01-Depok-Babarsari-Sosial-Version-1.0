@@ -26,15 +26,19 @@ class nilai extends base{
 		}
 		switch ($this->input->get('act')) {
 			case 'byclass':
-				$data['view'] = $this->m_guru->nilai_saya($config['per_page'],$uri,$this->session->userdata('id'));
+				if($this->session->userdata('siswa_logged_in')){
+					$lastclass = $this->my_last_class($this->session->userdata('id'));
+					$data['view'] = $this->m_siswa->my_class_nilai($config['per_page'],$uri,$lastclass);
+				} else {	
+					$data['view'] = $this->m_guru->nilai_saya($config['per_page'],$uri,$this->session->userdata('id'));
+				}
 				break;
-
 			case 'all':
 				$data['view'] = $this->m_all->all_nilai($config['per_page'],$uri);
 				break;
 			
 			default:
-				redirect('guru?act=byclass');
+				redirect('nilai?act=byclass');
 				break;
 		}
 		//end pagination setup		

@@ -1,17 +1,21 @@
 24 Sep 2014
 
 Upload data siswa dan guru menggunakan data yang sudah diberikan secara massal.
-bagian sidebar, hanya soal untuk siswa tsb.
-bagian sidebar, hanya nilai untuk siswa tsb.
-bagian sidebar, hanya materi untuk siswa tsb.
+bagian sidebar, hanya soal untuk siswa tsb. [fixed]
+bagian sidebar, hanya nilai untuk siswa tsb. [fixed]
+bagian sidebar, hanya materi untuk siswa tsb. [fixed]
 
 bagian sidebar, hanya soal untuk guru tsb. [fixed]
 bagian sidebar, hanya nilai untuk guru tsb. [fixed]
-bagian sidebar, hanya materi untuk guru tsb.[fixed]
+bagian sidebar, hanya materi untuk guru tsb. [fixed]
 
 guru semua materi [fixed]
 guru semua soal [fixed]
 guru semua nilai [fixed]
+
+siwa semua materi [fixed]
+siswa semua soal [fixed]
+siswa semua nilai [fixed]
 
 jadwal di profile guru [fixed]
 

@@ -195,4 +195,47 @@ class m_siswa extends CI_Model{
             return array();
         }
     }
+    /*****ALL ABOUT MATERI-SOAL-NILAI*****/
+    //Materi berdasarkan kelas
+    public function my_class_materi($x,$y,$kelas){
+        $sql="SELECT guru.nip AS 'nip',guru.nama_lengkap AS 'guru',kelas.nama_kelas AS 'kelas',
+        matapelajaran.matapelajaran AS 'mapel', judul,link,tahun 
+        FROM materi
+        INNER JOIN guru ON guru.id = materi.id_guru
+        INNER JOIN kelas ON kelas.id_kelas = materi.id_kelas
+        INNER JOIN matapelajaran ON matapelajaran.id_matapelajaran= materi.id_matapelajaran
+        WHERE materi.id_kelas = ".$kelas."
+        LIMIT ".$y.",".$x; //kelas dari siswa
+        $this->db->order_by('id_materi','desc');
+        $query = $this->db->query($sql);
+        if($query->num_rows()>0){return $query->result_array();}else{return array();}
+    }
+    //Soal berdasarkan kelas
+    public function my_class_soal($x,$y,$kelas){
+        $sql="SELECT guru.nama_lengkap AS 'guru',kelas.nama_kelas AS 'kelas',
+        matapelajaran.matapelajaran AS 'mapel', judul,link,tahun 
+        FROM soal
+        INNER JOIN guru ON guru.id = soal.id_guru
+        INNER JOIN kelas ON kelas.id_kelas = soal.id_kelas
+        INNER JOIN matapelajaran ON matapelajaran.id_matapelajaran= soal.id_matapelajaran
+        WHERE soal.id_kelas = ".$kelas."
+        LIMIT ".$y.",".$x;
+        $this->db->order_by('id_soal','desc');
+        $query = $this->db->query($sql);
+        if($query->num_rows()>0){return $query->result_array();}else{return array();}
+    }
+    //Nilai berdasarkan kelas
+    public function my_class_nilai($x,$y,$kelas){
+        $sql="SELECT guru.nama_lengkap AS 'guru',kelas.nama_kelas AS 'kelas',
+        matapelajaran.matapelajaran AS 'mapel', judul,link,tahun 
+        FROM nilai
+        INNER JOIN guru ON guru.id = nilai.id_guru
+        INNER JOIN kelas ON kelas.id_kelas = nilai.id_kelas
+        INNER JOIN matapelajaran ON matapelajaran.id_matapelajaran= nilai.id_matapelajaran
+        WHERE nilai.id_kelas = ".$kelas."
+        LIMIT ".$y.",".$x;
+        $this->db->order_by('id_soal','desc');
+        $query = $this->db->query($sql);
+        if($query->num_rows()>0){return $query->result_array();}else{return array();}
+    }
 }
