@@ -20,7 +20,10 @@ siswa semua nilai [fixed]
 jadwal di profile guru [fixed]
 
 guru semua materi + materi saya by guru [fixed]
-siswa semua materi + materi saya by class 
+siswa semua materi + materi saya by class [fixed]
 jika salah nip/nis dihalaman profile [fixed]
-menu untuk link aktif + sidebar
-menu untuk tab aktif
+menu untuk link aktif + sidebar [fixed]
+menu untuk tab aktif [fixed]
+
+hapus status  [fixed]
+hapus komentar

@@ -83,8 +83,6 @@ class json extends CI_Controller{
 				$link = site_url('guru/profile/'.$data['nip']);
 				$name = $data['nama_lengkap'];
 				$avatar = $data['avatar'];
-			}else if(!is_null($id_grup)){
-				$name = 'on construct';//GET GROUP NAME BY ID;
 			}
 			//IF NOT SET AVATAR			
 			if(!$avatar){ //IF NOT UPLOAD AVATAR
@@ -104,15 +102,18 @@ class json extends CI_Controller{
 				$des_name = $des_data['nama_lengkap'];
 				$des_avatar = $des_data['avatar'];
 			}else if(!is_null($des_id_grup)){
-				$des_name = 'on construct';//GET GROUP NAME BY ID;
+				$des_data = $this->m_grup->data_by_id($des_id_grup);
+				$des_link = site_url('grup/welcome/'.$des_id_grup.'/'.$des_data['nama_grup']);
+				$des_name = $des_data['nama_grup'];//GET GROUP NAME BY ID;
+				$des_avatar = $des_data['avatar'];
 			}
-
+			//ready encode to json
 			$result[] = array('id'=>$id,'content'=>$content,'tag'=>$tag,'profile'=>$link,'name'=>$name,'avatar'=>$avatar,
 				'des_profile'=>$des_link,'des_name'=>$des_name,'des_avatar'=>$des_avatar,'time'=>$waktu,'like'=>$like);
 			endforeach;
-		//ENCODE TO JSON
+			//ENCODE TO JSON
 			$json['result'] = $result;
-		//ECHO JSON
+			//ECHO JSON
 			echo json_encode($json);
 		}
 
@@ -291,5 +292,5 @@ class json extends CI_Controller{
 				$json['result'] = $result;
 			//ECHO JSON
 				echo json_encode($json);
+			}
 		}
-	}

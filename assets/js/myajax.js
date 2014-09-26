@@ -27,7 +27,7 @@ $.ajax({
 	success:function(data){
 		timeline ='';
 		$.each(data['result'], function(i,n){
-			timeline = '<div class=\'timeline\'> <button data-dismiss="alert" onclick="deleteMyStatus()" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+			timeline = '<div class=\'timeline\'> <button data-dismiss="alert" onclick="deleteMyStatus('+n['id']+')" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
 			'<div name=\''+n['id']+'\' class=\'row name\'> '+
 			'<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' />'+
 			'<h5><a href=\''+n['profile']+'\'><strong>'+n['name']+'</strong></a> > <a href=\''+n['des_profile']+'\'><strong>'+n['des_name']+'</strong></a></h5><h6>'+n['time']+'</h6>'+
@@ -80,7 +80,7 @@ $.ajax({
 	success:function(data){
 		timeline ='';
 		$.each(data['result'], function(i,n){
-			timeline = '<div class=\'timeline\'><button data-dismiss="alert" onclick="deleteMyStatus()" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+			timeline = '<div class=\'timeline\'><button data-dismiss="alert" onclick="deleteMyStatus('+n['id']+')" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
 			'<div name=\''+n['id']+'\' class=\'row name\'>'+
 			'<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' />'+
 			'<h5><a href=\''+n['profile']+'\'><strong>'+n['name']+'</strong></a> > <a href=\''+n['des_profile']+'\'><strong>'+n['des_name']+'</strong></a></h5><h6>'+n['time']+'</h6>'+
@@ -131,7 +131,7 @@ $.ajax({
 	success:function(data){
 		timeline ='';
 		$.each(data['result'], function(i,n){
-			timeline = '<div class=\'timeline\'><button data-dismiss="alert" onclick="deleteMyStatus()" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+			timeline = '<div class=\'timeline\'><button data-dismiss="alert" onclick="deleteMyStatus('+n['id']+')" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
 			'<div name=\''+n['id']+'\' class=\'row name\'>'+
 			'<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' />'+
 			'<h5><a href=\''+n['profile']+'\'><strong>'+n['name']+'</strong></a> > <a href=\''+n['des_profile']+'\'><strong>'+n['des_name']+'</strong></a></h5><h6>'+n['time']+'</h6>'+
@@ -195,11 +195,55 @@ function updateStatus(x,y,z,a,b,c){ //X= ID_SISWA,y = ID_GURU,Z = ID_GRUP | a = 
 	}
 
 }
-
 //DELETE MY STATUS
-function deleteMyStatus(){
-	var status = confirm('Anda Yakin');
+function deleteMyStatus(x){ //idpost
+	var act = confirm('Anda Yakin');
+	if(act == true){
+		$.ajax({
+			url:'../index.php/process/publik/deletestatus?id='+x,
+			timeout:5000,
+			success:function(){
+				//alert('Status berhasil dihapus');
+			},
+			error:function(data){
+				alert('Hapus bermasalah \n atau Bukan status anda');
+			}
+		});
+	} 
 }
+//DELETE PROFIl STATUS
+function deleteProfileStatus(x){
+	var act = confirm('Anda Yakin');
+	if(act == true){
+		$.ajax({
+			url:'../../index.php/process/publik/deletestatus?id='+x,
+			timeout:5000,
+			success:function(){
+				//alert('Status berhasil dihapus');
+			},
+			error:function(data){
+				alert('Hapus bermasalah \n atau Bukan status anda');
+			}
+		});
+	} 
+}
+//DELETE GRUP STATUS
+function deleteGroupStatus(x){ //idpost
+	var act = confirm('Anda Yakin');
+	if(act == true){
+		$.ajax({
+			url:'../../../index.php/process/publik/deletestatus?id='+x,
+			timeout:5000,
+			success:function(){
+				//alert('Status berhasil dihapus');
+			},
+			error:function(data){
+				alert('Hapus bermasalah \n atau Bukan status anda');
+			}
+		});
+	} 
+}
+
 
 /*
 * AJAX FOR COMMENTS
@@ -215,8 +259,64 @@ function getCommentById(x){ //COMMENT BY ID STATUS
 			//alert(x);
 			$('.comments'+x).html('<div></div>');
 			$.each(data['result'], function(i,n){//LOPPING COMMENTS
-				comment = '<div class=\'comment row\'>'+
-				'<div class=\'col-md-2\'>'+            
+				comment = '<div class=\'comment row\'> <button data-dismiss="alert" onclick="" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+				'<div style="margin-top:20px" class=\'col-md-2\'> '+            
+				'<img src=\''+n['avatar']+'\' />'+
+				'</div>'+
+				'<div class=\'col-md-10\'>'+
+				'<p><span><strong><a href=\'#\'>'+n['name']+'</a></strong> '+n['isi']+'</p>'+
+				'<h6>'+n['waktu']+'</h6>'+
+				'</div>'+
+				'</div>';
+				comment = comment+'';
+				$('.comments'+x).append(comment);							
+			});								
+		},
+		error:function(){
+			alert('Tidak ada komentar');
+		}
+	});
+}
+function getCommentOnProfileById(x){ //COMMENT BY ID STATUS	
+	$.ajax({ //x=id_status		
+		type:'GET',
+		dataType:'json',
+		url:'../../index.php/json/show_comment_by_id?id='+x,
+		timeout: 50000,//50000MS
+		success:function(data){ //SUCCESS INSERT TO DB			
+			//alert(x);
+			$('.comments'+x).html('<div></div>');
+			$.each(data['result'], function(i,n){//LOPPING COMMENTS
+				comment = '<div class=\'comment row\'> <button data-dismiss="alert" onclick="" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+				'<div style="margin-top:20px" class=\'col-md-2\'> '+            
+				'<img src=\''+n['avatar']+'\' />'+
+				'</div>'+
+				'<div class=\'col-md-10\'>'+
+				'<p><span><strong><a href=\'#\'>'+n['name']+'</a></strong> '+n['isi']+'</p>'+
+				'<h6>'+n['waktu']+'</h6>'+
+				'</div>'+
+				'</div>';
+				comment = comment+'';
+				$('.comments'+x).append(comment);							
+			});								
+		},
+		error:function(){
+			alert('Tidak ada komentar');
+		}
+	});
+}
+function getCommentOnGroupById(x){ //COMMENT BY ID STATUS	
+	$.ajax({ //x=id_status		
+		type:'GET',
+		dataType:'json',
+		url:'../../../index.php/json/show_comment_by_id?id='+x,
+		timeout: 50000,//50000MS
+		success:function(data){ //SUCCESS INSERT TO DB			
+			//alert(x);
+			$('.comments'+x).html('<div></div>');
+			$.each(data['result'], function(i,n){//LOPPING COMMENTS
+				comment = '<div class=\'comment row\'> <button data-dismiss="alert" onclick="" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+				'<div style="margin-top:20px" class=\'col-md-2\'> '+            
 				'<img src=\''+n['avatar']+'\' />'+
 				'</div>'+
 				'<div class=\'col-md-10\'>'+

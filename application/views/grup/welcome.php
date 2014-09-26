@@ -28,7 +28,7 @@ if($view['status'] == 'blocked'){
     $.ajax({
       url:'<?php echo site_url("all/addcomment");?>?idsiswa=<?php echo $sis;?>&idguru=<?php echo $gur;?>&idpost='+x+'&comment='+comment,
       success:function(){
-        getCommentById(x);
+        getCommentOnGroupById(x);
       },
       error:function(){
         alert('error add comment');
@@ -46,7 +46,7 @@ if($view['status'] == 'blocked'){
     success:function(data){
       timeline ='';
       $.each(data['result'], function(i,n){
-        timeline = '<div class=\'timeline\'><button data-dismiss="alert" onclick="deleteMyStatus()" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+        timeline = '<div class=\'timeline\'><button data-dismiss="alert" onclick="deleteGroupStatus('+n['id']+')" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
         '<div name=\''+n['id']+'\' class=\'row name\'>'+
         '<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' />'+
         '<h5><a href=\''+n['profile']+'\'><strong>'+n['name']+'</strong></a> > <a href=\''+n['des_profile']+'\'><strong>'+n['des_name']+'</strong></a></h5><h6>'+n['time']+'</h6>'+
@@ -58,7 +58,7 @@ if($view['status'] == 'blocked'){
         '<p><small>upload file : <a href="'+n['upload']+'">'+n['uploadname']+'</a></small></p>'+
         '<p>'+
         '<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'> '+n['like']+' </span>'+
-        '<button onclick=\'getCommentById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
+        '<button onclick=\'getCommentOnGroupById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
         '</p>'+
         '</div>'+
         '</div>'+     
@@ -97,7 +97,7 @@ function updatedGrupStatus(){
     success:function(data){
       timeline ='';
       $.each(data['result'], function(i,n){
-        timeline = '<div class=\'timeline\'><button data-dismiss="alert" onclick="deleteMyStatus()" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+        timeline = '<div class=\'timeline\'><button data-dismiss="alert" onclick="deleteGroupStatus('+n['id']+')" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
         '<div name=\''+n['id']+'\' class=\'row name\'>'+
         '<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' />'+
         '<h5><a href=\''+n['profile']+'\'><strong>'+n['name']+'</strong></a> > <a href=\''+n['des_profile']+'\'><strong>'+n['des_name']+'</strong></a></h5><h6>'+n['time']+'</h6>'+
@@ -109,7 +109,7 @@ function updatedGrupStatus(){
         '<p><small>upload file : <a href="'+n['upload']+'">'+n['uploadname']+'</a></small></p>'+
         '<p>'+
         '<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'> '+n['like']+' </span>'+
-        '<button onclick=\'getCommentById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
+        '<button onclick=\'getCommentOnGroupById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
         '</p>'+
         '</div>'+
         '</div>'+     
@@ -148,7 +148,7 @@ function moreGrupStatus(){
     success:function(data){
       timeline ='';
       $.each(data['result'], function(i,n){
-        timeline = '<div class=\'timeline\'><button data-dismiss="alert" onclick="deleteMyStatus()" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+        timeline = '<div class=\'timeline\'><button data-dismiss="alert" onclick="deleteGroupStatus('+n['id']+')" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
         '<div name=\''+n['id']+'\' class=\'row name\'>'+
         '<div class=\'col-md-12\'><img src=\''+n['avatar']+'\' />'+
         '<h5><a href=\''+n['profile']+'\'><strong>'+n['name']+'</strong></a> > <a href=\''+n['des_profile']+'\'><strong>'+n['des_name']+'</strong></a></h5><h6>'+n['time']+'</h6>'+
@@ -160,7 +160,7 @@ function moreGrupStatus(){
         '<p><small>upload file : <a href="'+n['upload']+'">'+n['uploadname']+'</a></small></p>'+
         '<p>'+
         '<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'> '+n['like']+' </span>'+
-        '<button onclick=\'getCommentById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
+        '<button onclick=\'getCommentOnGroupById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
         '</p>'+
         '</div>'+
         '</div>'+     
