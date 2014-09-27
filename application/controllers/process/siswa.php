@@ -47,6 +47,7 @@ class siswa extends base{
 			}
 		} else { //jika form validasi tidak jalan
 			$data['title'] = 'Error Login';
+			$data['berita'] = $this->m_berita->berita(3,0);
 			$this->defaultdisplay('publik/home', $data);//menampilkan publik home dan error
 		}
 	}
