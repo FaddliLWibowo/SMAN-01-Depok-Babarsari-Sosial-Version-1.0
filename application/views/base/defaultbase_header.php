@@ -84,7 +84,7 @@
 						<li id="home"><a href="'.site_url('guru/timeline').'">Home</a></li>
 						';
 					} else {
-						echo '<li><a data-toggle="modal" href="#login">Login '.validation_errors().'</a></li>
+						echo '<li><a data-toggle="modal" href="#login">Login</a></li>
 						<li id="about"><a href="'.site_url("berita/baca/3").'">About</a></li>
 						<li id="home"><a href="'.site_url().'">Home</a></li>
 						';					

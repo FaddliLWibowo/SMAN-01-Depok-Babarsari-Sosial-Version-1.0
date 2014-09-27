@@ -50,16 +50,19 @@ class guru extends base{
 				echo ("<SCRIPT LANGUAGE='JavaScript'>
 					window.alert('Login Sebagai Guru Berhasil');
 					window.location.href='".site_url('guru/timeline')."';
-					</SCRIPT>");
+				</SCRIPT>");
 			} else { //jika guru tidak ditemukan
 				echo ("<SCRIPT LANGUAGE='JavaScript'>
 					window.alert('Terjadi kesalahan, silahkan ulangi lagi');
 					window.location.href='".site_url()."';
-					</SCRIPT>");
+				</SCRIPT>");
 			}
 		} else { //jika form validasi tidak jalan
 			$data['title'] = 'Error Login';
 			$data['berita'] = $this->m_berita->berita(3,0);
+			echo ("<SCRIPT LANGUAGE='JavaScript'>
+				window.alert('NIP dan Password tidak cocok');
+			</SCRIPT>");
 			$this->defaultdisplay('publik/home', $data);//menampilkan publik home dan error
 		}
 	}
@@ -143,7 +146,7 @@ class guru extends base{
 				echo ("<SCRIPT LANGUAGE='JavaScript'>
 					window.alert('Gabung grup Sukses');
 					window.location.href='".site_url('grup')."';
-					</SCRIPT>");
+				</SCRIPT>");
 			} else { //JOIN FAILED
 				echo ("<SCRIPT LANGUAGE='JavaScript'>
 					window.alert('Gagal gabung ke grup');
@@ -204,9 +207,9 @@ class guru extends base{
 			if(!$this->upload->do_upload('fileUpload')){
 				//redirect(site_url('guru/profile/'.$this->session->userdata('nip')));//BACK TO PROFILE PAGE
 				echo ("<SCRIPT LANGUAGE='JavaScript'>
-						window.alert('".$this->upload->display_errors('', '')."');
-						window.location.href='".site_url('guru/profile/'.$this->session->userdata('nip'))."';
-					</SCRIPT>");
+					window.alert('".$this->upload->display_errors('', '')."');
+					window.location.href='".site_url('guru/profile/'.$this->session->userdata('nip'))."';
+				</SCRIPT>");
 			}
 		} else { //DATA NOT VALID
 			echo 'Insert Error';
@@ -217,14 +220,14 @@ class guru extends base{
 		VALUES(?,?,?,?,?,?)";
 		if($this->db->query($sql,$params)) { //SUCCESS UPLOAD MATERI
 			echo ("<SCRIPT LANGUAGE='JavaScript'>
-						window.alert('Sukses Upload Materi');
-						window.location.href='".site_url('guru/profile/'.$this->session->userdata('nip'))."';
-					</SCRIPT>");
+				window.alert('Sukses Upload Materi');
+				window.location.href='".site_url('guru/profile/'.$this->session->userdata('nip'))."';
+			</SCRIPT>");
 		}else{ //UPLOAD MATERI ERROR
 			echo ("<SCRIPT LANGUAGE='JavaScript'>
-						window.alert('Gagal Upload Materi, Coba Lagi');
-						window.location.href='".site_url('guru/profile/'.$this->session->userdata('nip'))."';
-					</SCRIPT>");
+				window.alert('Gagal Upload Materi, Coba Lagi');
+				window.location.href='".site_url('guru/profile/'.$this->session->userdata('nip'))."';
+			</SCRIPT>");
 		}
 	}
 
@@ -253,9 +256,9 @@ class guru extends base{
 			if(!$this->upload->do_upload('fileUpload')){
 				//redirect(site_url('guru/profile/'.$this->session->userdata('nip')));//BACK TO PROFILE PAGE
 				echo ("<SCRIPT LANGUAGE='JavaScript'>
-						window.alert('".$this->upload->display_errors('', '')."');
-						window.location.href='".site_url('guru/profile/'.$this->session->userdata('nip'))."';
-					</SCRIPT>");
+					window.alert('".$this->upload->display_errors('', '')."');
+					window.location.href='".site_url('guru/profile/'.$this->session->userdata('nip'))."';
+				</SCRIPT>");
 			}
 		} else { //DATA NOT VALID
 			echo 'Insert Error';
@@ -266,18 +269,18 @@ class guru extends base{
 		VALUES(?,?,?,?,?,?)";
 		if($this->db->query($sql,$params)) { //SUCCESS UPLOAD MATERI
 			echo ("<SCRIPT LANGUAGE='JavaScript'>
-						window.alert('Sukses Upload Soal');
-						window.location.href='".site_url('guru/profile/'.$this->session->userdata('nip'))."';
-					</SCRIPT>");
+				window.alert('Sukses Upload Soal');
+				window.location.href='".site_url('guru/profile/'.$this->session->userdata('nip'))."';
+			</SCRIPT>");
 		}else{ //UPLOAD MATERI ERROR
 			echo ("<SCRIPT LANGUAGE='JavaScript'>
-						window.alert('Gagal Upload Soal, Coba Lagi');
-						window.location.href='".site_url('guru/profile/'.$this->session->userdata('nip'))."';
-					</SCRIPT>");
+				window.alert('Gagal Upload Soal, Coba Lagi');
+				window.location.href='".site_url('guru/profile/'.$this->session->userdata('nip'))."';
+			</SCRIPT>");
 		}
 	}
 	/****************** ALL ABOUT nilai ******************/
-  public function addnilai(){
+	public function addnilai(){
     //INSTANITATION
     $idguru =$this->session->userdata('id');//GET IDGURU
     $idkelas = $this->input->post('slcKelas');//ID KELASif
@@ -291,7 +294,7 @@ class guru extends base{
     $this->form_validation->set_rules('slcMataPelajaran', 'Mata Pelajaran', 'required');
     $this->form_validation->set_rules('txtMateri', 'Materi', 'required');
     if($this->form_validation->run()){ //DATA VALID
-      $this->load->library('upload');
+    	$this->load->library('upload');
       $title = str_replace(' ', '_', $link['name']);//GET NAME FROM UPLOADED MATERI
       $config['upload_path'] = './assets/assets/materi/';
       $config['allowed_types'] = 'doc|docx|pdf|xls|xlsx|odt|ods';
@@ -300,28 +303,28 @@ class guru extends base{
       $this->upload->initialize($config);
       if(!$this->upload->do_upload('fileUpload')){
         //redirect(site_url('guru/profile/'.$this->session->userdata('nip')));//BACK TO PROFILE PAGE
-        echo ("<SCRIPT LANGUAGE='JavaScript'>
-            window.alert('".$this->upload->display_errors('', '')."');
-            window.location.href='".site_url('guru/profile/'.$this->session->userdata('nip'))."';
-          </SCRIPT>");
+      	echo ("<SCRIPT LANGUAGE='JavaScript'>
+      		window.alert('".$this->upload->display_errors('', '')."');
+      		window.location.href='".site_url('guru/profile/'.$this->session->userdata('nip'))."';
+      	</SCRIPT>");
       }
     } else { //DATA NOT VALID
-      echo 'Insert Error';
+    	echo 'Insert Error';
     }
 
     $params = array($idkelas,$idmapel,$idguru,$judul,$title,$year);
     $sql = "INSERT INTO nilai(id_kelas,id_matapelajaran,id_guru,judul,link,tahun) 
     VALUES(?,?,?,?,?,?)";
     if($this->db->query($sql,$params)) { //SUCCESS UPLOAD MATERI
-      echo ("<SCRIPT LANGUAGE='JavaScript'>
-            window.alert('Sukses Upload nilai');
-            window.location.href='".site_url('guru/profile/'.$this->session->userdata('nip'))."';
-          </SCRIPT>");
+    	echo ("<SCRIPT LANGUAGE='JavaScript'>
+    		window.alert('Sukses Upload nilai');
+    		window.location.href='".site_url('guru/profile/'.$this->session->userdata('nip'))."';
+    	</SCRIPT>");
     }else{ //UPLOAD MATERI ERROR
-      echo ("<SCRIPT LANGUAGE='JavaScript'>
-            window.alert('Gagal Upload nilai, Coba Lagi');
-            window.location.href='".site_url('guru/profile/'.$this->session->userdata('nip'))."';
-          </SCRIPT>");
+    	echo ("<SCRIPT LANGUAGE='JavaScript'>
+    		window.alert('Gagal Upload nilai, Coba Lagi');
+    		window.location.href='".site_url('guru/profile/'.$this->session->userdata('nip'))."';
+    	</SCRIPT>");
     }
-  }
+}
 }
