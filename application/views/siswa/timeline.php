@@ -3,7 +3,7 @@
   //WHEN DOCUMENT READY
   $(document).ready(function(){ 
     lattestStatus();//LOAD LATTEST UPDATES
-    setInterval(function(){showUpdatedStatus();},20000);//LOAD LATTEST UPDATES EVERY 20 seconds    
+    setInterval(function(){showUpdatedStatus();},5000);//LOAD LATTEST UPDATES EVERY 20 seconds    
   });
 
   //write comment

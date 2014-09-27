@@ -215,7 +215,7 @@ class json extends CI_Controller{
 			} else{ //UPLOADED AVATAR , GET AVATAR LOCATION
 				$avatar = base_url('assets/img/avatar/'.$avatar);
 			}
-			$result[] = array('id_komentar'=>$id_komentar,'id_status'=>$id_status,'name'=>$name,'avatar'=>$avatar,'isi'=>$isi,'waktu'=>$waktu);
+			$result[] = array('id'=>$id_komentar,'id_status'=>$id_status,'name'=>$name,'avatar'=>$avatar,'isi'=>$isi,'waktu'=>$waktu);
 			endforeach;
 			if(!empty($result)){
 			//ENCODE TO JSON

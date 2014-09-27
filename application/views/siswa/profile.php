@@ -3,7 +3,7 @@
 //WHEN DOCUMENT READY
 $(document).ready(function(){ 
   profileStatus();//LOAD LATTEST UPDATES
-  setInterval(function(){showUpdatedStatusOnProfile();},20000);//LOAD LATTEST UPDATES EVERY 20 seconds    
+  setInterval(function(){showUpdatedStatusOnProfile();},5000);//LOAD LATTEST UPDATES EVERY 20 seconds    
 });
  //write comment
   function writecomment(x){ //x=is id status : y = id siswa : z = id guru
@@ -20,7 +20,7 @@ $(document).ready(function(){
     $.ajax({
       url:'<?php echo site_url("all/addcomment");?>?idsiswa=<?php echo $sis;?>&idguru=<?php echo $gur;?>&idpost='+x+'&comment='+comment,
       success:function(){
-        getCommentById(x);
+        getCommentOnProfileById(x);
       },
       error:function(){
         alert('error add comment');
@@ -49,7 +49,7 @@ function profileStatus(){
         '<p>'+n['content']+'</p>'+
         '<p>'+
         '<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'>'+n['like']+'</span>'+
-        '<button onclick=\'getCommentById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
+        '<button onclick=\'getCommentOnProfileById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
         '</p>'+
         '</div>'+
         '</div>'+     
@@ -99,7 +99,7 @@ $.ajax({
       '<p>'+n['content']+'</p>'+
       '<p>'+
       '<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'>'+n['like']+'</span>'+
-      '<button onclick=\'getCommentById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
+      '<button onclick=\'getCommentOnProfileById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
       '</p>'+
       '</div>'+
       '</div>'+
@@ -148,7 +148,7 @@ function showMoreStatusOnProfile(){
         '<p>'+n['content']+'</p>'+
         '<p>'+
         '<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'>'+n['like']+'</span>'+
-        '<button onclick=\'getCommentById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
+        '<button onclick=\'getCommentOnProfileById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
         '</p>'+
         '</div>'+
         '</div>'+

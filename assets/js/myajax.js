@@ -259,7 +259,7 @@ function getCommentById(x){ //COMMENT BY ID STATUS
 			//alert(x);
 			$('.comments'+x).html('<div></div>');
 			$.each(data['result'], function(i,n){//LOPPING COMMENTS
-				comment = '<div class=\'comment row\'> <button data-dismiss="alert" onclick="" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+				comment = '<div class=\'comment row\'> <button data-dismiss="alert" onclick="deleteCommentOnTimeline('+n['id']+')" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
 				'<div style="margin-top:20px" class=\'col-md-2\'> '+            
 				'<img src=\''+n['avatar']+'\' />'+
 				'</div>'+
@@ -287,7 +287,7 @@ function getCommentOnProfileById(x){ //COMMENT BY ID STATUS
 			//alert(x);
 			$('.comments'+x).html('<div></div>');
 			$.each(data['result'], function(i,n){//LOPPING COMMENTS
-				comment = '<div class=\'comment row\'> <button data-dismiss="alert" onclick="" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+				comment = '<div class=\'comment row\'> <button data-dismiss="alert" onclick="deleteCommentOnProfile('+n['id']+')" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
 				'<div style="margin-top:20px" class=\'col-md-2\'> '+            
 				'<img src=\''+n['avatar']+'\' />'+
 				'</div>'+
@@ -315,7 +315,7 @@ function getCommentOnGroupById(x){ //COMMENT BY ID STATUS
 			//alert(x);
 			$('.comments'+x).html('<div></div>');
 			$.each(data['result'], function(i,n){//LOPPING COMMENTS
-				comment = '<div class=\'comment row\'> <button data-dismiss="alert" onclick="" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
+				comment = '<div class=\'comment row\'> <button data-dismiss="alert" onclick="deleteCommentOnGroup('+n['id']+')" class=\'close btn btn-xs btn-default\' style=\'float:right;top:0\'>x</button>'+
 				'<div style="margin-top:20px" class=\'col-md-2\'> '+            
 				'<img src=\''+n['avatar']+'\' />'+
 				'</div>'+
@@ -333,7 +333,50 @@ function getCommentOnGroupById(x){ //COMMENT BY ID STATUS
 		}
 	});
 }
+/*ALL ABOUT DELETE COMMENT*/
+function deleteCommentOnTimeline(x){
+	var act = confirm('Anda yakin');
+	if(act == true){
+		$.ajax({
+			url : '../index.php/all/deletecomment?id='+x,
+			success:function(){
 
+			},
+			error:function(){
+				alert('Gagal Hapus \n Bukan Komentar Anda');
+			}
+		});
+	}
+}
+function deleteCommentOnProfile(x){
+	var act = confirm('Anda yakin');
+	if(act == true){
+		$.ajax({
+			url : '../../index.php/all/deletecomment?id='+x,
+			success:function(){
+				
+			},
+			error:function(){
+				alert('Gagal Hapus \n Bukan Komentar Anda');
+			}
+		});
+	}
+}
+function deleteCommentOnGroup(x){
+	var act = confirm('Anda yakin');
+	if(act == true){
+		$.ajax({
+			url : '../../../index.php/all/deletecomment?id='+x,
+			success:function(){
+				
+			},
+			error:function(){
+				alert('Gagal Hapus \n Bukan Komentar Anda');
+			}
+		});
+	}
+}
+/*ALL ABOUT LIKE*/
 function addlike(x){ //x id status
 	like = $('.'+x).html();
 	newlike = parseInt(like);//convert to INT

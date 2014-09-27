@@ -112,7 +112,7 @@ class admin extends base{
 
 	///SISWA CONTROLER///
 	public function siswa(){
-		$data['siswa'] = "$('#dashboard').addClass('active')";
+		$data['scriptadmin'] = "$('#siswa').addClass('active')";
 		//pagination
 		$this->load->library('pagination');
 		$config['base_url'] = site_url('admin/siswa?act=0');
@@ -189,7 +189,7 @@ class admin extends base{
 
 	///GURU CONTROLER///
 		public function guru(){		
-			$data['guru'] = "$('#dashboard').addClass('active')";
+			$data['scriptadmin'] = "$('#guru').addClass('active')";
 		//pagination
 			$this->load->library('pagination');
 			$config['base_url'] = site_url('admin/guru?act=0');

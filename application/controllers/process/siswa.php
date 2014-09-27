@@ -79,7 +79,7 @@ class siswa extends base{
 			//UPLOAD AVATAR MANAGEMENT
 			if(isset($_FILES['myAvatar'])){ //IF UPLOAD NEW AVATAR
 				$this->load->library('upload');
-				$avatarname = str_replace(' ', '-', $img['name']);
+				$avatarname = str_replace(' ', '_', $img['name']);
 				$config['upload_path'] = './assets/img/avatar';
 				$config['allowed_types'] = 'gif|png|jpg|jpeg|GIF|PNG|JPG|JPEG';
 				$config['overwrite'] = true;

@@ -26,4 +26,4 @@ menu untuk link aktif + sidebar [fixed]
 menu untuk tab aktif [fixed]
 
 hapus status  [fixed]
-hapus komentar
+hapus komentar [fixed]

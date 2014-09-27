@@ -3,7 +3,7 @@
 //WHEN DOCUMENT READY
 $(document).ready(function(){ 
   profileStatus();//LOAD LATTEST UPDATES
-  setInterval(function(){showUpdatedStatusOnProfile();},20000);//LOAD LATTEST UPDATES EVERY 20 seconds    
+  setInterval(function(){showUpdatedStatusOnProfile();},5000);//LOAD LATTEST UPDATES EVERY 20 seconds    
 });
  //write comment
   function writecomment(x){ //x=is id status : y = id siswa : z = id guru
@@ -186,7 +186,7 @@ function updateGuruStatus(x,y,z,a,b,c){ //X= ID_SISWA,y = ID_GURU,Z = ID_GRUP | 
   } else {
     $.ajax({
       type:'POST',
-      url:'http://localhost/2014-Project/SMAN01DEPOKBABARSARI-SOCIAL/index.php/all/update_status',
+      url:'<?php echo site_url("all/update_status")?>',
     timeout: 50000,//50000MS
     data:{idsiswa:x,idguru:y,idgrup:z,isi:isi,desidsiswa:a,desidguru:b,desidgrup:c},
     success:function(data){ //SUCCESS INSERT TO DB

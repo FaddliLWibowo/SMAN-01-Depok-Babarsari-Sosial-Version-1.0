@@ -60,7 +60,7 @@
         $avatar = base_url('assets/img/grup/avatar.png');
       }
       ?>
-      <div class="col-sm-6 col-md-3">       
+      <div style="margin-bottom:20px" class="col-sm-6 col-md-3">       
         <div class="thumbnail" style="height:400px">         
           <img height="200px" src="<?php echo $avatar;?>" alt="...">
           <div class="caption">

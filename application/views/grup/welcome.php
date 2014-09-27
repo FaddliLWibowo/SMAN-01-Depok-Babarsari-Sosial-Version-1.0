@@ -10,7 +10,7 @@ if($view['status'] == 'blocked'){
 <script type="text/javascript">
   $(document).ready(function(){ 
   grupStatus();//LOAD LATTEST UPDATES
-  setInterval(function(){updatedGrupStatus();},20000);//LOAD LATTEST UPDATES EVERY 20 seconds    
+  setInterval(function(){updatedGrupStatus();},5000);//LOAD LATTEST UPDATES EVERY 20 seconds    
 });
 
    //write comment

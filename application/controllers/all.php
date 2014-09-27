@@ -56,14 +56,14 @@ class all extends base{
 		//status pesan
 		if($this->m_all->send_message($params)){//sukses kirim pesan
 			echo ("<SCRIPT LANGUAGE='JavaScript'>
-					window.alert('Pesan Terkirim');
-					window.location.href='".$this->agent->referrer()."';
-					</SCRIPT>");
+				window.alert('Pesan Terkirim');
+				window.location.href='".$this->agent->referrer()."';
+			</SCRIPT>");
 		} else { //gagal kirim pesan
 			echo ("<SCRIPT LANGUAGE='JavaScript'>
-					window.alert('Pesan Gagal Terkirim');
-					window.location.href='".$this->agent->referrer()."';
-					</SCRIPT>");
+				window.alert('Pesan Gagal Terkirim');
+				window.location.href='".$this->agent->referrer()."';
+			</SCRIPT>");
 		}
 	}
 
@@ -74,16 +74,16 @@ class all extends base{
 		$isi = $this->m_all->isi_pesan_saya($params);
 		foreach($isi as $i):
 			echo '
-			<div class="comment row">
-				<div class="col-md-2">            
-					<img src="assets/images/user/profile1.png" />
-				</div>
-				<div class="col-md-10">
-					<p><span><strong><a href="#">'.$i['pengirim'].'</a></strong></span> '.$i['isi'].'</p>
-					<h6>'.$i['waktu'].'</h6>
-				</div>
+		<div class="comment row">
+			<div class="col-md-2">            
+				<img src="assets/images/user/profile1.png" />
 			</div>
-			';
+			<div class="col-md-10">
+				<p><span><strong><a href="#">'.$i['pengirim'].'</a></strong></span> '.$i['isi'].'</p>
+				<h6>'.$i['waktu'].'</h6>
+			</div>
+		</div>
+		';
 		endforeach;
 		echo '
 		<div class="comment row">
@@ -164,9 +164,9 @@ class all extends base{
 		$query = $this->db->get('grup_keyword');
 		if($query->num_rows()>0){//keyword match
 			echo ' <label>Deskripsi Grup : </label><textarea class="form-control" name="txtGroupDetail" placeholder="About Group" required></textarea><br/>
-                  <label> Cover Grup : </label><input class="form-control" type="file" name="fileGroup" required><br/>
-                  <button class="btn btn-default" type="submit" >Create Group</button><br/>
-               ';
+			<label> Cover Grup : </label><input class="form-control" type="file" name="fileGroup" required><br/>
+			<button class="btn btn-default" type="submit" >Create Group</button><br/>
+			';
 		}else{//keyword not match
 			echo 'Nama Tidak Diperbolehkan';
 		}
@@ -205,18 +205,43 @@ class all extends base{
 			$params = array($groupname,$groupdetail,$student,$teacher,$coverName);
 			if($this->m_all->creategroup($params)) { //SUCCESS CREATING GROUP
 				echo ("<SCRIPT LANGUAGE='JavaScript'>
-						window.alert('Success Creating Group');
-						window.location.href='".site_url('grup')."';
-					</SCRIPT>");
+					window.alert('Success Creating Group');
+					window.location.href='".site_url('grup')."';
+				</SCRIPT>");
 			} else { //FAILED CREATING GROUP
 				echo ("<SCRIPT LANGUAGE='JavaScript'>
-						window.alert('Failed Creating Group');
-						window.location.href='".site_url('grup')."';
-					</SCRIPT>");
+					window.alert('Failed Creating Group');
+					window.location.href='".site_url('grup')."';
+				</SCRIPT>");
+			}
+
 		}
-
 	}
-}
 
+	//COMMENT DELETE
+	public function deletecomment(){
+		$id = $this->input->get('id');//get comment id
+		$komentar = "SELECT id_siswa,id_guru FROM status_komentar WHERE id_komentar = ?";
+		$komentar = $this->db->query($komentar,$id);
+		$komentar = $komentar->row_array();
+		//who logged in
+		if($this->session->userdata('siswa_logged_in')) {
+			if($this->session->userdata('id') == $komentar['id_siswa']){
+				$this->db->where('id_komentar',$id);
+				$this->db->delete('status_komentar');
+			} else {
+				$this->db->where('id_komentar',$id);
+				$this->db->delete('xxx');
+			}
+		} else {
+			if($this->session->userdata('id')==$komentar['id_guru']){
+				$this->db->where('id_komentar',$id);
+				$this->db->delete('status_komentar');
+			} else {
+				$this->db->where('id_komentar',$id);
+				$this->db->delete('xxx');
+			}
+		}		
+	}
 	//Membatasi penggunaan user dan manajemen hacker
 }
