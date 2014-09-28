@@ -57,7 +57,7 @@ if($view['status'] == 'blocked'){
         '<p>'+n['content']+'</p>'+
         '<p><small>upload file : <a href="'+n['upload']+'">'+n['uploadname']+'</a></small></p>'+
         '<p>'+
-        '<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'> '+n['like']+' </span>'+
+        '<button onclick="addlikegroup('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'> '+n['like']+' </span>'+
         '<button onclick=\'getCommentOnGroupById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
         '</p>'+
         '</div>'+
@@ -108,7 +108,7 @@ function updatedGrupStatus(){
         '<p>'+n['content']+'</p>'+
         '<p><small>upload file : <a href="'+n['upload']+'">'+n['uploadname']+'</a></small></p>'+
         '<p>'+
-        '<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'> '+n['like']+' </span>'+
+        '<button onclick="addlikegroup('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'> '+n['like']+' </span>'+
         '<button onclick=\'getCommentOnGroupById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
         '</p>'+
         '</div>'+
@@ -159,7 +159,7 @@ function moreGrupStatus(){
         '<p>'+n['content']+'</p>'+
         '<p><small>upload file : <a href="'+n['upload']+'">'+n['uploadname']+'</a></small></p>'+
         '<p>'+
-        '<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'> '+n['like']+' </span>'+
+        '<button onclick="addlikegroup('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'> '+n['like']+' </span>'+
         '<button onclick=\'getCommentOnGroupById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
         '</p>'+
         '</div>'+

@@ -5,6 +5,105 @@ $(document).ready(function(){
   profileStatus();//LOAD LATTEST UPDATES
   setInterval(function(){showUpdatedStatusOnProfile();},5000);//LOAD LATTEST UPDATES EVERY 20 seconds    
 });
+//SHOALL
+function semuamateri(x){
+  $('#modaldarisaya').modal('show');
+  $('#darisaya').html('loading...');
+  $.ajax({
+    url:'<?php echo site_url("ajax/materiguru?id=");?>'+x,
+    success:function(data){
+      $('#darisaya').html(data);
+    },
+    error:function(){
+      $('#darisaya').html('<center>Gagal Load Materi</center>');
+    },
+  });
+}
+function semuasoal(x){
+  $('#modaldarisaya').modal('show');
+  $('#darisaya').html('loading...');
+  $.ajax({
+    url:'<?php echo site_url("ajax/soalguru?id=");?>'+x,
+    success:function(data){
+      $('#darisaya').html(data);
+    },
+    error:function(){
+      $('#darisaya').html('<center>Gagal Load Soal</center>');
+    },
+  });
+}
+function semuanilai(x){
+  $('#modaldarisaya').modal('show');
+  $('#darisaya').html('loading...');
+  $.ajax({
+    url:'<?php echo site_url("ajax/nilaiguru?id=");?>'+x,
+    success:function(data){
+      $('#darisaya').html(data);
+    },
+    error:function(){
+      $('#darisaya').html('<center>Gagal Load Nilai</center>');
+    },
+  });
+}
+//DELETE ALL
+function deletemateri(x,y){
+ var act=confirm('Yakin?');
+ if(act = true){
+    $.ajax({
+      url:'<?php echo site_url("ajax/deletemateri?id=");?>'+x,
+      success:function(){
+        $.ajax({
+          url:'<?php echo site_url("ajax/materiguru?id=");?>'+y,
+          success:function(data){
+            $('#darisaya').html(data);
+          },
+          error:function(){
+            $('#darisaya').html('<center>Gagal Load Materi</center>');
+          },
+        });
+      }
+    });
+  }
+}
+function deletesoal(x,y){
+ var act=confirm('Yakin?');
+ if(act = true){
+    $.ajax({
+      url:'<?php echo site_url("ajax/deletesoal?id=");?>'+x,
+      success:function(){
+        $.ajax({
+          url:'<?php echo site_url("ajax/soalguru?id=");?>'+y,
+          success:function(data){
+            $('#darisaya').html(data);
+          },
+          error:function(){
+            $('#darisaya').html('<center>Gagal Load Soal</center>');
+          },
+        });
+      }
+    });
+  }
+}
+function deletenilai(x,y){
+ var act=confirm('Yakin?');
+ if(act = true){
+    $.ajax({
+      url:'<?php echo site_url("ajax/deletenilai?id=");?>'+x,
+      success:function(){
+        $.ajax({
+          url:'<?php echo site_url("ajax/nilaiguru?id=");?>'+y,
+          success:function(data){
+            $('#darisaya').html(data);
+          },
+          error:function(){
+            $('#darisaya').html('<center>Gagal Load Nilai</center>');
+          },
+        });
+      }
+    });
+  }
+}
+
  //write comment
   function writecomment(x){ //x=is id status : y = id siswa : z = id guru
     comment = $('#writecomment'+x).val();
@@ -321,6 +420,14 @@ function nilaiGuru(){
 
               <div class="tab-pane" id="materiguru">
                 <a class="btn btn-primary btn-xs" href="#uploadmateri" data-toggle="modal">+ Upload Materi</a>
+                <?php 
+                if($this->session->userdata('guru_logged_in')){
+                  if($this->session->userdata('nip') == $this->uri->segment(3)){
+                    echo '<a class="btn btn-primary btn-xs" onclick="semuamateri('.$this->session->userdata('id').')">+ Semua Materi</a>';
+                  }
+                }
+                ?>
+
                 <!--modal to upload materi-->
                 <div class="modal fade" id="uploadmateri" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
@@ -390,7 +497,15 @@ function nilaiGuru(){
               </div>
 
               <div class="tab-pane" id="soalguru">
-                <a class="btn btn-primary btn-xs" href="#uploadsoal" data-toggle="modal">+ Upload Soal</a><br/><br/>
+                <a class="btn btn-primary btn-xs" href="#uploadsoal" data-toggle="modal">+ Upload Soal</a>
+                <?php 
+                if($this->session->userdata('guru_logged_in')){
+                  if($this->session->userdata('nip') == $this->uri->segment(3)){
+                    echo '<a class="btn btn-primary btn-xs" onclick="semuasoal('.$this->session->userdata('id').')">+ Semua Soal</a>';
+                  }
+                }
+                ?>
+                <br/><br/>
                 <!--modal to upload materi-->
                 <div class="modal fade" id="uploadsoal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
@@ -458,7 +573,16 @@ function nilaiGuru(){
                 </div>
 
                 <div class="tab-pane" id="nilaiguru">
-                  <a class="btn btn-primary btn-xs" href="#uploadnilai" data-toggle="modal">+ Upload nilai</a><br/><br/>
+                <a class="btn btn-primary btn-xs" href="#uploadnilai" data-toggle="modal">+ Upload nilai</a>
+                  <?php 
+                  if($this->session->userdata('guru_logged_in')){
+                    if($this->session->userdata('nip') == $this->uri->segment(3)){
+                      echo '<a class="btn btn-primary btn-xs" onclick="semuanilai('.$this->session->userdata('id').')">+ Semua Nilai</a>';
+                    }
+                  }
+                  ?>
+                  <br/>
+                  <br/>
                   <!--modal to upload materi-->
                   <div class="modal fade" id="uploadnilai" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -576,3 +700,18 @@ function nilaiGuru(){
             </div>
           </div>
         </section>
+
+        <!--modal for all-->
+        <div class="modal fade" id="modaldarisaya" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Upload Saya</h4>
+              </div>
+              <div class="modal-body">
+                <div id="darisaya"></div>
+              </div>                      
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->

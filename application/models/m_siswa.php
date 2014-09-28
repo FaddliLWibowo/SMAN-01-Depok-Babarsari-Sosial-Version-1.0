@@ -94,7 +94,7 @@ class m_siswa extends CI_Model{
     }
     //SEARCH SISWA
     public function searchsiswa($id){
-        $sql = "SELECT * FROM siswa WHERE nip = ?";
+        $sql = "SELECT * FROM siswa WHERE nis = ?";
         $result = $this->db->query($sql, $id);
         if($result->num_rows()>0) {
             $result = $result->row_array();

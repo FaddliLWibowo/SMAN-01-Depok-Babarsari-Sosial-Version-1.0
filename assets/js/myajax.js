@@ -393,6 +393,22 @@ function addlike(x){ //x id status
 		}
 	});	
 }
+function addlikegroup(x){ //x id status
+	like = $('.'+x).html();
+	newlike = parseInt(like);//convert to INT
+	newlike = newlike + 1;
+	//ajax to insert DB
+	$.ajax({
+		url:'../../../index.php/all/addlike?idpost='+x,
+		success:function(){
+			$('.'+x).html();
+			$('.'+x).html(newlike);
+		},
+		error:function(){
+			alert('error add like');			
+		}
+	});	
+}
 
 /*****************************
 AJAX UNTUK SEMUA

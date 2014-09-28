@@ -61,7 +61,7 @@ class m_guru extends CI_Model{
         if($result->num_rows()>0) {
             $result = $result->row_array();
             $v ='<div class="well well-sm">
-              <p> guru : '.$result['nip'].' / '.$result['nama_guru']. ' <span style="color:green" class="glyphicon glyphicon-ok-circle"></span></p>
+              <p> guru : '.$result['nip'].' / '.$result['nama_lengkap']. ' <span style="color:green" class="glyphicon glyphicon-ok-circle"></span></p>
             </div>'; 
         } else {
             $v = '<div class="well well-sm">
