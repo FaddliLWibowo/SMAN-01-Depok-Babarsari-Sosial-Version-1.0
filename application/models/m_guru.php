@@ -134,10 +134,10 @@ class m_guru extends CI_Model{
         $sql = "SELECT mengajar.id_mengajar AS 'ajar', guru.nama_lengkap AS 'nama',kelas.id_kelas AS 'id_kelas',kelas.nama_kelas AS 'kelas',subkelas.nama AS 'subkelas',
         matapelajaran.id_matapelajaran AS 'id_matapelajaran', matapelajaran.matapelajaran AS 'matapelajaran',mengajar.hari AS 'hari',mengajar.jam_mulai AS 'mulai',mengajar.jam_selesai AS 'selesai' 
         FROM mengajar 
-        LEFT JOIN guru ON guru.id=mengajar.id_guru
-        LEFT JOIN matapelajaran ON matapelajaran.id_matapelajaran=mengajar.id_matapelajaran
-        LEFT JOIN subkelas ON mengajar.id_subkelas=subkelas.id_subkelas
-        LEFT JOIN kelas ON subkelas.kelas = kelas.id_kelas 
+        INNER JOIN guru ON guru.id=mengajar.id_guru
+        INNER JOIN matapelajaran ON matapelajaran.id_matapelajaran=mengajar.id_matapelajaran
+        INNER JOIN subkelas ON mengajar.id_subkelas=subkelas.id_subkelas
+        INNER JOIN kelas ON subkelas.kelas = kelas.id_kelas 
         WHERE mengajar.id_guru=?  GROUP BY kelas.id_kelas
         ";
         $query = $this->db->query($sql,$idguru);
@@ -147,10 +147,10 @@ class m_guru extends CI_Model{
         $sql = "SELECT mengajar.id_mengajar AS 'ajar', guru.nama_lengkap AS 'nama',kelas.id_kelas AS 'id_kelas',kelas.nama_kelas AS 'kelas',mengajar.id_subkelas AS 'id_subkelas',subkelas.nama AS 'subkelas',
         matapelajaran.id_matapelajaran AS 'id_matapelajaran', matapelajaran.matapelajaran AS 'matapelajaran',mengajar.hari AS 'hari',mengajar.jam_mulai AS 'mulai',mengajar.jam_selesai AS 'selesai' 
         FROM mengajar 
-        LEFT JOIN guru ON guru.id=mengajar.id_guru
-        LEFT JOIN matapelajaran ON matapelajaran.id_matapelajaran=mengajar.id_matapelajaran
-        LEFT JOIN subkelas ON mengajar.id_subkelas=subkelas.id_subkelas
-        LEFT JOIN kelas ON subkelas.kelas = kelas.id_kelas 
+        INNER JOIN guru ON guru.id=mengajar.id_guru
+        INNER JOIN matapelajaran ON matapelajaran.id_matapelajaran=mengajar.id_matapelajaran
+        INNER JOIN subkelas ON mengajar.id_subkelas=subkelas.id_subkelas
+        INNER JOIN kelas ON subkelas.kelas = kelas.id_kelas 
         WHERE mengajar.id_mengajar=?;
         ";
         $query = $this->db->query($sql,$idajar);

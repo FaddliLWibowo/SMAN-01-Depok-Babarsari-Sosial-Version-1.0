@@ -108,7 +108,7 @@ class all extends base{
 			<div class="col-md-8">
 				<textarea class="form-control" id="isibalasan" placeholder="reply..."></textarea>
 			</div>
-			<div class="col-md-2"><button onclick="sendmessageviamodal('.$penerima.','.$pengirim.')" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-send"></span></button</div>
+			<div class="col-md-2"><button onclick="sendmessageviamodal(\''.$penerima.'\',\''.$pengirim.'\')" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-send"></span></button</div>
 		</div>
 		';
 	}
