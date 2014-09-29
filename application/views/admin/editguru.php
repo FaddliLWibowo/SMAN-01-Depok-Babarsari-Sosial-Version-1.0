@@ -8,7 +8,8 @@
 		$('#subkelas').html();
 		$('#subkelas').show();
 		$('#subkelas').html('loading subkelas...');
-		var idkelas = $('#kelas').val();
+		//alert($('#mainkelas').val());
+		var idkelas = $('#mainkelas').val();
 		$.ajax({
 			url:'<?php echo site_url("admin/guru?act=ajaxsubkelas&idkelas=")?>'+idkelas,
 			success:function(data){
@@ -139,7 +140,7 @@ if(isset($script)){
 										$kelas = $this->db->get('kelas');
 										$kelas = $kelas->result_array();
 										?>
-										<select id="kelas" onchange="subkelas()" class="form-control" name="kelas">
+										<select id="mainkelas" onchange="subkelas()" class="form-control" name="kelas">
 											<option>Kelas</option>
 											<?php
 											foreach($kelas as $k):

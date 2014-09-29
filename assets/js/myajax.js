@@ -413,19 +413,20 @@ function addlikegroup(x){ //x id status
 /*****************************
 AJAX UNTUK SEMUA
 ******************************/
-function showmessage(x,y){
-	//SHOW MESSAGE BY USER x= pengirim , y = penerima
-	//$('#pengirim').html(x);
+function showmessage(x, y){
+	//SHOW MESSAGE BY USER x= pengirim , y = penerima	
 	$('#isithread').modal('show');
 	$('#loader').show();
+	//pasrse to string x and y
 	$.ajax({
 		type:"GET",
-		url:"../index.php/all/isi_pesan_saya",
-		data:{pengirim:x,penerima:y},
+		url:"../index.php/all/isi_pesan_saya?pengirim="+x+"&penerima="+y,
 		success:function(result){
+			//alert(result);
 			$('#loader').hide();//HIDE LOADING
-			$('#isipesan').html(result);			
 			$('#isipesan').show();
+			$('#isipesan').html(result);			
+			
 		}
 	});
 }

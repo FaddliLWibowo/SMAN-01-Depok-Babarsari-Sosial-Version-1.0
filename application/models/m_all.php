@@ -114,7 +114,8 @@ class m_all extends CI_Model{
 	}
 	//ISI PESAN SAYA
 	public function isi_pesan_saya($params){
-		$sql = "SELECT * FROM `pesan`WHERE (pengirim = ? AND penerima= ?) OR (pengirim = ? AND penerima = ?) ORDER BY waktu ASC";
+		$sql = "SELECT pesan.pengirim AS 'pengirim',pesan.penerima AS 'penerima',pesan.id_pesan AS 'id_pesan',pesan.waktu AS 'waktu',pesan.isi AS 'isi'
+		FROM `pesan`WHERE (pengirim = ? AND penerima= ?) OR (pengirim = ? AND penerima = ?) ORDER BY waktu ASC";
 		$result = $this->db->query($sql, $params);
 		if($result->num_rows>0) {
 			return $result->result_array();

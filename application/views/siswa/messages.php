@@ -38,7 +38,7 @@
         <?php //print_r($messages)?>
         <?php foreach($messages as $m):?>
           <tr>
-          <td><strong>Dari : <?php echo $m['pengirim']?></strong> <small style="font-size:10px;color:gray"><?php echo $m['waktu']?></small></td><td><?php echo substr($m['isi'], 0,20)?>...</td><td><a onclick="showmessage(<?php echo $m['pengirim']?>,<?php echo $m['penerima']?>)" href="#showmessages">baca</a></td>
+          <td><strong>Dari : <?php echo $m['pengirim']?></strong> <small style="font-size:10px;color:gray"><?php echo $m['waktu']?></small></td><td><?php echo substr($m['isi'], 0,20)?>...</td><td><a onclick="showmessage(<?php echo $m['pengirim'];?>,<?php echo $m['penerima'];?>)" href="#showmessages">baca</a></td>
           </tr>
         <?php endforeach;?>
       </table>

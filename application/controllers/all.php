@@ -73,13 +73,30 @@ class all extends base{
 		$params = array($pengirim, $penerima, $penerima, $pengirim);
 		$isi = $this->m_all->isi_pesan_saya($params);
 		foreach($isi as $i):
+			//get avatar pengirim
+			if(strlen($i['pengirim'])<5) { //pengirim adalah user
+				$sql= "SELECT avatar,nama_lengkap FROM siswa WHERE nis = ".$i['pengirim'];
+				//echo $sql;
+				$avatar = $this->db->query($sql);
+				$avatar = $avatar->row_array();
+				$nama = explode(' ', $avatar['nama_lengkap']);
+				$nama = $nama[0];
+				$img_avatar = base_url('assets/img/avatar/'.$avatar['avatar']);
+			} else { //pengirim adalah guru
+				$sql= "SELECT avatar,nama_lengkap FROM guru WHERE nip = ".$i['pengirim'];
+				$avatar = $this->db->query($sql);
+				$avatar = $avatar->row_array();
+				$nama = explode(' ', $avatar['nama_lengkap']);
+				$nama = $nama[0];
+				$img_avatar = base_url('assets/img/avatar/'.$avatar['avatar']);
+			}
 			echo '
 		<div class="comment row">
-			<div class="col-md-2">            
-				<img src="assets/images/user/profile1.png" />
+			<div class="col-md-2"">            
+				<img src="'.$img_avatar.'" />
 			</div>
 			<div class="col-md-10">
-				<p><span><strong><a href="#">'.$i['pengirim'].'</a></strong></span> '.$i['isi'].'</p>
+				<p><span><strong><a href="#">'.$nama.'</a></strong></span> '.$i['isi'].'</p>
 				<h6>'.$i['waktu'].'</h6>
 			</div>
 		</div>
@@ -87,7 +104,7 @@ class all extends base{
 		endforeach;
 		echo '
 		<div class="comment row">
-			<div class="col-md-2"><img src="assets/images/user/profile1.png" /></div>
+			<div style="width:50px;height:50px" class="col-md-2 myavatar"></div>
 			<div class="col-md-8">
 				<textarea class="form-control" id="isibalasan" placeholder="reply..."></textarea>
 			</div>

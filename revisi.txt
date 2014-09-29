@@ -27,3 +27,10 @@ menu untuk tab aktif [fixed]
 
 hapus status  [fixed]
 hapus komentar [fixed]
+
+-----------------------------------------
+
+28 Sep 2014
+
+siswa sent to guru [fixed]
+guru baca pesan guru [fixed]
