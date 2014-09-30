@@ -17,17 +17,17 @@ if(isset($script)){
 			<div style="height:auto" class="panel-body">
 				<div class="col-md-2">
 					<a data-toggle="modal" href="#addguru" class="btn btn-primary">+ Tambah Guru</a>
+
 				</div>
-				<div class="col-md-5">
-					<form action="<?php echo site_url('process/admin/importguru')?>" role="form" method="post" class="form-inline" enctype="multipart/form-data">
-						<div class="from-group">
-							<input class="form-control" type="file" name="data-import">
-						</div>
-						<div class="form-group">
-							<button type="submit" class="btn btn-primary">+ Upload Guru</button>
-						</div>
-					</form>
-				</div>
+
+				<form class="form-inline" role="form" action="<?php echo site_url('process/admin/importguru')?>" role="form" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label class="sr-only" for="exampleInputEmail2">Email address</label>
+						<input class="form-control" type="file" id="upload" name="data-import" />
+					</div>
+					<button type="submit" class="btn btn-primary">+ Upload Guru</button>
+				</form>
+				
 				<!--modal add guru-->
 				<div class="modal fade" id="addguru" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog">

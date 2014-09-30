@@ -18,15 +18,14 @@ if(isset($script)){
 				<div class="col-md-2">
 					<a data-toggle="modal" href="#addsiswa" class="btn btn-primary">+ Tambah Siswa</a>
 				</div>
-				<div class="col-md-5">
-					<form class="form-inline" role="form" action="<?php echo site_url('process/admin/importsiswa')?>" method="post" enctype="multipart/form-data">
-						<div class="from-group">
-							<input class="form-control" type="file" name="data-import">							
-						</div>
-						<button type="submit" class="btn btn-primary">+Upload Siswa</button>
-					</form>
 
-				</div>
+				<form class="form-inline" role="form" action="<?php echo site_url('process/admin/importsiswa')?>" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label class="sr-only" for="exampleInputEmail2">Email address</label>
+						<input class="form-control" type="file" name="data-import">	
+					</div>
+					<button type="submit" class="btn btn-primary">+Upload Siswa</button>
+				</form>
 
 				<!--modal add siswa-->
 				<div class="modal fade" id="addsiswa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

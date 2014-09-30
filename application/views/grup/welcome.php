@@ -224,7 +224,7 @@ function moreGrupStatus(){
         <li><a class="btn" href="#member" data-toggle="tab"><span class="glyphicon glyphicon-envelope"></span> Member</a></li>
         <!-- <li><a class="btn" href="#files" data-toggle="tab"><span class="glyphicon glyphicon-list-alt"></span> Files</a></li> -->
         <?php 
-        if($status == 'admin') {
+        if($status == 'admin') { //jika admin grup yang login
           echo ' <li><a class="btn" href="#admin" data-toggle="tab"><span class="glyphicon glyphicon-cog"></span> admin</a></li>';
         }
         ?>

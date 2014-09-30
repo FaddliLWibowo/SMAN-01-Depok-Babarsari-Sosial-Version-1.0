@@ -48,7 +48,7 @@ function profileStatus(){
         '<div class=\'col-md-12\'>'+
         '<p>'+n['content']+'</p>'+
         '<p>'+
-        '<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'>'+n['like']+'</span>'+
+        '<button onclick="addlikeprofile('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'>'+n['like']+'</span>'+
         '<button onclick=\'getCommentOnProfileById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
         '</p>'+
         '</div>'+
@@ -98,7 +98,7 @@ $.ajax({
       '<div class=\'col-md-12\'>'+
       '<p>'+n['content']+'</p>'+
       '<p>'+
-      '<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'>'+n['like']+'</span>'+
+      '<button onclick="addlikeprofile('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'>'+n['like']+'</span>'+
       '<button onclick=\'getCommentOnProfileById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
       '</p>'+
       '</div>'+
@@ -147,7 +147,7 @@ function showMoreStatusOnProfile(){
         '<div class=\'col-md-12\'>'+
         '<p>'+n['content']+'</p>'+
         '<p>'+
-        '<button onclick="addlike('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'>'+n['like']+'</span>'+
+        '<button onclick="addlikeprofile('+n['id']+')" class=\'btn btn-xs btn-default\'><span class=\'glyphicon glyphicon-thumbs-up\'></span> </button> <span class="'+n['id']+'" style=\'font-size:10px\'>'+n['like']+'</span>'+
         '<button onclick=\'getCommentOnProfileById('+n['id']+')\' class="btn btn-default btn-xs"> Lihat Komentar</button>'+
         '</p>'+
         '</div>'+

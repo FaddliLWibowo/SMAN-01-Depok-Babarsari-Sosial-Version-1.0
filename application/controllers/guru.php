@@ -37,7 +37,7 @@ class guru extends base{
 			$data['script'] = "$(document).ready(function(){document.getElementById('home').className='active';});";
 			$data['title'] = $nama.' | ';
 			$data['guru'] = $this->m_guru->data_by_nip($nip);
-			$data['mengajar'] =$this->m_guru->guru_ajar($data['guru']['id']);
+			$data['mengajar'] =$this->m_guru->guru_ajar_byclass($data['guru']['id']);
 			$this->defaultdisplay('guru/profile', $data);
 		} else {
 			if($this->session->userdata('siswa_logged_in')) { //redirect to timeline siswa

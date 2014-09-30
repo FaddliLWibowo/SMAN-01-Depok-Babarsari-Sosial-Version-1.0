@@ -37,8 +37,26 @@
 
         <?php //print_r($messages)?>
         <?php foreach($messages as $m):?>
+          <?php
+          if(strlen($m['pengirim'])<5) { //pengirim adalah user
+              $sql= "SELECT avatar,nama_lengkap FROM siswa WHERE nis = ".$m['pengirim'];
+              //echo $sql;
+              $avatar = $this->db->query($sql);
+              $avatar = $avatar->row_array();
+              $nama = explode(' ', $avatar['nama_lengkap']);
+              $nama = $nama[0];
+              $img_avatar = base_url('assets/img/avatar/'.$avatar['avatar']);
+            } else { //pengirim adalah guru
+              $sql= "SELECT avatar,nama_lengkap FROM guru WHERE nip = ".$m['pengirim'];
+              $avatar = $this->db->query($sql);
+              $avatar = $avatar->row_array();
+              $nama = explode(' ', $avatar['nama_lengkap']);
+              $nama = $nama[0];
+              $img_avatar = base_url('assets/img/avatar/'.$avatar['avatar']);
+            }
+          ?>
           <tr>
-          <td><strong>Dari : <?php echo $m['pengirim']?></strong> <small style="font-size:10px;color:gray"><?php echo $m['waktu']?></small></td><td><?php echo substr($m['isi'], 0,20)?>...</td><td><a onclick="showmessage(<?php echo $m['pengirim'];?>,<?php echo $m['penerima'];?>)" href="#showmessages">baca</a></td>
+          <td><strong>Dari : <?php echo $nama;?></strong> <small style="font-size:10px;color:gray"><?php echo $m['waktu']?></small></td><td><?php echo substr($m['isi'], 0,20)?>...</td><td><a onclick="showmessage('<?php echo $m['pengirim'];?>','<?php echo $m['penerima'];?>')" href="#showmessages">baca</a></td>
           </tr>
         <?php endforeach;?>
       </table>

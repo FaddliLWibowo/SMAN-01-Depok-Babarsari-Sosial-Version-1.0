@@ -8,6 +8,7 @@ class admin extends base{
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('m_siswa');
+		error_reporting(0);
 	}
 	
 	public function index(){
