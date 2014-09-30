@@ -26,6 +26,7 @@ if(isset($script)){
 					</div>
 					<button type="submit" class="btn btn-primary">+Upload Siswa</button>
 				</form>
+				</div>
 
 				<!--modal add siswa-->
 				<div class="modal fade" id="addsiswa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

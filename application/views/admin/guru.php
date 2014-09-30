@@ -17,7 +17,6 @@ if(isset($script)){
 			<div style="height:auto" class="panel-body">
 				<div class="col-md-2">
 					<a data-toggle="modal" href="#addguru" class="btn btn-primary">+ Tambah Guru</a>
-
 				</div>
 
 				<form class="form-inline" role="form" action="<?php echo site_url('process/admin/importguru')?>" role="form" method="post" enctype="multipart/form-data">
@@ -27,6 +26,7 @@ if(isset($script)){
 					</div>
 					<button type="submit" class="btn btn-primary">+ Upload Guru</button>
 				</form>
+				</div>
 				
 				<!--modal add guru-->
 				<div class="modal fade" id="addguru" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
