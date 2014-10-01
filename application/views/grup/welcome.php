@@ -247,7 +247,7 @@ function moreGrupStatus(){
             <button type="submit" id="btn-newpost">Post</button> 
             <?php } ?> <br/><br/>
           </div>
-          
+          </form>
           <div class="tab-pane" id="member">
             <h2>Member</h2>
             <hr>
@@ -311,9 +311,11 @@ function moreGrupStatus(){
               </div>
 
               <div style="height:450px" class="tab-pane" id="admin">
+                <form method="POST" action="<?php echo site_url('grup/update');?>" class="form-horizontal" role="form" enctype="multipart/form-data">
+                  
                 <h2>Admin Setup</h2>
                 <hr>
-                <form class="form-horizontal" role="form">
+                <input type="hidden" name="id" value="<?php echo $view['id_grup']?>">
                   <div class="form-group">
                     <label class="col-lg-2 control-label">Name</label>
                     <div class="col-lg-10">
@@ -333,10 +335,10 @@ function moreGrupStatus(){
                     //IF COVER SET
                       if(!empty($view['avatar'])) {
                         echo '<img width="50%" src="'.base_url().'/assets/img/grup/'.$view['avatar'].'"/>';
-                        echo '<input type="hidden" value="'.$view['avatar'].'">';
+                        echo '<input type="hidden" name="oldcover" value="'.$view['avatar'].'">';
                       }
                       ?>
-                      <input type="file" name="fileCover"/></br>
+                      <input type="file" name="filecover"/></br>
                     </div>
                   </div>
                   <div class="form-group">
@@ -345,10 +347,11 @@ function moreGrupStatus(){
                       <a onclick="return confirm('Anda Yakin')" class="btn btn-danger" href="<?php echo site_url('grup/delete_group?id='.$view['id_grup'])?>"><span class="glyphicon glyphicon-ban-circle"></span> Hapus Grup</a>
                     </div>
                   </div>
-                </form>
+                
                 <br/>                
               </div>
             </div>
+            </form>
 
           </div>
 

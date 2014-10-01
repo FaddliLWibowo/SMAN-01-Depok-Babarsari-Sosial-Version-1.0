@@ -65,37 +65,68 @@ class grup extends base{
         }
       }
 
-    //delete grup
-    public function delete_group(){
-      $id = $this->input->get('id');
-      //query for delete group
-      if($this->m_all->delete_group($id)) {
-        echo ("<SCRIPT LANGUAGE='JavaScript'>
-              window.alert('Success Group Deleted');
-              window.location.href='".site_url('grup')."';
-            </SCRIPT>");
-      } else {
-        echo ("<SCRIPT LANGUAGE='JavaScript'>
-              window.alert('Error Deleting Group');
-              window.location.href='".site_url('grup')."';
-            </SCRIPT>");
+      public function update(){
+        $id = $this->input->post('id');
+        $name = $this->input->post('txtGroupName');
+        $deskripsi = $this->input->post('txtGroupDetail');
+        if(!empty($_FILES['filecover']['name'])){
+          $newcover = $_FILES['filecover'];
+          $covername = str_replace(' ', '_', $newcover['name']);
+          //upload new cover
+          $this->load->library('upload');
+          $config['upload_path'] = './assets/img/grup';
+          $config['allowed_types'] = 'gif|png|jpg|jpeg|GIF|PNG|JPG|JPEG';
+          $config['overwrite'] = true;
+          $config['max_size'] = 1000000; //1MB
+          $this->upload->initialize($config);
+          if(!$this->upload->do_upload('filecover')){
+            redirect(site_url('grup/welcome/'.$id));
+          }  
+        } else {
+          $covername = $this->input->post('oldcover');
+        }
+        //update database
+        $data = array(
+          'nama_grup' => $name,
+          'deskripsi_grup' => $deskripsi,
+          'avatar' => $covername
+          );
+        $this->db->where('id_grup',$id);
+        $this->db->update('grup',$data);
+        redirect('grup/welcome/'.$id.'/'.$name);
       }
-    }
+
+    //delete grup
+      public function delete_group(){
+        $id = $this->input->get('id');
+      //query for delete group
+        if($this->m_all->delete_group($id)) {
+          echo ("<SCRIPT LANGUAGE='JavaScript'>
+            window.alert('Success Group Deleted');
+            window.location.href='".site_url('grup')."';
+          </SCRIPT>");
+        } else {
+          echo ("<SCRIPT LANGUAGE='JavaScript'>
+            window.alert('Error Deleting Group');
+            window.location.href='".site_url('grup')."';
+          </SCRIPT>");
+        }
+      }
 
     //add status
-    public function addstatus(){
-      $this->load->library('user_agent');
-      $status = $this->input->post('txtStatus');
-      $upload = $_FILES['upload'];
-      $idsiswa = $this->input->post('idsiswa');
-      $idguru = $this->input->post('idguru');
-      if ($idsiswa == 0) {
-        $idsiswa = null;
-      }
-      if ($idguru == 0) {
-        $idguru = null;
-      }
-      $idgrup = $this->input->post('idgrup');
+      public function addstatus(){
+        $this->load->library('user_agent');
+        $status = $this->input->post('txtStatus');
+        $upload = $_FILES['upload'];
+        $idsiswa = $this->input->post('idsiswa');
+        $idguru = $this->input->post('idguru');
+        if ($idsiswa == 0) {
+          $idsiswa = null;
+        }
+        if ($idguru == 0) {
+          $idguru = null;
+        }
+        $idgrup = $this->input->post('idgrup');
       //upload file management
       if(!empty($_FILES['upload']['name'])) { //if upload file
         $this->load->library('upload');
@@ -106,17 +137,17 @@ class grup extends base{
         $config['max_size'] = 1000000; //1MB
         $this->upload->initialize($config);
         if(!$this->upload->do_upload('upload')){ //if upload failed
-           echo $this->upload->display_errors();
-           redirect($this->agent->referrer());
-         }
-      } else {
-        $filename = null;
-      }
+         echo $this->upload->display_errors();
+         redirect($this->agent->referrer());
+       }
+     } else {
+      $filename = null;
+    }
       //parameter to insert
-      $params = array($status,$idsiswa,$idguru,$filename,$idgrup);
+    $params = array($status,$idsiswa,$idguru,$filename,$idgrup);
       //excute query
-      $sql = "INSERT INTO status(isi_status, id_siswa,id_guru,publik,file,on_id_grup)
-      VALUES (?,?,?,0,?,?)";
+    $sql = "INSERT INTO status(isi_status, id_siswa,id_guru,publik,file,on_id_grup)
+    VALUES (?,?,?,0,?,?)";
       if($this->db->query($sql,$params)){ //success add post
         redirect($this->agent->referrer());
       }else{ //failed add post
@@ -126,4 +157,4 @@ class grup extends base{
         </SCRIPT>");
       }
     }
-}
+  }
