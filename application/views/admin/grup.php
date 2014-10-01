@@ -32,7 +32,7 @@ if(isset($script)){
 								<td><strong>Admin Guru</strong></td>
 								<td><strong>Created</strong></td>
 								<td><strong>Status</strong></td>
-								<td></td>
+								<td style="width:80px"></td>
 							</tr>
 							<?php $i=1;foreach($view as $v):?>
 							<tr>
@@ -50,7 +50,8 @@ if(isset($script)){
 									<td><?php echo $v['status']?></td>
 									<td>
 										<div class="btn-group">
-											<a title="block" href="<?php echo site_url('admin/grup?act=blockgrup&id='.$v['id_grup'])?>" onclick="return confirm('Anda yakin?')" type="button" class="btn btn-default"><span class="glyphicon glyphicon-exclamation-sign"></span></a>
+											<a title="block" href="<?php echo site_url('admin/grup?act=blockgrup&id='.$v['id_grup'])?>" onclick="return confirm('Anda yakin?')" type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-exclamation-sign"></span></a>
+											<a title="unblock" href="<?php echo site_url('admin/grup?act=unblockgrup&id='.$v['id_grup'])?>" onclick="return confirm('Anda yakin?')" type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-ok-sign"></span></a>
 										</div>
 									</td>
 								</tr>

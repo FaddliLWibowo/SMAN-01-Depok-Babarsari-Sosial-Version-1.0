@@ -98,6 +98,13 @@ class admin extends base{
 			$this->db->where('id_grup', $id);
 			$this->db->update('grup', $data); 
 			redirect(site_url('admin/grup'));
+			break;	
+			case 'unblockgrup':
+			$id = $this->input->get('id');
+			$data = array('status'=>'aktif');
+			$this->db->where('id_grup', $id);
+			$this->db->update('grup', $data); 
+			redirect(site_url('admin/grup'));
 			break;			
 			default://SHOW ALL GROUP
 			$params = array(0,20);
