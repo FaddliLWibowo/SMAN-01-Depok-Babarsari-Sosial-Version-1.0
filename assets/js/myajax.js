@@ -180,15 +180,15 @@ function updateStatus(x,y,z,a,b,c){ //X= ID_SISWA,y = ID_GURU,Z = ID_GRUP | a = 
 		$.ajax({
 			type:'POST',
 			url:'../index.php/all/update_status',
-		timeout: 50000,//50000MS
-		data:{idsiswa:x,idguru:y,idgrup:z,isi:isi,desidsiswa:a,desidguru:b,desidgrup:c},
-		success:function(data){ //SUCCESS INSERT TO DB
-			showUpdatedStatus();
-		},
-		error:function(data){
-			alert('ERROR'+data);
-		}
-	});
+			timeout: 50000,//50000MS
+			data:{idsiswa:x,idguru:y,idgrup:z,isi:isi,desidsiswa:a,desidguru:b,desidgrup:c},
+			success:function(data){ //SUCCESS INSERT TO DB
+				showUpdatedStatus();
+			},
+			error:function(data){
+				alert('ERROR'+data);
+			}
+		});
                 //$('#newpost').val() = '';//EMPTY STATUS TEXTAREA
 		$('#top-loader').hide();//SHOW LOADING
 		$('#newpost').val() = ' ';
@@ -254,7 +254,7 @@ function getCommentById(x){ //COMMENT BY ID STATUS
 		type:'GET',
 		dataType:'json',
 		url:'../index.php/json/show_comment_by_id?id='+x,
-		timeout: 50000,//50000MS
+		timeout: 50000,//batas tunggu respon dalam satu kali request
 		success:function(data){ //SUCCESS INSERT TO DB			
 			//alert(x);
 			$('.comments'+x).html('<div></div>');

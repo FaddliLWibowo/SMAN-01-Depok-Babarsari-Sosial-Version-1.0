@@ -110,7 +110,7 @@ class m_siswa extends CI_Model{
     }
     //SEMUA PESAN BERDASAR NIS
     public function semuapesan($penerima){
-        $sql = "SELECT pesan.id_pesan AS 'id', pesan.pengirim AS 'pengirim',pesan.penerima AS 'penerima', pesan.isi AS 'isi',pesan.waktu AS 'waktu' FROM (SELECT * FROM pesan WHERE penerima=? ORDER BY id_pesan DESC) AS pesan GROUP BY pesan.pengirim";
+        $sql = "SELECT pesan.id_pesan AS 'id', pesan.pengirim AS 'pengirim',pesan.penerima AS 'penerima', pesan.isi AS 'isi',pesan.waktu AS 'waktu' FROM (SELECT * FROM pesan WHERE penerima=? ORDER BY id_pesan DESC) AS pesan GROUP BY pesan.pengirim ORDER BY pesan.id_pesan DESC";
         $result = $this->db->query($sql, array($penerima,$penerima));
         if($result->num_rows()>0){
             return $result->result_array();
